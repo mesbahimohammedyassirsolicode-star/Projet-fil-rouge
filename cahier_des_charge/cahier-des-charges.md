@@ -16,5 +16,5 @@
 
 ## 3. Contraintes
 - **Deadline** : À définir
-- **Technique** : HTML sémantique, CSS, Vanilla JS
+- **Technique** : HTML sémantique, CSS, JS, php
 - **Langue** : Français
