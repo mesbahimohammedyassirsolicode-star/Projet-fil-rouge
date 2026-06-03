@@ -1,3 +1,5 @@
 <?php
-// index.php - homepage (empty)
-?>
+
+require_once 'includes/db.php';
+
+echo "Connexion réussie";
