@@ -1,2 +1,3 @@
-</body>
-</html>
+<?php
+// footer.php - site footer (empty)
+?>
