@@ -12,8 +12,15 @@ if ($_SESSION['role'] !== 'admin') {
     exit();
 }
 ?>
-
-<h1>Dashboard Admin</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+</head>
+<body>
+    <h1>Dashboard Admin</h1>
 
 <p>Bienvenue <?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
 
@@ -23,3 +30,9 @@ if ($_SESSION['role'] !== 'admin') {
 <a href="categories/list.php">
     Gestion des catégories
 </a>
+<a href="products/list.php">
+    Gestion des produits
+</a>
+</body>
+</html>
+
