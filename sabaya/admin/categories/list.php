@@ -1,17 +1,28 @@
 <?php
-session_start();
-require_once '../../includes/db.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+session_start();
+
+require_once '../../config/Database.php';
+require_once '../../models/Category.php';
+
+if (!isset($_SESSION['user_id'])) {
     header('Location: ../../auth/login.php');
     exit();
 }
 
-$sql = "SELECT * FROM categorie ORDER BY id_categorie ASC";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
+if ($_SESSION['role'] !== 'admin') {
+    header('Location: ../../index.php');
+    exit();
+}
 
-$categories = $stmt->fetchAll();
+$db = new Database();
+
+$pdo = $db->getConnection();
+
+$categoryModel = new Category($pdo);
+
+$categories = $categoryModel->getAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -24,11 +35,14 @@ $categories = $stmt->fetchAll();
 
 <h1>Gestion des catégories</h1>
 
-<a href="add.php">+ Ajouter une catégorie</a>
+<a href="add.php">
+    Ajouter une catégorie
+</a>
 
 <br><br>
 
 <table border="1" cellpadding="10">
+
     <thead>
         <tr>
             <th>Nom</th>
@@ -42,30 +56,35 @@ $categories = $stmt->fetchAll();
 
         <?php foreach($categories as $categorie): ?>
 
-        <tr>
+            <tr>
 
-            <td><?= htmlspecialchars($categorie['nom']); ?></td>
+                <td>
+                    <?= htmlspecialchars($categorie['nom']) ?>
+                </td>
 
-            <td>
-                <a href="edit.php?id=<?= $categorie['id_categorie']; ?>">
-                    Modifier
-                </a>
+                <td>
 
-                |
+                    <a href="edit.php?id=<?= $categorie['id_categorie'] ?>">
+                        Modifier
+                    </a>
 
-                <a href="delete.php?id=<?= $categorie['id_categorie']; ?>"
-                   onclick="return confirm('Supprimer cette catégorie ?')">
-                    Supprimer
-                </a>
-            </td>
-        </tr>
+                    |
+
+                    <a href="delete.php?id=<?= $categorie['id_categorie'] ?>"
+                       onclick="return confirm('Supprimer cette catégorie ?')">
+                        Supprimer
+                    </a>
+
+                </td>
+
+            </tr>
 
         <?php endforeach; ?>
 
     <?php else: ?>
 
         <tr>
-            <td colspan="3">
+            <td colspan="2">
                 Aucune catégorie trouvée
             </td>
         </tr>
@@ -73,6 +92,7 @@ $categories = $stmt->fetchAll();
     <?php endif; ?>
 
     </tbody>
+
 </table>
 
 </body>

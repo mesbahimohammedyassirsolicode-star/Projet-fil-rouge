@@ -1,0 +1,2 @@
+<?php
+// Empty Contact model

@@ -15,7 +15,7 @@ if ($_SESSION['role'] !== 'admin') {
 
 <h1>Dashboard Admin</h1>
 
-<p>Bienvenue <?php echo $_SESSION['user_name']; ?></p>
+<p>Bienvenue <?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
 
 <!-- links -->
 <a href="/auth/logout.php">Logout</a>

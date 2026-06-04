@@ -1,5 +1,4 @@
 <?php
 
-require_once 'includes/db.php';
-
+require_once __DIR__ . '/config/Database.php';
 echo "Connexion réussie";

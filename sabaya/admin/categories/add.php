@@ -1,7 +1,12 @@
 <?php
-
 session_start();
-require_once '../../includes/db.php';
+require_once '../../config/Database.php';
+require_once '../../models/Category.php';
+
+$db = new Database();
+$pdo = $db->getConnection();
+
+$categoryModel = new Category($pdo);
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: ../../auth/login.php');
@@ -15,19 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = trim($_POST['nom']);
 
     if (empty($nom)) {
+
         $errors[] = "Le nom de la catégorie est obligatoire";
-    }
 
-    if (empty($errors)) {
+    } else {
 
-        $sql = "INSERT INTO categorie (nom)
-                VALUES (:nom)";
-
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->execute([
-            ':nom' => $nom
-        ]);
+        $categoryModel->create($nom);
 
         header('Location: list.php');
         exit();
@@ -47,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php foreach($errors as $error): ?>
     <p style="color:red;">
-        <?= $error ?>
+        <?= htmlspecialchars($error) ?>
     </p>
 <?php endforeach; ?>
 

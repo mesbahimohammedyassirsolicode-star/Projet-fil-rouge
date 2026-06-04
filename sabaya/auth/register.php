@@ -1,12 +1,14 @@
 <?php
 // start session
     session_start();
-//include the database connection
-    require_once '../includes/db.php';
+require_once '../config/Database.php';
+
+$db = new Database();
+$pdo = $db->getConnection();
 // set error array
     $error=[];
 // check if the submit button is clicked
-    if(isset($_POST['submit']))
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         // fetch the data from the form 
         $nom = htmlspecialchars($_POST['nom']);
@@ -21,17 +23,17 @@
 }
 
 if (empty($prenom)) {
-    $errors[] = "Le prénom est obligatoire";
+    $error[] = "Le prénom est obligatoire";
 }
 
 if (empty($email)) {
-    $errors[] = "L'email est obligatoire";
+    $error[] = "L'email est obligatoire";
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "Adresse email invalide";
+    $error[] = "Adresse email invalide";
 }
 
 if (empty($phone)) {
-    $errors[] = "Le téléphone est obligatoire";
+    $error[] = "Le téléphone est obligatoire";
 }
 
 if (empty($password)) {
@@ -56,14 +58,6 @@ if (empty($password)) {
     $error[] = "Adresse email invalide";
 }
 // check if the password is valid
-        if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
-            $error[] = "Le mot de passe doit contenir uniquement des lettres et des chiffres";
-        }
-
-        if (!preg_match("/^[a-zA-Z0-9]*$/", $confirme)) {
-            $error[] = "Le mot de passe doit contenir uniquement des lettres et des chiffres";
-        }
-
         if($password != $confirme){
             $error[] = "Les mots de passe ne correspondent pas";
         }
@@ -83,16 +77,12 @@ if (empty($password)) {
             $stmt->execute([
                 ':nom' => $nom,
                 ':prenom' => $prenom,
-            ':telephone' => $phone,
+                ':telephone' => $phone,
                 ':email' => $email,
                 ':password' => $hashedPassword
             ]);
             header("Location:login.php"); 
-        }
-        else{
-            foreach($error as $err){
-                echo $err ;
-            }
+            exit();
         }
     }
 
@@ -105,6 +95,13 @@ if (empty($password)) {
     <title>register</title>
 </head>
 <body>
+    <?php if (!empty($error)): ?>
+        <div style="color: red; margin-bottom: 15px;">
+            <?php foreach($error as $err): ?>
+                <p><?php echo htmlspecialchars($err); ?></p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
     <!--start the form to register -->
     <form  method="post">
         <!-- nom -->
