@@ -54,6 +54,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $errors[] = "L'image est obligatoire ou invalide";
     }
+    if (empty($categorie_id)) {
+    $errors[] = "La catégorie est obligatoire";
+}
 
     if (empty($errors)) {
         $productModel->create(
