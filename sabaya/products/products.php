@@ -46,6 +46,7 @@ $products = $productModel->getAll();
     <a href="product-details.php?id=<?= $product['id_produit'] ?>">
         Voir détails
     </a>
+    
 
 </div>
 

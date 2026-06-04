@@ -50,9 +50,12 @@ if (!$product) {
 Ajouter au panier
 </button>
 
-<button>
-Ajouter à la wishlist
-</button>
+<a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>">
+    Ajouter à la wishlist
+</a>
+<a href="../wishlist/wishlist.php">
+    Voir la wishlist
+</a>
 </div>
     </main>
 </body>
