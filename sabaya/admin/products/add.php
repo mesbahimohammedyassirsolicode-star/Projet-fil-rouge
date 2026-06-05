@@ -83,42 +83,83 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Ajouter un produit</title>
 </head>
 <body>
-<h1>Ajouter un produit</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../categories/list.php">Gestion des catégories</a></li>
+                <li><a href="list.php">Gestion des produits</a></li>
+                <li><a href="../orders/list.php">Gestion des commandes</a></li>
+                <li><a href="../dashboard.php">Tableau de bord</a></li>
+                <li><a href="../../auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<?php if (!empty($errors)): ?>
-    <div style="color: red; margin-bottom: 15px;">
-        <?php foreach ($errors as $error): ?>
-            <p><?= htmlspecialchars($error) ?></p>
-        <?php endforeach; ?>
-    </div>
-<?php endif; ?>
+    <main>
+        <section>
+            <h1>Ajouter un produit</h1>
 
-<form  method="post" enctype="multipart/form-data">
-    <label for="nom">Nom du produit:</label><br>
-    <input type="text" id="nom" name="nom"><br>
-    <label for="description">Description:</label><br>
-    <textarea id="description" name="description"></textarea><br>
-    <label for="prix">Prix:</label><br>
-    <input type="number" id="prix" name="prix" step="0.01"><br>
-    <label for="stock">Stock:</label><br>
-    <input type="number" id="stock" name="stock" step="1"><br>
-    <label for="taille">Taille:</label><br>
-    <input type="text" id="taille" name="taille"><br>
-    <label for="couleur">Couleur:</label><br>
-    <input type="text" id="couleur" name="couleur"><br>
-    <label>Image</label>
-<input type="file" name="image"><br>
-    <label for="categorie">Catégorie:</label><br>
-    <select id="categorie" name="categorie">
-        <?php
-        $sql = "SELECT * FROM categorie";
-        $stmt = $pdo->query($sql);
-        while ($row = $stmt->fetch()) {
-            echo "<option value='" . $row['id_categorie'] . "'>" . $row['nom'] . "</option>";
-        }
-        ?>
-    </select><br>
-    <button type="submit">Ajouter</button>
-</form>
+            <?php if (!empty($errors)): ?>
+                <div style="color: red; margin-bottom: 15px;" role="alert">
+                    <?php foreach ($errors as $error): ?>
+                        <p><?= htmlspecialchars($error) ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Informations sur le nouveau produit</legend>
+                    <p>
+                        <label for="nom">Nom du produit :</label><br>
+                        <input type="text" id="nom" name="nom">
+                    </p>
+                    <p>
+                        <label for="description">Description :</label><br>
+                        <textarea id="description" name="description"></textarea>
+                    </p>
+                    <p>
+                        <label for="prix">Prix :</label><br>
+                        <input type="number" id="prix" name="prix" step="0.01">
+                    </p>
+                    <p>
+                        <label for="stock">Stock :</label><br>
+                        <input type="number" id="stock" name="stock" step="1">
+                    </p>
+                    <p>
+                        <label for="taille">Taille :</label><br>
+                        <input type="text" id="taille" name="taille">
+                    </p>
+                    <p>
+                        <label for="couleur">Couleur :</label><br>
+                        <input type="text" id="couleur" name="couleur">
+                    </p>
+                    <p>
+                        <label for="image">Image :</label><br>
+                        <input type="file" id="image" name="image">
+                    </p>
+                    <p>
+                        <label for="categorie">Catégorie :</label><br>
+                        <select id="categorie" name="categorie">
+                            <?php
+                            $sql = "SELECT * FROM categorie";
+                            $stmt = $pdo->query($sql);
+                            while ($row = $stmt->fetch()) {
+                                echo "<option value='" . $row['id_categorie'] . "'>" . htmlspecialchars($row['nom']) . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </p>
+                    <button type="submit">Ajouter</button>
+                </fieldset>
+            </form>
+            <br>
+            <a href="list.php">Retour à la liste</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

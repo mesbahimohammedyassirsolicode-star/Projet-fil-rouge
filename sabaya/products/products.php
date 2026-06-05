@@ -19,43 +19,42 @@ $products = $productModel->getAll();
     <title> Shop Catalog - Sabaya Luxury</title>
 </head>
 <body>
-    <?php if(empty($products)): ?>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="products.php">Boutique</a></li>
+                <li><a href="cart.php">Mon Panier</a></li>
+                <li><a href="../wishlist/wishlist.php">Ma Liste de souhaits</a></li>
+                <li><a href="my-orders.php">Mes Commandes</a></li>
+                <li><a href="../auth/profile.php">Mon Profil</a></li>
+                <li><a href="../auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<p>Aucun produit disponible.</p>
+    <main class="container">
+        <section>
+            <h1>Modern Collection</h1>
 
-<?php endif; ?>
-<main class="container">
-    <h1>Modern Collection</h1>
-   <?php foreach($products as $product): ?>
+            <?php if(empty($products)): ?>
+                <p>Aucun produit disponible.</p>
+            <?php endif; ?>
 
-<div class="card">
+            <?php foreach($products as $product): ?>
+                <article class="card">
+                    <img src="../assets/images/products/<?= htmlspecialchars($product['image']) ?>" alt="Photo de <?= htmlspecialchars($product['nom']) ?>" width="200">
+                    <h3><?= htmlspecialchars($product['nom']) ?></h3>
+                    <p><?= htmlspecialchars($product['prix']) ?> DH</p>
+                    <a href="product-details.php?id=<?= $product['id_produit'] ?>">Voir détails</a>
+                    <a href="add-cart.php?id=<?= $product['id_produit'] ?>">Ajouter au panier</a>
+                    <a href="my-orders.php">Mes Commandes</a>
+                </article>
+            <?php endforeach; ?>
+        </section>
+    </main>
 
-    <img
-    src="../assets/images/products/<?= htmlspecialchars($product['image']) ?>"
-    width="200"
-    >
-
-    <h3>
-        <?= htmlspecialchars($product['nom']) ?>
-    </h3>
-
-    <p>
-        <?= htmlspecialchars($product['prix']) ?> DH
-    </p>
-
-    <a href="product-details.php?id=<?= $product['id_produit'] ?>">
-        Voir détails
-    </a>
-    <a href="add-cart.php?id=<?= $product['id_produit'] ?>">
-    Ajouter au panier
-</a>
-
-<a href="my-orders.php">
-    Mes Commandes
-</a>
-</div>
-
-<?php endforeach; ?>
-</main>
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

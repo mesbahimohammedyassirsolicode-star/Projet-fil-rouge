@@ -31,36 +31,43 @@ $orders = $orderModel->getUserOrders(
     <header>
         <nav>
             <ul>
-                <li><a href="products.php">Produits</a></li>
-                <li><a href="cart.php">Panier</a></li>
-                <li><a href="checkout.php">Checkout</a></li>
-                <li><a href="my-orders.php">Mes commandes</a></li>
-                <li><a href="../auth/logout.php">Logout</a></li>
+                <li><a href="products.php">Boutique</a></li>
+                <li><a href="cart.php">Mon Panier</a></li>
+                <li><a href="../wishlist/wishlist.php">Ma Liste de souhaits</a></li>
+                <li><a href="my-orders.php">Mes Commandes</a></li>
+                <li><a href="../auth/profile.php">Mon Profil</a></li>
+                <li><a href="../auth/logout.php">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>Mes commandes</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($orders as $order): ?>
+        <section>
+            <h1>Mes commandes</h1>
+            <table>
+                <caption>Historique de vos commandes passées sur Sabaya Luxury</caption>
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($order['id_commande']) ?></td>
-                        <td><?= htmlspecialchars($order['datecmd']) ?></td>
-                        <td><?= htmlspecialchars($order['statuscmd']) ?></td>
-                        <td><?= htmlspecialchars($order['total']) ?></td>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach($orders as $order): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($order['id_commande']) ?></td>
+                            <td><?= htmlspecialchars($order['datecmd']) ?></td>
+                            <td><?= htmlspecialchars($order['statuscmd']) ?></td>
+                            <td><?= htmlspecialchars($order['total']) ?> DH</td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
     </main>
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

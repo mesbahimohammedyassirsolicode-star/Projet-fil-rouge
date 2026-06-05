@@ -136,105 +136,83 @@ if (empty($errors)) {
     <header>
         <nav>
             <ul>
-                <li><a href="products.php">Produits</a></li>
-                <li><a href="cart.php">Panier</a></li>
-                <li><a href="checkout.php">Checkout</a></li>
-                <li><a href="my-orders.php">Mes commandes</a></li>
-                <li><a href="../auth/logout.php">Logout</a></li>
+                <li><a href="products.php">Boutique</a></li>
+                <li><a href="cart.php">Mon Panier</a></li>
+                <li><a href="../wishlist/wishlist.php">Ma Liste de souhaits</a></li>
+                <li><a href="my-orders.php">Mes Commandes</a></li>
+                <li><a href="../auth/profile.php">Mon Profil</a></li>
+                <li><a href="../auth/logout.php">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>Finaliser la commande</h1>
+        <section>
+            <h1>Finaliser la commande</h1>
 
-        <?php foreach ($errors as $error): ?>
-
-            <p style="color:red;">
-                <?= htmlspecialchars($error) ?>
-            </p>
-
-        <?php endforeach; ?>
-
-        <form method="POST">
-
-            <label>Ville</label>
-
-            <input type="text" name="ville">
-
-            <label>Adresse</label>
-
-            <input type="text" name="adresse">
-
-            <label>Code Postal</label>
-
-            <input type="text" name="code_postal">
-
-            <h2>Récapitulatif</h2>
-
-            <table border="1" cellpadding="10">
-
-                <tr>
-                    <th>Produit</th>
-                    <th>Prix</th>
-                    <th>Quantité</th>
-                    <th>Sous Total</th>
-                </tr>
-
-                <?php foreach ($cart as $id_produit => $quantite): ?>
-
-                    <?php
-
-                    $product = $productModel->find($id_produit);
-
-                    if (!$product) {
-                        continue;
-                    }
-
-                    $sousTotal = $product['prix'] * $quantite;
-
-                    ?>
-
-                    <tr>
-
-                        <td>
-                            <?= htmlspecialchars($product['nom']) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars($product['prix']) ?> DH
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars($quantite) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars($sousTotal) ?> DH
-                        </td>
-
-                    </tr>
-
+            <?php if (isset($errors)): ?>
+                <?php foreach ($errors as $error): ?>
+                    <p style="color:red;">
+                        <?= htmlspecialchars($error) ?>
+                    </p>
                 <?php endforeach; ?>
+            <?php endif; ?>
 
-            </table>
+            <form method="POST">
+                <fieldset>
+                    <legend>Informations de livraison</legend>
+                    <p>
+                        <label for="ville">Ville</label>
+                        <input type="text" name="ville" id="ville">
+                    </p>
+                    <p>
+                        <label for="adresse">Adresse</label>
+                        <input type="text" name="adresse" id="adresse">
+                    </p>
+                    <p>
+                        <label for="code_postal">Code Postal</label>
+                        <input type="text" name="code_postal" id="code_postal">
+                    </p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Récapitulatif de la commande</legend>
+                    <table border="1" cellpadding="10">
+                        <caption>Articles dans votre commande</caption>
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Prix</th>
+                                <th>Quantité</th>
+                                <th>Sous Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($cart as $id_produit => $quantite): ?>
+                                <?php
+                                $product = $productModel->find($id_produit);
+                                if (!$product) {
+                                    continue;
+                                }
+                                $sousTotal = $product['prix'] * $quantite;
+                                ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($product['nom']) ?></td>
+                                    <td><?= htmlspecialchars($product['prix']) ?> DH</td>
+                                    <td><?= htmlspecialchars($quantite) ?></td>
+                                    <td><?= htmlspecialchars($sousTotal) ?> DH</td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                    <h3>Total Général : <?= $total ?> DH</h3>
+                    <button type="submit">Confirmer la commande</button>
+                </fieldset>
+            </form>
 
             <br>
-
-            <h3>Total Général : <?= $total ?> DH</h3>
-
-            <br>
-
-            <button type="submit">
-                Confirmer la commande
-            </button>
-
-        </form>
-
-        <br>
-
-        <a href="cart.php">
-            Retour au panier
-        </a>
+            <a href="cart.php">Retour au panier</a>
+        </section>
     </main>
     <footer>
         <p>Copyright &copy; 2026 Sabaya Luxury</p>

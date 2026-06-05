@@ -20,22 +20,28 @@ if ($_SESSION['role'] !== 'admin') {
     <title>Dashboard Admin</title>
 </head>
 <body>
-    <h1>Dashboard Admin</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="categories/list.php">Gestion des catégories</a></li>
+                <li><a href="products/list.php">Gestion des produits</a></li>
+                <li><a href="orders/list.php">Gestion des commandes</a></li>
+                <li><a href="/auth/profile.php">Profil</a></li>
+                <li><a href="/auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<p>Bienvenue <?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
+    <main>
+        <section>
+            <h1>Dashboard Admin</h1>
+            <p>Bienvenue <?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
+        </section>
+    </main>
 
-<!-- links -->
-<a href="/auth/logout.php">Logout</a>
-<a href="/auth/profile.php">Profile</a>
-<a href="categories/list.php">
-    Gestion des catégories
-</a>
-<a href="products/list.php">
-    Gestion des produits
-</a>
-<a href="orders/list.php">
-    Gestion des commandes
-</a>
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>
 

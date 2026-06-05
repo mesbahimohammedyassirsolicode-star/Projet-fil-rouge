@@ -100,56 +100,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Modifier un produit</title>
 </head>
 <body>
-<h1>Modifier un produit</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../categories/list.php">Gestion des catégories</a></li>
+                <li><a href="list.php">Gestion des produits</a></li>
+                <li><a href="../orders/list.php">Gestion des commandes</a></li>
+                <li><a href="../dashboard.php">Tableau de bord</a></li>
+                <li><a href="../../auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<?php if (!empty($errors)): ?>
-    <div style="color: red; margin-bottom: 15px;">
-        <?php foreach ($errors as $error): ?>
-            <p><?= htmlspecialchars($error) ?></p>
-        <?php endforeach; ?>
-    </div>
-<?php endif; ?>
+    <main>
+        <section>
+            <h1>Modifier un produit</h1>
 
-<form method="post" enctype="multipart/form-data">
-    <label for="nom">Nom du produit:</label><br>
-    <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($product['nom']) ?>"><br>
-    
-    <label for="description">Description:</label><br>
-    <textarea id="description" name="description"><?= htmlspecialchars($product['description']) ?></textarea><br>
-    
-    <label for="prix">Prix:</label><br>
-    <input type="number" id="prix" name="prix" step="0.01" value="<?= htmlspecialchars($product['prix']) ?>"><br>
-    
-    <label for="stock">Stock:</label><br>
-    <input type="number" id="stock" name="stock" step="1" value="<?= htmlspecialchars($product['stock']) ?>"><br>
-    
-    <label for="taille">Taille:</label><br>
-    <input type="text" id="taille" name="taille" value="<?= htmlspecialchars($product['taille']) ?>"><br>
-    
-    <label for="couleur">Couleur:</label><br>
-    <input type="text" id="couleur" name="couleur" value="<?= htmlspecialchars($product['couleur']) ?>"><br>
-    
-    <label>Image actuelle</label><br>
-    <?php if (!empty($product['image'])): ?>
-        <img src="../../assets/images/products/<?= htmlspecialchars($product['image']) ?>" width="100" style="margin-bottom: 10px;"><br>
-    <?php endif; ?>
-    <label for="image">Remplacer l'image (optionnel):</label><br>
-    <input type="file" id="image" name="image"><br>
-    
-    <label for="categorie">Catégorie:</label><br>
-    <select id="categorie" name="categorie">
-        <?php
-        $sql = "SELECT * FROM categorie";
-        $stmt = $pdo->query($sql);
-        while ($row = $stmt->fetch()) {
-            $selected = ($row['id_categorie'] == $product['id_categorie']) ? 'selected' : '';
-            echo "<option value='" . $row['id_categorie'] . "' $selected>" . $row['nom'] . "</option>";
-        }
-        ?>
-    </select><br><br>
-    
-    <button type="submit">Enregistrer les modifications</button>
-    <a href="list.php">Annuler</a>
-</form>
+            <?php if (!empty($errors)): ?>
+                <div style="color: red; margin-bottom: 15px;" role="alert">
+                    <?php foreach ($errors as $error): ?>
+                        <p><?= htmlspecialchars($error) ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Détails du produit à modifier</legend>
+                    <p>
+                        <label for="nom">Nom du produit :</label><br>
+                        <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($product['nom']) ?>">
+                    </p>
+                    <p>
+                        <label for="description">Description :</label><br>
+                        <textarea id="description" name="description"><?= htmlspecialchars($product['description']) ?></textarea>
+                    </p>
+                    <p>
+                        <label for="prix">Prix :</label><br>
+                        <input type="number" id="prix" name="prix" step="0.01" value="<?= htmlspecialchars($product['prix']) ?>">
+                    </p>
+                    <p>
+                        <label for="stock">Stock :</label><br>
+                        <input type="number" id="stock" name="stock" step="1" value="<?= htmlspecialchars($product['stock']) ?>">
+                    </p>
+                    <p>
+                        <label for="taille">Taille :</label><br>
+                        <input type="text" id="taille" name="taille" value="<?= htmlspecialchars($product['taille']) ?>">
+                    </p>
+                    <p>
+                        <label for="couleur">Couleur :</label><br>
+                        <input type="text" id="couleur" name="couleur" value="<?= htmlspecialchars($product['couleur']) ?>">
+                    </p>
+                    <p>
+                        <span>Image actuelle :</span><br>
+                        <?php if (!empty($product['image'])): ?>
+                            <img src="../../assets/images/products/<?= htmlspecialchars($product['image']) ?>" alt="Photo actuelle de <?= htmlspecialchars($product['nom']) ?>" width="100" style="margin-bottom: 10px;"><br>
+                        <?php endif; ?>
+                        <label for="image">Remplacer l'image (optionnel) :</label><br>
+                        <input type="file" id="image" name="image">
+                    </p>
+                    <p>
+                        <label for="categorie">Catégorie :</label><br>
+                        <select id="categorie" name="categorie">
+                            <?php
+                            $sql = "SELECT * FROM categorie";
+                            $stmt = $pdo->query($sql);
+                            while ($row = $stmt->fetch()) {
+                                $selected = ($row['id_categorie'] == $product['id_categorie']) ? 'selected' : '';
+                                echo "<option value='" . $row['id_categorie'] . "' $selected>" . htmlspecialchars($row['nom']) . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </p>
+                    <button type="submit">Enregistrer les modifications</button>
+                    <a href="list.php">Annuler</a>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

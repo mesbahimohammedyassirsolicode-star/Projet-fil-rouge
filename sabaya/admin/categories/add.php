@@ -40,37 +40,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Ajouter une catégorie</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="list.php">Gestion des catégories</a></li>
+                <li><a href="../products/list.php">Gestion des produits</a></li>
+                <li><a href="../orders/list.php">Gestion des commandes</a></li>
+                <li><a href="../dashboard.php">Tableau de bord</a></li>
+                <li><a href="../../auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<h1>Ajouter une catégorie</h1>
+    <main>
+        <section>
+            <h1>Ajouter une catégorie</h1>
 
-<?php foreach($errors as $error): ?>
-    <p style="color:red;">
-        <?= htmlspecialchars($error) ?>
-    </p>
-<?php endforeach; ?>
+            <?php if (!empty($errors)): ?>
+                <?php foreach($errors as $error): ?>
+                    <p style="color:red;" role="alert">
+                        <?= htmlspecialchars($error) ?>
+                    </p>
+                <?php endforeach; ?>
+            <?php endif; ?>
 
-<form method="POST">
+            <form method="POST">
+                <fieldset>
+                    <legend>Informations sur la nouvelle catégorie</legend>
+                    <p>
+                        <label for="nom">Nom de la catégorie :</label><br>
+                        <input type="text" id="nom" name="nom" placeholder="Ex : Abayas Casual">
+                    </p>
+                    <button type="submit">Ajouter</button>
+                </fieldset>
+            </form>
+            <br>
+            <a href="list.php">Retour à la liste</a>
+        </section>
+    </main>
 
-    <label>Nom de la catégorie</label>
-    <br>
-
-    <input
-        type="text"
-        name="nom"
-        placeholder="Ex : Abayas Casual"
-    >
-
-    <br><br>
-
-    <button type="submit">
-        Ajouter
-    </button>
-
-</form>
-
-<br>
-
-<a href="list.php">Retour à la liste</a>
-
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

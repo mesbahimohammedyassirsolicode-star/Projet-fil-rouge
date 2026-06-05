@@ -48,77 +48,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../categories/list.php">Gestion des catégories</a></li>
+                <li><a href="../products/list.php">Gestion des produits</a></li>
+                <li><a href="list.php">Gestion des commandes</a></li>
+                <li><a href="../dashboard.php">Tableau de bord</a></li>
+                <li><a href="../../auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header>
-    <h1>Modifier le statut de la commande</h1>
-</header>
+    <main>
+        <section>
+            <h1>Modifier le statut de la commande</h1>
 
-<main>
+            <form method="POST">
+                <fieldset>
+                    <legend>Nouveau statut de la commande</legend>
+                    <p>
+                        <label for="status">Statut de la commande :</label><br>
+                        <select name="status" id="status">
+                            <option value="En attente">En attente</option>
+                            <option value="Confirmée">Confirmée</option>
+                            <option value="Expédiée">Expédiée</option>
+                            <option value="Livrée">Livrée</option>
+                            <option value="Annulée">Annulée</option>
+                        </select>
+                    </p>
+                    <button type="submit">Enregistrer</button>
+                </fieldset>
+            </form>
+            <br>
+            <a href="list.php">Retour à la liste des commandes</a>
+        </section>
+    </main>
 
-
-<section>
-
-    <form method="POST">
-
-        <div>
-
-            <label for="status">
-                Statut de la commande
-            </label>
-
-            <br><br>
-
-            <select
-                name="status"
-                id="status"
-            >
-
-                <option value="En attente">
-                    En attente
-                </option>
-
-                <option value="Confirmée">
-                    Confirmée
-                </option>
-
-                <option value="Expédiée">
-                    Expédiée
-                </option>
-
-                <option value="Livrée">
-                    Livrée
-                </option>
-
-                <option value="Annulée">
-                    Annulée
-                </option>
-
-            </select>
-
-        </div>
-
-        <br><br>
-
-        <button type="submit">
-            Enregistrer
-        </button>
-
-    </form>
-
-</section>
-
-</main>
-
-<footer>
-
-
-<a href="list.php">
-    Retour à la liste des commandes
-</a>
-
-
-</footer>
-
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
-
 </html>

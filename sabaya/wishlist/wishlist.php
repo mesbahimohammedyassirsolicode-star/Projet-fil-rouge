@@ -28,50 +28,72 @@ $wishlist = $wishlistModel->getUserWishlist($id_client);
     <title>Wishlist</title>
 </head>
 <body>
-    <h1>Your Wishlist</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../products/products.php">Boutique</a></li>
+                <li><a href="../products/cart.php">Mon Panier</a></li>
+                <li><a href="wishlist.php">Ma Liste de souhaits</a></li>
+                <li><a href="../products/my-orders.php">Mes Commandes</a></li>
+                <li><a href="../auth/profile.php">Mon Profil</a></li>
+                <li><a href="../auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <?php if (empty($wishlist)): ?>
-        <p>Votre liste de souhaits est vide.</p>
-    <?php else: ?>
-        <table border="1" cellpadding="10">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Nom du produit</th>
-                    <th>Prix</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($wishlist as $item): ?>
-                    <tr>
-                        <td>
-                            <img src="../assets/images/products/<?= htmlspecialchars($item['image']) ?>"
-                                 alt="<?= htmlspecialchars($item['nom']) ?>">
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($item['nom']) ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($item['prix']) ?> DH
-                        </td>
-                        <td>
-                            <!-- Bouton vers page produit -->
-                            <a href="../products/product-details.php?id=<?= $item['id_produit'] ?>">
-                                Voir le produit
-                            </a>
-                            <!-- Bouton supprimer -->
-                            <a href="remove-wishlist.php?id=<?= $item['id_wishlist'] ?>">
-                                Supprimer
-                            </a>
-                            <a href="../products/products.php">
-                                Retour aux produits
-                            </a>    
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
+    <main>
+        <section>
+            <h1>Your Wishlist</h1>
+
+            <?php if (empty($wishlist)): ?>
+                <p>Votre liste de souhaits est vide.</p>
+            <?php else: ?>
+                <table border="1" cellpadding="10">
+                    <caption>Liste de vos produits favoris</caption>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Nom du produit</th>
+                            <th>Prix</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($wishlist as $item): ?>
+                            <tr>
+                                <td>
+                                    <img src="../assets/images/products/<?= htmlspecialchars($item['image']) ?>"
+                                         alt="Image de <?= htmlspecialchars($item['nom']) ?>">
+                                </td>
+                                <td>
+                                    <?= htmlspecialchars($item['nom']) ?>
+                                </td>
+                                <td>
+                                    <?= htmlspecialchars($item['prix']) ?> DH
+                                </td>
+                                <td>
+                                    <!-- Bouton vers page produit -->
+                                    <a href="../products/product-details.php?id=<?= $item['id_produit'] ?>">
+                                        Voir le produit
+                                    </a>
+                                    <!-- Bouton supprimer -->
+                                    <a href="remove-wishlist.php?id=<?= $item['id_wishlist'] ?>">
+                                        Supprimer
+                                    </a>
+                                    <a href="../products/products.php">
+                                        Retour aux produits
+                                    </a>    
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

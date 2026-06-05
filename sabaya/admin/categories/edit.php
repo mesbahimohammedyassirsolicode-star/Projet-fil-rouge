@@ -57,37 +57,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Modifier Catégorie</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="list.php">Gestion des catégories</a></li>
+                <li><a href="../products/list.php">Gestion des produits</a></li>
+                <li><a href="../orders/list.php">Gestion des commandes</a></li>
+                <li><a href="../dashboard.php">Tableau de bord</a></li>
+                <li><a href="../../auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<h1>Modifier Catégorie</h1>
+    <main>
+        <section>
+            <h1>Modifier la catégorie</h1>
 
-<?php foreach ($errors as $error): ?>
-    <p style="color:red;">
-        <?= htmlspecialchars($error) ?>
-    </p>
-<?php endforeach; ?>
+            <?php if (!empty($errors)): ?>
+                <?php foreach ($errors as $error): ?>
+                    <p style="color:red;" role="alert">
+                        <?= htmlspecialchars($error) ?>
+                    </p>
+                <?php endforeach; ?>
+            <?php endif; ?>
 
-<form method="POST">
+            <form method="POST">
+                <fieldset>
+                    <legend>Détails de la catégorie</legend>
+                    <p>
+                        <label for="nom">Nom de la catégorie :</label><br>
+                        <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($categorie['nom']) ?>">
+                    </p>
+                    <button type="submit">Modifier</button>
+                </fieldset>
+            </form>
+            <br>
+            <a href="list.php">Retour à la liste</a>
+        </section>
+    </main>
 
-    <label>Nom de la catégorie</label>
-    <br>
-
-    <input
-        type="text"
-        name="nom"
-        value="<?= htmlspecialchars($categorie['nom']) ?>"
-    >
-
-    <br><br>
-
-    <button type="submit">
-        Modifier
-    </button>
-
-</form>
-
-<br>
-
-<a href="list.php">Retour à la liste</a>
-
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

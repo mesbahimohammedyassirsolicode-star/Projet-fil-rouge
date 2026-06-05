@@ -95,31 +95,63 @@ if (empty($password)) {
     <title>register</title>
 </head>
 <body>
-    <?php if (!empty($error)): ?>
-        <div style="color: red; margin-bottom: 15px;">
-            <?php foreach($error as $err): ?>
-                <p><?php echo htmlspecialchars($err); ?></p>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-    <!--start the form to register -->
-    <form  method="post">
-        <!-- nom -->
-        <label for="nom">nom </label>
-        <input type="text" id="nom" name="nom">
-        <!-- prenom -->
-        <label for="prenom">prenom </label>
-        <input type="text" id="prenom" name="prenom">
-        <label for="phone">telephone</label>
-        <input type="tel" id="phone" name="phone">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
-        <label for="confirme">confirmer le mot de passe</label>
-        <input type="password" id="confirme" name="confirme">
-        <button type="submit" id="submit" name="submit">Register</button>
-    </form>
-    
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../products/products.php">Boutique</a></li>
+                <li><a href="login.php">Connexion</a></li>
+                <li><a href="register.php">Inscription</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Créer un compte</h1>
+
+            <?php if (!empty($error)): ?>
+                <div style="color: red; margin-bottom: 15px;" role="alert">
+                    <?php foreach($error as $err): ?>
+                        <p><?php echo htmlspecialchars($err); ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="post">
+                <fieldset>
+                    <legend>Informations d'inscription</legend>
+                    <p>
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom">
+                    </p>
+                    <p>
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom">
+                    </p>
+                    <p>
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </p>
+                    <p>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </p>
+                    <p>
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password">
+                    </p>
+                    <p>
+                        <label for="confirme">Confirmer le mot de passe</label>
+                        <input type="password" id="confirme" name="confirme">
+                    </p>
+                    <button type="submit" id="submit" name="submit">S'inscrire</button>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

@@ -62,22 +62,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
 </head>
-<body>    
-    <?php if (!empty($error)): ?>
-        <div style="color: red; margin-bottom: 15px;">
-            <?php foreach ($error as $err): ?>
-                <p><?php echo htmlspecialchars($err); ?></p>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-    <!--start the form to login -->
-    <form action="login.php" method="post">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
-        <button type="submit" id="submit" name="submit">Login</button>
-    </form>
-    
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../products/products.php">Boutique</a></li>
+                <li><a href="login.php">Connexion</a></li>
+                <li><a href="register.php">Inscription</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Connexion</h1>
+
+            <?php if (!empty($error)): ?>
+                <div style="color: red; margin-bottom: 15px;" role="alert">
+                    <?php foreach ($error as $err): ?>
+                        <p><?php echo htmlspecialchars($err); ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="login.php" method="post">
+                <fieldset>
+                    <legend>Identifiants de connexion</legend>
+                    <p>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </p>
+                    <p>
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password">
+                    </p>
+                    <button type="submit" id="submit" name="submit">Se connecter</button>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>

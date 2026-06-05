@@ -26,91 +26,70 @@ $products = $productModel->getAll();
     <title>Produits</title>
 </head>
 <body>
-    <h1>Gestion des Produits</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../categories/list.php">Gestion des catégories</a></li>
+                <li><a href="list.php">Gestion des produits</a></li>
+                <li><a href="../orders/list.php">Gestion des commandes</a></li>
+                <li><a href="../dashboard.php">Tableau de bord</a></li>
+                <li><a href="../../auth/logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<a href="add.php">Ajouter un produit</a>
+    <main>
+        <section>
+            <h1>Gestion des Produits</h1>
 
-<br><br>
+            <a href="add.php">Ajouter un produit</a>
 
-<table border="1" cellpadding="10">
+            <br><br>
 
-    <thead>
-        <tr>
-            <th>Image</th>
-            <th>Nom</th>
-            <th>Prix</th>
-            <th>Stock</th>
-            <th>Catégorie</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-<?php if(empty($products)): ?>
+            <table border="1" cellpadding="10">
+                <caption>Liste de tous les produits en vente</caption>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Stock</th>
+                        <th>Catégorie</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(empty($products)): ?>
+                        <tr>
+                            <td colspan="6">Aucun produit trouvé</td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach($products as $product): ?>
+                            <tr>
+                                <td>
+                                    <img src="../../assets/images/products/<?= htmlspecialchars($product['image']) ?>" alt="Photo de <?= htmlspecialchars($product['nom']) ?>" width="80" height="80">
+                                </td>
+                                <td><?= htmlspecialchars($product['nom']) ?></td>
+                                <td><?= htmlspecialchars($product['prix']) ?> DH</td>
+                                <td><?= htmlspecialchars($product['stock']) ?></td>
+                                <td><?= htmlspecialchars($product['categorie_nom']) ?></td>
+                                <td>
+                                    <a href="edit.php?id=<?= $product['id_produit'] ?>">Modifier</a>
+                                    |
+                                    <a href="delete.php?id=<?= $product['id_produit'] ?>" onclick="return confirm('Supprimer ce produit ?')">Supprimer</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+            <br>
+            <a href="../dashboard.php">Retour au dashboard</a>
+        </section>
+    </main>
 
-<tr>
-    <td colspan="6">
-        Aucun produit trouvé
-    </td>
-</tr>
-
-<?php endif; ?>
-    <tbody>
-
-    <?php foreach($products as $product): ?>
-
-        <tr>
-
-            <td>
-
-                <img
-                src="../../assets/images/products/<?= htmlspecialchars($product['image']) ?>"
-                width="80"
-                height="80"
-                >
-
-            </td>
-
-            <td>
-                <?= htmlspecialchars($product['nom']) ?>
-            </td>
-
-            <td>
-                <?= htmlspecialchars($product['prix']) ?> DH
-            </td>
-
-            <td>
-                <?= htmlspecialchars($product['stock']) ?>
-            </td>
-
-            <td>
-                <?= htmlspecialchars($product['categorie_nom']) ?>
-            </td>
-
-            <td>
-
-                <a href="edit.php?id=<?= $product['id_produit'] ?>">
-                    Modifier
-                </a>
-
-                |
-
-                <a
-                href="delete.php?id=<?= $product['id_produit'] ?>"
-                onclick="return confirm('Supprimer ce produit ?')"
-                >
-                    Supprimer
-                </a>
-
-            </td>
-
-        </tr>
-
-    <?php endforeach; ?>
-
-    </tbody>
-
-</table>
-<br><br>
-<a href="../dashboard.php">Retour au dashboard</a>
-
+    <footer>
+        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+    </footer>
 </body>
 </html>
