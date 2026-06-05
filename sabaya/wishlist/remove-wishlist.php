@@ -22,7 +22,10 @@ $wishlistModel = new Wishlist($pdo);
 
 $id = (int) $_GET['id'];
 
-$wishlistModel->delete($id);
+$wishlistModel->delete(
+    $id,
+    $_SESSION['user_id']
+);
 
 header('Location: wishlist.php');
 exit();

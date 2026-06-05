@@ -33,6 +33,9 @@ if ($_SESSION['role'] !== 'admin') {
 <a href="products/list.php">
     Gestion des produits
 </a>
+<a href="orders/list.php">
+    Gestion des commandes
+</a>
 </body>
 </html>
 

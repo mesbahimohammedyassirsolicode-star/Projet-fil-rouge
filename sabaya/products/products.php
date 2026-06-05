@@ -46,8 +46,13 @@ $products = $productModel->getAll();
     <a href="product-details.php?id=<?= $product['id_produit'] ?>">
         Voir détails
     </a>
-    
+    <a href="add-cart.php?id=<?= $product['id_produit'] ?>">
+    Ajouter au panier
+</a>
 
+<a href="my-orders.php">
+    Mes Commandes
+</a>
 </div>
 
 <?php endforeach; ?>

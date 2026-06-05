@@ -46,9 +46,9 @@ if (!$product) {
 <p><?= htmlspecialchars($product['couleur']) ?></p>
 </div>
 <div class="product-actions">
- <button>
-Ajouter au panier
-</button>
+<a href="add-cart.php?id=<?= $product['id_produit'] ?>">
+    Ajouter au panier
+</a>
 
 <a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>">
     Ajouter à la wishlist

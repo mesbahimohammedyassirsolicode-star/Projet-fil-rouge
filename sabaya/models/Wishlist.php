@@ -68,15 +68,17 @@ class Wishlist
         return $stmt->fetchAll();
     }
 
-    public function delete($id)
-    {
-        $sql = "DELETE FROM wishlist
-                WHERE id_wishlist = :id";
+    public function delete($id, $id_client)
+{
+    $sql = "DELETE FROM wishlist
+            WHERE id_wishlist = :id
+            AND id_client = :id_client";
 
-        $stmt = $this->pdo->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
 
-        return $stmt->execute([
-            ':id' => $id
-        ]);
-    }
+    return $stmt->execute([
+        ':id' => $id,
+        ':id_client' => $id_client
+    ]);
+}
 }

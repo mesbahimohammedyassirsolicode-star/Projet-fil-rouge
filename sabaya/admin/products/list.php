@@ -110,7 +110,7 @@ $products = $productModel->getAll();
 
 </table>
 <br><br>
-<a href="./dashboard.php">Retour au dashboard</a>
+<a href="../dashboard.php">Retour au dashboard</a>
 
 </body>
 </html>
