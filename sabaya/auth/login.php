@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $error[] = "Email ou mot de passe incorrect";
         }
+        session_regenerate_id(true);
     }
 
 }
