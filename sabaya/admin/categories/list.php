@@ -38,6 +38,7 @@ $categories = $categoryModel->getAll();
                 <li><a href="list.php">Gestion des catégories</a></li>
                 <li><a href="../products/list.php">Gestion des produits</a></li>
                 <li><a href="../orders/list.php">Gestion des commandes</a></li>
+                <li><a href="../users/list.php">Gestion des utilisateurs</a></li>
                 <li><a href="../dashboard.php">Tableau de bord</a></li>
                 <li><a href="../../auth/logout.php">Déconnexion</a></li>
             </ul>
