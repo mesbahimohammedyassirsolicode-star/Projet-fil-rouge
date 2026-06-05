@@ -56,11 +56,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <meta name="description" content="Connectez-vous à votre compte Sabaya Luxury pour accéder à vos commandes et votre liste de souhaits.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Connexion | Sabaya Luxury</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sabaya Luxury">
+    <meta property="og:title" content="Connexion | Sabaya Luxury">
+    <meta property="og:locale" content="fr_MA">
 </head>
 <body>
     <header>

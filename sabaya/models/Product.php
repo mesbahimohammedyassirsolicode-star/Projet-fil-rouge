@@ -135,4 +135,36 @@ class Product
             ':id' => $id
         ]);
     }
+    public function search($keyword)
+{
+    $sql = "SELECT produits.*, categorie.nom AS categorie_nom
+            FROM produits
+            INNER JOIN categorie
+            ON produits.id_categorie = categorie.id_categorie
+            WHERE produits.nom LIKE :keyword
+            ORDER BY produits.nom ASC";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute([
+        ':keyword' => '%' . $keyword . '%'
+    ]);
+
+    return $stmt->fetchAll();
+}
+public function getByCategory($id_categorie)
+{
+    $sql = "SELECT *
+            FROM produits
+            WHERE id_categorie = :id_categorie
+            ORDER BY id_produit DESC";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute([
+        ':id_categorie' => $id_categorie
+    ]);
+
+    return $stmt->fetchAll();
+}
 }

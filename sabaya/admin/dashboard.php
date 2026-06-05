@@ -35,6 +35,7 @@ $pdo = $db->getConnection();
                 <li><a href="/auth/profile.php">Profil</a></li>
                 <li><a href="/auth/logout.php">Déconnexion</a></li>
                 <li><a href="statistics/index.php">Statistiques</a></li>
+                <li><a href="contact/list.php">Gestion des Messages</a></li>
             </ul>
         </nav>
           <main>

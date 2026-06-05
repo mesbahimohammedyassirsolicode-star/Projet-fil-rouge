@@ -21,7 +21,18 @@ $pdo = $db->getConnection();
 $userModel = new User($pdo);
 
 $id = (int) $_GET['id'];
+$user = $userModel->find($id);
 
+if (!$user) {
+    header('Location: list.php');
+    exit();
+}
+
+if ($user['role'] === 'admin') {
+    die('Impossible de supprimer un administrateur');
+}
+
+$userModel->delete($id);
 $userModel->delete($id);
 
 header('Location: list.php');

@@ -13,7 +13,16 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Profil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gérez votre profil Sabaya Luxury.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Mon Profil | Sabaya Luxury</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sabaya Luxury">
+    <meta property="og:title" content="Mon Profil | Sabaya Luxury">
+    <meta property="og:locale" content="fr_MA">
 </head>
 <body>
     <header>

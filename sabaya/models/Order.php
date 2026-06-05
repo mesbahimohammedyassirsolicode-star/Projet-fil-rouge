@@ -116,6 +116,40 @@ return $stmt->fetchAll();
 
 }
 
+public function getOrderById($id_commande)
+{
+    $sql = "SELECT commande.*, client.nom, client.prenom, client.email, client.telephone
+            FROM commande
+            INNER JOIN client
+            ON commande.id_client = client.id_client
+            WHERE commande.id_commande = :id_commande";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute([
+        ':id_commande' => $id_commande
+    ]);
+
+    return $stmt->fetch();
+}
+
+public function getOrderItems($id_commande)
+{
+    $sql = "SELECT ligne_commande.*, produits.nom AS produit_nom, produits.image
+            FROM ligne_commande
+            INNER JOIN produits
+            ON ligne_commande.id_produit = produits.id_produit
+            WHERE ligne_commande.id_commande = :id_commande";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute([
+        ':id_commande' => $id_commande
+    ]);
+
+    return $stmt->fetchAll();
+}
+
 public function updateStatus($id_commande, $status)
 {
 $sql = "UPDATE commande

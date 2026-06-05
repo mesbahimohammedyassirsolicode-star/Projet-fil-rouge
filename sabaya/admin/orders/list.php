@@ -67,6 +67,7 @@ $orders = $orderModel->getAllOrders();
                                 <td><?= htmlspecialchars($order['total']) ?> DH</td>
                                 <td><?= htmlspecialchars($order['statuscmd']) ?></td>
                                 <td>
+                                    <a href="details.php?id=<?= htmlspecialchars($order['id_commande']) ?>">Détails</a>
                                     <a href="update-status.php?id=<?= htmlspecialchars($order['id_commande']) ?>">Modifier</a>
                                 </td>
                             </tr>

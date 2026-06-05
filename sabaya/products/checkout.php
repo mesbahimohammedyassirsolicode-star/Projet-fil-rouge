@@ -126,11 +126,19 @@ if (empty($errors)) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finaliser la commande</title>
+    <meta name="description" content="Finalisez votre commande d'abayas sur Sabaya Luxury.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Finaliser la commande | Sabaya Luxury</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sabaya Luxury">
+    <meta property="og:title" content="Finaliser la commande | Sabaya Luxury">
+    <meta property="og:locale" content="fr_MA">
 </head>
 <body>
     <header>

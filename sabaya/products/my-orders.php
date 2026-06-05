@@ -21,11 +21,19 @@ $orders = $orderModel->getUserOrders(
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes commandes</title>
+    <meta name="description" content="Consultez l'historique de vos commandes sur Sabaya Luxury.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Mes Commandes | Sabaya Luxury</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sabaya Luxury">
+    <meta property="og:title" content="Mes Commandes | Sabaya Luxury">
+    <meta property="og:locale" content="fr_MA">
 </head>
 <body>
     <header>

@@ -6,7 +6,16 @@ session_start();
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Commande Confirmée</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Votre commande sur Sabaya Luxury a été confirmée avec succès.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Commande Confirmée | Sabaya Luxury</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sabaya Luxury">
+    <meta property="og:title" content="Commande Confirmée | Sabaya Luxury">
+    <meta property="og:locale" content="fr_MA">
 </head>
 <body>
     <header>
