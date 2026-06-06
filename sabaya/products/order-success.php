@@ -32,12 +32,57 @@ session_start();
     </header>
 
     <main>
-        <section>
-            <h1>Commande enregistrée avec succès ✅</h1>
-            <p>Merci pour votre commande.</p>
-            <a href="products.php">Continuer mes achats</a>
-        </section>
-    </main>
+
+```
+<section>
+
+    <h1>Commande enregistrée avec succès ✅</h1>
+
+    <p>
+        Merci pour votre commande.
+    </p>
+
+    <p>
+        Pour confirmer votre commande rapidement,
+        veuillez nous contacter sur WhatsApp.
+    </p>
+
+    <?php
+
+    $orderId = isset($_GET['order_id']) ? intval($_GET['order_id']) : 0;
+
+    $message = $_SESSION['whatsapp_message'] ?? '';
+
+    $whatsappLink =
+        "https://wa.me/212613623407?text="
+        . urlencode($message);
+
+    ?>
+
+    <a
+        href="<?= $whatsappLink ?>"
+        target="_blank"
+    >
+        Confirmer via WhatsApp
+    </a>
+
+    <br><br>
+
+    <a href="my-orders.php">
+        Voir mes commandes
+    </a>
+
+    <br><br>
+
+    <a href="products.php">
+        Continuer mes achats
+    </a>
+
+</section>
+
+
+</main>
+
 
     <footer>
         <p>Copyright &copy; 2026 Sabaya Luxury</p>

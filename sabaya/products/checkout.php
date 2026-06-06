@@ -113,10 +113,52 @@ if (empty($errors)) {
             ':id' => $id_produit
         ]);
     }
+    $whatsappMessage = "Bonjour Sabaya Luxury\n\n";
 
+$whatsappMessage .=
+    "Je souhaite confirmer ma commande.\n\n";
+
+$whatsappMessage .=
+    "Commande N°" . $id_commande . "\n\n";
+
+$whatsappMessage .=
+    "Produits :\n";
+
+foreach ($cart as $id_produit => $quantite) {
+
+    $product = $productModel->find($id_produit);
+
+    if (!$product) {
+        continue;
+    }
+
+    $whatsappMessage .=
+        "- " .
+        $product['nom'] .
+        " × " .
+        $quantite .
+        "\n";
+}
+
+$whatsappMessage .= "\n";
+
+$whatsappMessage .=
+    "Total : " .
+    $total .
+    " DH\n";
+
+$whatsappMessage .=
+    "Ville : " .
+    $ville .
+    "\n";
+
+$whatsappMessage .= "\nMerci.";
+    
+$_SESSION['whatsapp_message'] = $whatsappMessage;
+$_SESSION['last_order_id'] = $id_commande;
     unset($_SESSION['cart']);
 
-    header('Location: order-success.php');
+    header('Location: order-success.php?order_id=' . $id_commande);
     exit();
 }
 
