@@ -11,7 +11,7 @@ class Category
 
     public function getAll()
     {
-        $sql = "SELECT * FROM categorie ORDER BY id_categorie ASC";
+        $sql = "SELECT * FROM categorie ORDER BY nom ASC";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
@@ -33,30 +33,59 @@ class Category
         return $stmt->fetch();
     }
 
-    public function create($nom)
+    public function findByName($nom)
     {
-        $sql = "INSERT INTO categorie (nom)
-                VALUES (:nom)";
+        $sql = "SELECT * FROM categorie
+                WHERE nom = :nom";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([
+            ':nom' => $nom
+        ]);
+
+        return $stmt->fetch();
+    }
+
+    public function create($nom, $image = null)
+    {
+        $sql = "INSERT INTO categorie (nom, image)
+                VALUES (:nom, :image)";
 
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
-            ':nom' => $nom
+            ':nom'   => $nom,
+            ':image' => $image
         ]);
     }
 
-    public function update($id, $nom)
+    public function update($id, $nom, $image = null)
     {
-        $sql = "UPDATE categorie
-                SET nom = :nom
-                WHERE id_categorie = :id";
+        if ($image !== null) {
+            $sql = "UPDATE categorie
+                    SET nom = :nom, image = :image
+                    WHERE id_categorie = :id";
 
-        $stmt = $this->pdo->prepare($sql);
+            $stmt = $this->pdo->prepare($sql);
 
-        return $stmt->execute([
-            ':nom' => $nom,
-            ':id' => $id
-        ]);
+            return $stmt->execute([
+                ':nom'   => $nom,
+                ':image' => $image,
+                ':id'    => $id
+            ]);
+        } else {
+            $sql = "UPDATE categorie
+                    SET nom = :nom
+                    WHERE id_categorie = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+
+            return $stmt->execute([
+                ':nom' => $nom,
+                ':id'  => $id
+            ]);
+        }
     }
 
     public function delete($id)
