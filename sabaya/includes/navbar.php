@@ -90,6 +90,7 @@ if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                 <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/products/cart.php" role="menuitem">Panier <?php if ($cartCount > 0) echo '(' . $cartCount . ')'; ?></a></li>
             <?php else: ?>
                 <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/auth/login.php" role="menuitem">Compte</a></li>
+                <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/products/cart.php" role="menuitem">Panier <?php if ($cartCount > 0) echo '(' . $cartCount . ')'; ?></a></li>
             <?php endif; ?>
         </ul>
 

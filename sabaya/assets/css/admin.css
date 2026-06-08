@@ -14,6 +14,7 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f5f5f5;
+    overflow-x: hidden;
 }
 
 /* ── Screen Reader Only ───────────────────────── */
@@ -252,6 +253,28 @@ section article p {
 }
 
 /* ── Responsive ───────────────────────────────── */
+
+@media (max-width: 992px) {
+    main {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    table {
+        font-size: 0.88rem;
+    }
+
+    table th,
+    table td {
+        padding: 8px 10px;
+    }
+
+    section article {
+        min-width: 150px;
+        padding: 1.2rem;
+    }
+}
+
 @media (max-width: 768px) {
     header nav ul {
         flex-direction: column;
@@ -262,12 +285,101 @@ section article p {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    main {
+        padding: 0 0.75rem;
+        margin: 1rem auto;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    /* Responsive tables: horizontal scroll */
     table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         font-size: 0.85rem;
+    }
+
+    table thead {
+        display: table-header-group;
+    }
+
+    table tbody {
+        display: table-row-group;
     }
 
     table th,
     table td {
         padding: 6px 8px;
+        white-space: nowrap;
+    }
+
+    table img {
+        max-width: 60px;
+    }
+
+    /* Stats cards: stack on mobile */
+    section article {
+        display: block;
+        min-width: unset;
+        margin: 0.5rem 0;
+    }
+
+    /* Form inputs: full width on mobile */
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="file"],
+    textarea,
+    select {
+        max-width: 100%;
+    }
+
+    fieldset {
+        padding: 1rem;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    section {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    table th,
+    table td {
+        padding: 5px 6px;
+    }
+
+    section article {
+        padding: 1rem;
+    }
+
+    section article p {
+        font-size: 1.3rem;
     }
 }

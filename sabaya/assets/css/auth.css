@@ -221,7 +221,9 @@ main > section fieldset > p:first-child + p > label[for="password"]::before {
 ========================== */
 
 main > section input[type="email"],
-main > section input[type="password"] {
+main > section input[type="password"],
+main > section input[type="text"],
+main > section input[type="tel"] {
     width: 100%;
     padding: 10px 0;
     border: none;
@@ -240,13 +242,17 @@ main > section input[type="password"] {
 }
 
 main > section input[type="email"]:focus,
-main > section input[type="password"]:focus {
+main > section input[type="password"]:focus,
+main > section input[type="text"]:focus,
+main > section input[type="tel"]:focus {
     outline: none;
     border-bottom-color: #1A1A1A;
 }
 
 main > section input[type="email"]::placeholder,
-main > section input[type="password"]::placeholder {
+main > section input[type="password"]::placeholder,
+main > section input[type="text"]::placeholder,
+main > section input[type="tel"]::placeholder {
     color: #CCCCCC;
     font-weight: 300;
     font-style: italic;
@@ -355,5 +361,17 @@ main > section button[type="submit"]:active {
     main > section fieldset > p:first-child > label[for="email"]::after,
     main > section fieldset > p:first-child + p > label[for="password"]::before {
         font-size: 10px;
+    }
+
+    main > section input[type="email"],
+    main > section input[type="password"],
+    main > section input[type="text"],
+    main > section input[type="tel"] {
+        font-size: 13px;
+        padding: 8px 0;
+    }
+
+    main > section fieldset > p {
+        margin-bottom: 18px;
     }
 }

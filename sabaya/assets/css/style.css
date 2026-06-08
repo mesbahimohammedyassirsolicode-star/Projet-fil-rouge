@@ -12,6 +12,7 @@ box-sizing:border-box;
 
 html{
 scroll-behavior:smooth;
+overflow-x:hidden;
 }
 
 body{
@@ -19,6 +20,7 @@ font-family:'Poppins',sans-serif;
 background:#F9F8F3;
 color:#1A1A1A;
 line-height:1.6;
+overflow-x:hidden;
 }
 
 /* Focus-visible for keyboard accessibility */
@@ -553,6 +555,24 @@ FOOTER
     color:#999;
 }
 
+@media(max-width:480px){
+    .footer{
+        padding:40px 5% 0;
+    }
+    .footer-col h4{
+        font-size:16px;
+        margin-bottom:14px;
+    }
+    .social-links{
+        gap:12px;
+    }
+    .social-links a{
+        width:32px;
+        height:32px;
+        font-size:14px;
+    }
+}
+
 /* ==========================
 RESPONSIVE
 ========================== */
@@ -569,6 +589,10 @@ h1{
 
 h2{
     font-size:32px;
+}
+
+section{
+    padding:80px 0;
 }
 
 .grid-4{
@@ -590,6 +614,15 @@ h2{
 
 .nav-right{
     gap:20px;
+}
+
+/* Homepage cards tablet */
+.card img{
+    height:280px;
+}
+
+.card-content h3{
+    font-size:15px;
 }
 
 }
@@ -637,13 +670,75 @@ h2{
     font-size:28px;
 }
 
+section{
+    padding:60px 0;
+}
+
 .grid-2,
 .grid-3,
 .grid-4{
     grid-template-columns:1fr;
 }
 
+/* Homepage hero mobile */
+.hero{
+    min-height:60vh;
+    padding:0 4%;
 }
+
+.hero p{
+    font-size:14px;
+    margin:16px auto;
+}
+
+.hero .btn{
+    padding:12px 28px;
+    font-size:12px;
+}
+
+/* Homepage cards mobile */
+.card img{
+    height:360px;
+}
+
+.card-content{
+    padding:16px 12px 20px;
+}
+
+.categories h2,
+.new-arrivals h2{
+    margin-bottom:32px;
+}
+
+}
+
+@media(max-width:480px){
+
+    .card img{
+        height:300px;
+    }
+
+    .hero{
+        min-height:50vh;
+    }
+
+    .hero-subtitle{
+        font-size:10px;
+        letter-spacing:.2em;
+    }
+
+    .btn{
+        padding:12px 24px;
+        font-size:11px;
+    }
+
+    .btn-outline{
+        padding:12px 24px;
+        font-size:11px;
+    }
+
+}
+
 .hero{
     min-height:80vh;
     display:flex;
@@ -660,6 +755,66 @@ h2{
 .hero p{
     max-width:700px;
     margin:20px auto;
+}
+
+/* ==========================
+HOMEPAGE CARDS
+========================== */
+
+.card{
+    background:#fff;
+    border:1px solid var(--border);
+    overflow:hidden;
+    transition:box-shadow 0.4s, transform 0.4s, border-color 0.4s;
+    display:flex;
+    flex-direction:column;
+}
+
+.card:hover{
+    box-shadow:0 12px 36px rgba(197,173,89,0.12);
+    transform:translateY(-4px);
+    border-color:var(--gold);
+}
+
+.card img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.card:hover img{
+    transform:scale(1.03);
+}
+
+.card-content{
+    padding:20px 16px 24px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    gap:8px;
+}
+
+.card-content h3{
+    font-size:16px;
+    font-weight:400;
+    letter-spacing:0.02em;
+    color:var(--black);
+}
+
+.card-content .price{
+    font-size:15px;
+    font-weight:500;
+    color:var(--gold);
+    margin-bottom:8px;
+}
+
+.card-content .btn{
+    font-size:11px;
+    padding:10px 24px;
+    align-self:center;
 }
 
 .categories h2,
