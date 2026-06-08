@@ -59,4 +59,26 @@ class Contact
 
         return $stmt->fetchAll();
     }
+
+    public function getById($id)
+    {
+        $sql = "SELECT *
+                FROM contact
+                WHERE id_contact = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+
+        return $stmt->fetch();
+    }
+
+    public function delete($id)
+    {
+        $sql = "DELETE FROM contact
+                WHERE id_contact = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        return $stmt->execute([':id' => $id]);
+    }
 }

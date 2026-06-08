@@ -2182,3 +2182,1104 @@ body:not(.admin-dashboard) section article p {
         align-items: center;
     }
 }
+
+/* ════════════════════════════════════════════════
+   CONTACT MODULE – Luxury Admin
+   ════════════════════════════════════════════════ */
+
+/* ── Stat Icon Modifiers (Contact Module) ─────── */
+.stat-icon--today {
+    background: rgba(197, 173, 89, 0.12);
+    color: var(--clr-gold);
+}
+
+.stat-icon--week {
+    background: rgba(52, 152, 219, 0.1);
+    color: #2980b9;
+}
+
+/* ── Contact Stats Cards Grid ────────────────── */
+.contact-stats-cards {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* ── Contact Table Wrapper ────────────────────── */
+.contact-table-wrapper {
+    background: var(--clr-white);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+}
+
+.contact-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0;
+}
+
+.contact-table th {
+    background: var(--clr-cream);
+    color: var(--clr-dark);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.contact-table th:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.contact-table th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.contact-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--clr-border);
+    font-size: 0.9rem;
+    color: var(--clr-text);
+    vertical-align: middle;
+}
+
+.contact-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.contact-table tbody tr {
+    transition: background-color var(--transition);
+}
+
+.contact-table tbody tr:hover {
+    background: rgba(197, 173, 89, 0.04);
+}
+
+/* ── Contact Sender Cell ─────────────────────── */
+.contact-sender-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-avatar-sm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--clr-gold);
+    color: var(--clr-dark);
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.contact-sender-name {
+    font-weight: 600;
+    color: var(--clr-dark);
+}
+
+/* ── Contact Actions Cell ────────────────────── */
+.contact-actions-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ── Contact Empty State ─────────────────────── */
+.contact-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--clr-text-muted);
+}
+
+.contact-empty-state svg {
+    opacity: 0.35;
+}
+
+.contact-empty-state p {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* ── Contact Details Grid ────────────────────── */
+.contact-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+}
+
+.contact-details-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ── Contact Sender Block (View Page) ────────── */
+.contact-sender-block {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: var(--clr-cream);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+}
+
+/* ── Contact Date Badge ──────────────────────── */
+.contact-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    background: rgba(197, 173, 89, 0.12);
+    color: var(--clr-gold);
+    border: 1px solid rgba(197, 173, 89, 0.3);
+}
+
+/* ── Contact Message Body ────────────────────── */
+.contact-message-body {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--clr-text);
+    padding: 4px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* ── Contact Action Buttons (View Page) ──────── */
+.contact-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+/* ── Danger Button ───────────────────────────── */
+.btn-danger {
+    background: rgba(231, 76, 60, 0.08);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.25);
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background: #e74c3c;
+    color: var(--clr-white);
+    border-color: #e74c3c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
+    text-decoration: none;
+}
+
+/* ── Delete Confirmation Card ────────────────── */
+.delete-confirmation-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 32px;
+}
+
+.delete-confirmation-card {
+    background: var(--clr-white);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 40px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.delete-confirmation-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(231, 76, 60, 0.08);
+    margin: 0 auto 24px;
+    color: #e74c3c;
+}
+
+.delete-confirmation-card h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--clr-dark);
+    margin: 0 0 12px;
+}
+
+.delete-confirmation-text {
+    font-size: 0.92rem;
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+    margin: 0 0 28px;
+}
+
+.delete-message-preview {
+    background: var(--clr-cream);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.delete-confirmation-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.delete-confirm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: #e74c3c;
+    color: var(--clr-white);
+    border: 1px solid #e74c3c;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.delete-confirm-btn:hover,
+.delete-confirm-btn:focus {
+    background: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    outline: none;
+}
+
+.delete-cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+}
+
+/* ════════════════════════════════════════════════
+   CONTACT MODULE – Responsive
+   ════════════════════════════════════════════════ */
+
+/* ── Tablet ───────────────────────────────────── */
+@media (max-width: 1024px) {
+    .contact-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-details-right {
+        order: -1;
+    }
+
+    .contact-action-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contact-action-btn {
+        flex: 1;
+        min-width: 140px;
+    }
+}
+
+/* ── Mobile: Contact Table Card Layout ───────── */
+@media (max-width: 768px) {
+    .contact-stats-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .contact-table-wrapper {
+        padding: 16px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    .contact-table,
+    .contact-table thead,
+    .contact-table tbody,
+    .contact-table th,
+    .contact-table td,
+    .contact-table tr {
+        display: block;
+    }
+
+    .contact-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .contact-table tbody tr {
+        background: var(--clr-white);
+        border: 1px solid var(--clr-border);
+        border-radius: var(--radius);
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .contact-table td {
+        border: none;
+        border-bottom: 1px solid rgba(229, 225, 216, 0.5);
+        position: relative;
+        padding-left: 45% !important;
+        text-align: right;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .contact-table td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .contact-table td:first-child {
+        padding-top: 0;
+    }
+
+    .contact-table td::before {
+        position: absolute;
+        left: 12px;
+        width: 40%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--clr-text-muted);
+        content: attr(data-label);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+    }
+
+    .contact-table td .contact-sender-cell {
+        align-items: flex-end;
+    }
+
+    .contact-actions-cell {
+        justify-content: flex-end;
+    }
+
+    .contact-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-info-card {
+        padding: 20px;
+    }
+
+    .order-info-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .order-info-row dd {
+        text-align: left;
+    }
+
+    .delete-confirmation-card {
+        padding: 28px 20px;
+    }
+
+    .delete-confirmation-actions {
+        flex-direction: column-reverse;
+    }
+
+    .delete-confirm-btn,
+    .delete-cancel-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .contact-action-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-stats-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-sender-block {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contact-sender-block .product-info-cell {
+        align-items: center;
+    }
+
+    .contact-avatar-sm {
+        width: 34px;
+        height: 34px;
+        font-size: 0.82rem;
+    }
+
+    .order-breadcrumb {
+        margin-bottom: 16px;
+    }
+
+    .delete-confirmation-icon {
+        width: 64px;
+        height: 64px;
+    }
+
+    .delete-confirmation-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* ════════════════════════════════════════════════
+   USERS MODULE – Luxury Admin
+   ════════════════════════════════════════════════ */
+
+/* ── Role Badges ──────────────────────────────── */
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.role-badge--admin {
+    background: rgba(197, 173, 89, 0.15);
+    color: #a89432;
+    border: 1px solid rgba(197, 173, 89, 0.3);
+}
+
+.role-badge--client {
+    background: rgba(52, 152, 219, 0.1);
+    color: #2980b9;
+    border: 1px solid rgba(52, 152, 219, 0.25);
+}
+
+/* ── Users Table Wrapper ──────────────────────── */
+.users-table-wrapper {
+    background: var(--clr-white);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0;
+}
+
+.users-table th {
+    background: var(--clr-cream);
+    color: var(--clr-dark);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.users-table th:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.users-table th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.users-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--clr-border);
+    font-size: 0.9rem;
+    color: var(--clr-text);
+    vertical-align: middle;
+}
+
+.users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.users-table tbody tr {
+    transition: background-color var(--transition);
+}
+
+.users-table tbody tr:hover {
+    background: rgba(197, 173, 89, 0.04);
+}
+
+/* ── User Info Cell ───────────────────────────── */
+.user-info-cell {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.user-avatar-sm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--clr-gold);
+    color: var(--clr-dark);
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.user-name-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.user-email-cell {
+    font-size: 0.88rem;
+    color: var(--clr-text);
+    word-break: break-all;
+}
+
+/* ── User Details Grid ───────────────────────── */
+.user-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+}
+
+.user-details-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ── Responsive: User Details ─────────────────── */
+@media (max-width: 1024px) {
+    .user-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .user-details-right {
+        order: -1;
+    }
+}
+
+/* ── Responsive: Users Table Card Layout (Mobile) ── */
+@media (max-width: 768px) {
+    .users-table-wrapper {
+        padding: 16px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    .users-table,
+    .users-table thead,
+    .users-table tbody,
+    .users-table th,
+    .users-table td,
+    .users-table tr {
+        display: block;
+    }
+
+    .users-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .users-table tbody tr {
+        background: var(--clr-white);
+        border: 1px solid var(--clr-border);
+        border-radius: var(--radius);
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .users-table td {
+        border: none;
+        border-bottom: 1px solid rgba(229, 225, 216, 0.5);
+        position: relative;
+        padding-left: 45% !important;
+        text-align: right;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .users-table td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .users-table td:first-child {
+        padding-top: 0;
+    }
+
+    .users-table td::before {
+        position: absolute;
+        left: 12px;
+        width: 40%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--clr-text-muted);
+        content: attr(data-label);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+    }
+
+    .users-table td .user-info-cell {
+        align-items: flex-end;
+    }
+
+    .product-actions-cell {
+        justify-content: flex-end;
+    }
+
+    .user-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-info-card {
+        padding: 20px;
+    }
+
+    .order-info-card-header {
+        flex-direction: column;
+    }
+
+    .order-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .order-info-row dd {
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-avatar-sm {
+        width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+    }
+
+    .order-breadcrumb {
+        margin-bottom: 16px;
+    }
+
+    .customer-avatar-block {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .customer-avatar-block .product-info-cell {
+        align-items: center;
+    }
+}
+
+/* ════════════════════════════════════════════════
+   STATISTICS MODULE – Luxury Admin
+   ════════════════════════════════════════════════ */
+
+/* ── KPI Grid (5 columns) ─────────────────────── */
+.stats-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+/* ── KPI Card ─────────────────────────────────── */
+.kpi-card {
+    background: var(--clr-white);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--clr-gold);
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+.kpi-card:hover,
+.kpi-card:focus {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    outline: none;
+}
+
+.kpi-card:hover::after,
+.kpi-card:focus::after {
+    opacity: 1;
+}
+
+/* Revenue card – special accent */
+.kpi-card--revenue {
+    background: var(--clr-dark);
+    border-color: var(--clr-dark);
+}
+
+.kpi-card--revenue::after {
+    background: var(--clr-gold);
+    opacity: 1;
+}
+
+.kpi-card--revenue .kpi-label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.kpi-card--revenue .kpi-value {
+    color: var(--clr-gold);
+}
+
+.kpi-card--revenue .kpi-tag {
+    color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.kpi-card--revenue .kpi-icon {
+    background: rgba(197, 173, 89, 0.15);
+    color: var(--clr-gold);
+}
+
+/* ── KPI Icon ─────────────────────────────────── */
+.kpi-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.kpi-icon--products {
+    background: rgba(197, 173, 89, 0.12);
+    color: var(--clr-gold);
+}
+
+.kpi-icon--categories {
+    background: rgba(26, 26, 26, 0.08);
+    color: var(--clr-dark);
+}
+
+.kpi-icon--clients {
+    background: rgba(197, 173, 89, 0.12);
+    color: var(--clr-gold);
+}
+
+.kpi-icon--orders {
+    background: rgba(26, 26, 26, 0.08);
+    color: var(--clr-dark);
+}
+
+.kpi-icon--revenue {
+    background: rgba(197, 173, 89, 0.15);
+    color: var(--clr-gold);
+}
+
+/* ── KPI Body ─────────────────────────────────── */
+.kpi-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.kpi-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--clr-dark);
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.kpi-currency {
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0;
+}
+
+.kpi-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--clr-text-muted);
+    background: var(--clr-cream);
+    padding: 4px 10px;
+    border-radius: 20px;
+    align-self: flex-start;
+    letter-spacing: 0.3px;
+}
+
+/* ── Insights Grid ────────────────────────────── */
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+/* ── Insight Card ─────────────────────────────── */
+.insight-card {
+    background: var(--clr-white);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.insight-card:hover,
+.insight-card:focus {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    outline: none;
+}
+
+.insight-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.insight-card-header h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--clr-dark);
+    margin: 0;
+}
+
+.insight-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.insight-icon--catalog {
+    background: rgba(197, 173, 89, 0.12);
+    color: var(--clr-gold);
+}
+
+.insight-icon--orders {
+    background: rgba(26, 26, 26, 0.08);
+    color: var(--clr-dark);
+}
+
+.insight-icon--growth {
+    background: rgba(197, 173, 89, 0.12);
+    color: var(--clr-gold);
+}
+
+.insight-icon--perf {
+    background: rgba(26, 26, 26, 0.08);
+    color: var(--clr-dark);
+}
+
+/* ── Insight Stat Row ─────────────────────────── */
+.insight-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.insight-stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(229, 225, 216, 0.5);
+}
+
+.insight-stat-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.insight-stat-label {
+    font-size: 0.82rem;
+    color: var(--clr-text-muted);
+    font-weight: 400;
+}
+
+.insight-stat-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--clr-dark);
+}
+
+.insight-stat-value--success {
+    color: #27ae60;
+}
+
+.insight-stat-value--danger {
+    color: #e74c3c;
+}
+
+/* ════════════════════════════════════════════════
+   STATISTICS MODULE – Responsive
+   ════════════════════════════════════════════════ */
+
+/* ── Tablet ───────────────────────────────────── */
+@media (max-width: 1024px) {
+    .stats-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .insights-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+/* ── Mobile ───────────────────────────────────── */
+@media (max-width: 768px) {
+    .stats-kpi-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .kpi-card {
+        padding: 20px 16px;
+        gap: 12px;
+    }
+
+    .kpi-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .kpi-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .kpi-value {
+        font-size: 1.5rem;
+    }
+
+    .kpi-tag {
+        font-size: 0.68rem;
+    }
+
+    .insights-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .insight-card {
+        padding: 20px;
+    }
+
+    .chart-container {
+        height: 240px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-kpi-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .kpi-value {
+        font-size: 1.4rem;
+    }
+}

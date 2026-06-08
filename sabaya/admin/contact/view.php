@@ -10,22 +10,23 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
+if (!isset($_GET['id'])) {
+    header('Location: list.php');
+    exit();
+}
+
 $db = new Database();
 $pdo = $db->getConnection();
 
 $contactModel = new Contact($pdo);
 
-$messages = $contactModel->getAll();
+$id = (int) $_GET['id'];
+$message = $contactModel->getById($id);
 
-// Fetch database stats for cards
-$stmtTotal = $pdo->query("SELECT COUNT(*) FROM contact");
-$totalMessages = $stmtTotal->fetchColumn();
-
-$stmtToday = $pdo->query("SELECT COUNT(*) FROM contact WHERE DATE(date_message) = CURDATE()");
-$todayMessages = $stmtToday->fetchColumn();
-
-$stmtWeek = $pdo->query("SELECT COUNT(*) FROM contact WHERE YEARWEEK(date_message, 1) = YEARWEEK(CURDATE(), 1)");
-$weekMessages = $stmtWeek->fetchColumn();
+if (!$message) {
+    header('Location: list.php');
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +35,7 @@ $weekMessages = $stmtWeek->fetchColumn();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Messages de Contact | Sabaya Luxury Admin</title>
+    <title>Voir le Message | Sabaya Luxury Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -114,12 +115,8 @@ $weekMessages = $stmtWeek->fetchColumn();
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <div class="header-title-block">
-            <h1>Messages de Contact</h1>
-            <p class="header-subtitle">Consultez et gérez les messages envoyés par les clients.</p>
-        </div>
-        <div class="header-search">
-            <label for="adminSearch" class="sr-only">Rechercher</label>
-            <input type="search" id="adminSearch" placeholder="Rechercher un message..." aria-label="Rechercher dans les messages">
+            <h1>Détail du Message</h1>
+            <p class="header-subtitle">Message de <?= htmlspecialchars($message['nom']) ?></p>
         </div>
         <div class="header-user">
             <span class="user-greeting">Bonjour, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
@@ -132,92 +129,99 @@ $weekMessages = $stmtWeek->fetchColumn();
     <!-- ── Main Content ────────────────────────── -->
     <main class="admin-content">
 
-        <!-- Statistics Cards -->
-        <section class="stats-cards contact-stats-cards" aria-label="Statistiques des messages">
-            <article class="stat-card">
-                <div class="stat-icon stat-icon--messages">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                </div>
-                <div class="stat-info">
-                    <h2>Total Messages</h2>
-                    <p class="stat-value"><?= htmlspecialchars($totalMessages) ?></p>
-                </div>
-            </article>
-            <article class="stat-card">
-                <div class="stat-icon stat-icon--today">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div class="stat-info">
-                    <h2>Aujourd'hui</h2>
-                    <p class="stat-value"><?= htmlspecialchars($todayMessages) ?></p>
-                </div>
-            </article>
-            <article class="stat-card">
-                <div class="stat-icon stat-icon--week">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                </div>
-                <div class="stat-info">
-                    <h2>Cette Semaine</h2>
-                    <p class="stat-value"><?= htmlspecialchars($weekMessages) ?></p>
-                </div>
-            </article>
-        </section>
+        <!-- Breadcrumb -->
+        <nav class="order-breadcrumb" aria-label="Fil d'Ariane">
+            <a href="list.php" class="breadcrumb-back">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Retour aux messages
+            </a>
+        </nav>
 
-        <!-- Messages Table -->
-        <section class="contact-table-wrapper" aria-label="Liste des messages">
-            <header class="section-header">
-                <h2>Tous les Messages</h2>
-            </header>
+        <!-- Message Details Grid -->
+        <div class="contact-details-grid">
+            <!-- Left: Message Info Card -->
+            <div class="contact-details-left">
+                <article class="order-info-card">
+                    <header class="order-info-card-header">
+                        <div>
+                            <h2>Informations de Contact</h2>
+                        </div>
+                        <span class="contact-date-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <time datetime="<?= htmlspecialchars($message['date_message']) ?>"><?= date('d M Y - H:i', strtotime($message['date_message'])) ?></time>
+                        </span>
+                    </header>
 
-            <?php if (empty($messages)): ?>
-                <div class="contact-empty-state">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <p>Aucun message de contact pour le moment.</p>
-                </div>
-            <?php else: ?>
-                <div class="table-responsive">
-                    <table class="contact-table">
-                        <caption class="sr-only">Liste de tous les messages reçus via le formulaire de contact</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Sujet</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($messages as $msg): ?>
-                            <tr>
-                                <td data-label="Nom">
-                                    <div class="contact-sender-cell">
-                                        <span class="contact-avatar-sm"><?= strtoupper(substr($msg['nom'], 0, 1)) ?></span>
-                                        <span class="contact-sender-name"><?= htmlspecialchars($msg['nom']) ?></span>
-                                    </div>
-                                </td>
-                                <td data-label="Email"><?= htmlspecialchars($msg['email']) ?></td>
-                                <td data-label="Sujet"><?= htmlspecialchars($msg['sujet']) ?></td>
-                                <td data-label="Date">
-                                    <time datetime="<?= htmlspecialchars($msg['date_message']) ?>"><?= date('d M Y', strtotime($msg['date_message'])) ?></time>
-                                </td>
-                                <td data-label="Actions">
-                                    <div class="contact-actions-cell">
-                                        <a href="view.php?id=<?= $msg['id_contact'] ?>" class="action-btn-circle btn-view" aria-label="Voir le message de <?= htmlspecialchars($msg['nom']) ?>" title="Voir">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                        </a>
-                                        <a href="delete.php?id=<?= $msg['id_contact'] ?>" class="action-btn-circle btn-delete" aria-label="Supprimer le message de <?= htmlspecialchars($msg['nom']) ?>" title="Supprimer">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            <?php endif; ?>
-        </section>
+                    <!-- Sender Block -->
+                    <div class="contact-sender-block">
+                        <div class="customer-avatar" aria-hidden="true">
+                            <?= strtoupper(substr($message['nom'], 0, 1)) ?>
+                        </div>
+                        <div class="product-info-cell">
+                            <span class="product-name-text"><?= htmlspecialchars($message['nom']) ?></span>
+                            <span class="product-ref-text"><?= htmlspecialchars($message['email']) ?></span>
+                        </div>
+                    </div>
+
+                    <!-- Info Rows -->
+                    <dl class="order-info-dl">
+                        <div class="order-info-row">
+                            <dt>Nom</dt>
+                            <dd><?= htmlspecialchars($message['nom']) ?></dd>
+                        </div>
+                        <div class="order-info-row">
+                            <dt>Email</dt>
+                            <dd>
+                                <a href="mailto:<?= htmlspecialchars($message['email']) ?>"><?= htmlspecialchars($message['email']) ?></a>
+                            </dd>
+                        </div>
+                        <div class="order-info-row">
+                            <dt>Sujet</dt>
+                            <dd><?= htmlspecialchars($message['sujet']) ?></dd>
+                        </div>
+                        <div class="order-info-row">
+                            <dt>Date</dt>
+                            <dd>
+                                <time datetime="<?= htmlspecialchars($message['date_message']) ?>"><?= date('d F Y à H:i', strtotime($message['date_message'])) ?></time>
+                            </dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <!-- Message Content Card -->
+                <article class="order-info-card">
+                    <header class="order-info-card-header">
+                        <h2>Message Complet</h2>
+                    </header>
+                    <div class="contact-message-body">
+                        <?= nl2br(htmlspecialchars($message['message'])) ?>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Right: Actions Card -->
+            <aside class="contact-details-right">
+                <article class="order-info-card">
+                    <header class="order-info-card-header">
+                        <h2>Actions</h2>
+                    </header>
+                    <div class="contact-action-buttons">
+                        <a href="mailto:<?= htmlspecialchars($message['email']) ?>" class="btn-primary contact-action-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            Répondre
+                        </a>
+                        <a href="delete.php?id=<?= $message['id_contact'] ?>" class="btn-danger contact-action-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                            Supprimer
+                        </a>
+                        <a href="list.php" class="btn-secondary contact-action-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Retour
+                        </a>
+                    </div>
+                </article>
+            </aside>
+        </div>
 
     </main>
 
@@ -257,19 +261,6 @@ document.addEventListener('DOMContentLoaded', function () {
             toggle.focus();
         }
     });
-
-    /* ── Search Filter ────────────────────────── */
-    const searchInput = document.getElementById('adminSearch');
-    if (searchInput) {
-        searchInput.addEventListener('input', function () {
-            const query = this.value.toLowerCase();
-            const rows = document.querySelectorAll('.contact-table tbody tr');
-            rows.forEach(function (row) {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(query) ? '' : 'none';
-            });
-        });
-    }
 });
 </script>
 
