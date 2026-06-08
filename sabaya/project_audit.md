@@ -1,4 +1,4 @@
-You are a Senior Luxury Fashion UI Designer and Frontend Architect.
+You are a Senior Frontend Architect and Responsive Design Auditor.
 
 Project:
 Sabaya Luxury
@@ -8,167 +8,100 @@ IMPORTANT:
 Do NOT modify:
 
 * PHP logic
-* Authentication
+* Database logic
 * Sessions
-* Navbar links
-* Existing routes
+* Authentication
+* CRUD operations
 
-Only redesign:
+Only improve:
 
-includes/navbar.php
-and related CSS.
-
-==================================================
-GOAL
-====
-
-Create a premium luxury fashion navbar inspired by:
-
-* Zara
-* Massimo Dutti
-* Luxury Abaya Brands
-
-The final result should match a minimalist luxury aesthetic.
+* Responsive Design
+* Mobile UX
+* Tablet UX
+* Layout Adaptation
 
 ==================================================
-LAYOUT
-======
+AUDIT ALL PAGES
+===============
 
-Desktop Navbar
+Analyze:
 
-LEFT:
-
-home
-produits 
-about us
-
-CENTER:
-
-SABAYA Logo from assets/logo/logo.png
-
-RIGHT:
-
-Search Icon
-Wishlist Icon
-Account Icon
-Cart Icon
+* Homepage
+* Products
+* Product Details
+* Cart
+* Checkout
+* Order Success
+* My Orders
+* Wishlist
+* Login
+* Register
+* Profile
+* About
+* Contact
+* Search
 
 ==================================================
-SEMANTIC HTML5
-==============
+RESPONSIVE BREAKPOINTS
+======================
 
-Use:
+Desktop:
+1200px+
 
-<header>
-<nav>
-<ul>
+Laptop:
+992px–1199px
 
-Avoid unnecessary div wrappers.
+Tablet:
+768px–991px
 
-==================================================
-SEO
-===
-
-Maintain crawlable navigation.
-
-Use proper anchor tags.
-
-Keep internal linking structure.
+Mobile:
+Below 768px
 
 ==================================================
-ACCESSIBILITY
+CHECK FOR
+=========
+
+* Horizontal scrolling
+* Broken grids
+* Overflow issues
+* Navbar issues
+* Large images
+* Button sizing
+* Form usability
+* Table responsiveness
+
+==================================================
+PRODUCT GRIDS
 =============
+
+Desktop:
+4 columns
+
+Tablet:
+2 columns
+
+Mobile:
+1 column
+
+==================================================
+FORMS
+=====
 
 Ensure:
 
-* Accessible navigation
-* Proper aria-labels for icon links
-* Keyboard navigation
+* Inputs full width
+* Buttons accessible
+* Proper spacing
 
 ==================================================
-DESIGN
+NAVBAR
 ======
-
-Style:
-
-Luxury
-Minimalist
-Editorial
-
-Typography:
-
-Poppins
-
-Colors:
-
-Background:
-#F9F8F3
-
-Text:
-#1A1A1A
-
-Hover:
-#C5AD59
-
-==================================================
-SPACING
-=======
-
-Navbar Height:
-
-80px
-
-Container Width:
-
-1400px max
-
-Logo centered perfectly.
-
-Large horizontal spacing.
-
-==================================================
-ICONS
-=====
-
-Right side icons:
-
-Search
-Wishlist
-Account
-Cart
-
-Use Font Awesome if already loaded.
-
-Icons size:
-
-18px to 20px
-
-Hover color:
-
-Gold (#C5AD59)
-
-==================================================
-BORDER
-======
-
-Bottom border:
-
-1px solid #E5E1D8
-
-No shadows.
-
-==================================================
-RESPONSIVE
-==========
 
 Desktop:
-Full navbar
-
-Tablet:
-Compact spacing
+Full navigation
 
 Mobile:
-Hamburger menu
+Hamburger menu or stacked navigation
 
 ==================================================
 OUTPUT
@@ -176,10 +109,16 @@ OUTPUT
 
 Generate:
 
-1. Semantic navbar HTML
-2. navbar.css styles
-3. Responsive styles
-4. Accessibility improvements
+# Responsive Audit Report
 
-Do not modify backend logic.
-Only improve the visual navbar design.
+# Pages With Issues
+
+# Exact CSS Fixes
+
+# Media Queries To Add
+
+# Final Responsive Score
+
+Do not modify business logic.
+
+Only improve responsive behavior.
