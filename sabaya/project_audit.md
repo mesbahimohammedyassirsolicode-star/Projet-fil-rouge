@@ -1,53 +1,185 @@
-# Project Audit (Updated)
+You are a Senior Luxury Fashion UI Designer and Frontend Architect.
 
-## Complete Modules
-- **Authentication**: `auth/login.php`, `auth/register.php`, `auth/profile.php`, `auth/logout.php`.
-- **Client Cart & Checkout**: Fully migrated to `products/cart.php` and `products/checkout.php` (redundant directories were successfully deleted).
-- **Client Products & Search**: The `Product.php` model now includes `search()` and `getByCategory()` methods, and `index.php`, `about.php`, `category.php`, and `search.php` have been implemented.
-- **Admin Categories**: `admin/categories/` (list, add, edit, delete).
-- **Admin Products**: `admin/products/` (list, add, edit, delete).
-- **Admin Orders**: `admin/orders/` (list, details, update-status).
-- **Wishlist**: `wishlist/` and `models/Wishlist.php`.
-- **Models**: `Category.php`, `Product.php`, `Order.php`.
+Project:
+Sabaya Luxury
 
-## Partial Modules
-- **Admin Users**: `admin/users/` has listing, details, and delete, but is missing user creation (`add.php`) and modification (`edit.php`).
-- **Admin Contacts**: `admin/contact/` has listing, but is missing view, reply, and delete functionality.
-- **User Model**: `models/User.php` is missing `create()` and `update()` methods.
-- **Contact Model**: `models/Contact.php` is missing `find()` and `delete()` methods.
+IMPORTANT:
 
-## Empty Files / Placeholders
-The following files are under 100 bytes and contain only placeholder comments:
+Do NOT modify:
 
-- `faq.php` (Status: PLACEHOLDER)
-- `guide-entretien.php` (Status: PLACEHOLDER)
-- `assets/css/admin.css` (Status: PLACEHOLDER)
-- `assets/css/auth.css` (Status: PLACEHOLDER)
-- `assets/css/cart.css` (Status: PLACEHOLDER)
-- `assets/css/products.css` (Status: PLACEHOLDER)
-- `assets/js/cart.js` (Status: PLACEHOLDER)
-- `assets/js/main.js` (Status: PLACEHOLDER)
-- `assets/js/validation.js` (Status: PLACEHOLDER)
+* PHP logic
+* Authentication
+* Sessions
+* Navbar links
+* Existing routes
 
-*(Note: A search for `TODO` comments returned no results across the codebase).*
+Only redesign:
 
-## Dead Links & Missing Features
+includes/navbar.php
+and related CSS.
 
-### Pages Linked but Not Implemented
-- **`shop.php`**: This file is linked in `about.php` (lines 16 and 113) but does not exist in the project directory. The actual shop page appears to be `products/products.php`.
+==================================================
+GOAL
+====
 
-### Missing Admin Features
-- **User Management**: Cannot add new users or edit existing users from the admin panel.
-- **Contact Management**: Cannot view full message details, delete messages, or mark them as resolved/replied.
-- **Site Settings**: No global configuration or CMS capability for dynamic pages.
+Create a premium luxury fashion navbar inspired by:
 
-### Missing Client Features
-- **Static Content**: The FAQ and Maintenance Guide pages (`faq.php`, `guide-entretien.php`) are still placeholders.
-- **Password Reset**: Missing "Forgot Password" functionality.
+* Zara
+* Massimo Dutti
+* Luxury Abaya Brands
 
-## Recommended Next Steps
-1. **Fix Dead Links**: Update the `href="shop.php"` links in `about.php` to point to `products/products.php`.
-2. **Complete User CRUD**: Add `create()` and `update()` methods to `User.php`, and create `add.php` and `edit.php` in `admin/users/`.
-3. **Complete Contact CRUD**: Add `find()` and `delete()` to `Contact.php`, and create `view.php` and `delete.php` in `admin/contact/`.
-4. **Develop Remaining Static Pages**: Implement the design/content for `faq.php` and `guide-entretien.php`.
-5. **Populate Empty Assets**: Write the actual CSS/JS for the placeholder files in the `assets/` directory or safely remove them if they are not linked in the HTML headers.
+The final result should match a minimalist luxury aesthetic.
+
+==================================================
+LAYOUT
+======
+
+Desktop Navbar
+
+LEFT:
+
+home
+produits 
+about us
+
+CENTER:
+
+SABAYA Logo from assets/logo/logo.png
+
+RIGHT:
+
+Search Icon
+Wishlist Icon
+Account Icon
+Cart Icon
+
+==================================================
+SEMANTIC HTML5
+==============
+
+Use:
+
+<header>
+<nav>
+<ul>
+
+Avoid unnecessary div wrappers.
+
+==================================================
+SEO
+===
+
+Maintain crawlable navigation.
+
+Use proper anchor tags.
+
+Keep internal linking structure.
+
+==================================================
+ACCESSIBILITY
+=============
+
+Ensure:
+
+* Accessible navigation
+* Proper aria-labels for icon links
+* Keyboard navigation
+
+==================================================
+DESIGN
+======
+
+Style:
+
+Luxury
+Minimalist
+Editorial
+
+Typography:
+
+Poppins
+
+Colors:
+
+Background:
+#F9F8F3
+
+Text:
+#1A1A1A
+
+Hover:
+#C5AD59
+
+==================================================
+SPACING
+=======
+
+Navbar Height:
+
+80px
+
+Container Width:
+
+1400px max
+
+Logo centered perfectly.
+
+Large horizontal spacing.
+
+==================================================
+ICONS
+=====
+
+Right side icons:
+
+Search
+Wishlist
+Account
+Cart
+
+Use Font Awesome if already loaded.
+
+Icons size:
+
+18px to 20px
+
+Hover color:
+
+Gold (#C5AD59)
+
+==================================================
+BORDER
+======
+
+Bottom border:
+
+1px solid #E5E1D8
+
+No shadows.
+
+==================================================
+RESPONSIVE
+==========
+
+Desktop:
+Full navbar
+
+Tablet:
+Compact spacing
+
+Mobile:
+Hamburger menu
+
+==================================================
+OUTPUT
+======
+
+Generate:
+
+1. Semantic navbar HTML
+2. navbar.css styles
+3. Responsive styles
+4. Accessibility improvements
+
+Do not modify backend logic.
+Only improve the visual navbar design.

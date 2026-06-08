@@ -19,15 +19,17 @@ $products = $productModel->getAll();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produits</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Gestion des Produits | Sabaya Luxury Admin</title>
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav aria-label="Navigation administration">
             <ul>
                 <li><a href="../categories/list.php">Gestion des catégories</a></li>
                 <li><a href="list.php">Gestion des produits</a></li>
@@ -47,8 +49,8 @@ $products = $productModel->getAll();
 
             <br><br>
 
-            <table border="1" cellpadding="10">
-                <caption>Liste de tous les produits en vente</caption>
+            <table>
+                <caption class="sr-only">Liste de tous les produits en vente</caption>
                 <thead>
                     <tr>
                         <th>Image</th>

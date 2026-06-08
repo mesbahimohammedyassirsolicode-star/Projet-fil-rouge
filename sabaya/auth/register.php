@@ -86,35 +86,25 @@ if (empty($password)) {
         }
     }
 
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Créez votre compte Sabaya Luxury et découvrez nos collections d'abayas modernes et élégantes.">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Inscription | Sabaya Luxury</title>
+$pageTitle = 'Inscription | Sabaya Luxury';
+$pageDescription = 'Créez votre compte Sabaya Luxury et découvrez nos collections d\'abayas modernes et élégantes.';
+$pageRobots = 'noindex, nofollow';
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Sabaya Luxury">
-    <meta property="og:title" content="Inscription | Sabaya Luxury">
-    <meta property="og:locale" content="fr_MA">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="../products/products.php">Boutique</a></li>
-                <li><a href="login.php">Connexion</a></li>
-                <li><a href="register.php">Inscription</a></li>
-            </ul>
-        </nav>
-    </header>
+$_authProtocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$_authScriptDir = dirname($_SERVER['SCRIPT_NAME']);
+if ($_authScriptDir !== '/' && $_authScriptDir !== '\\' && $_authScriptDir !== '') {
+    $_authScriptDir = dirname($_authScriptDir);
+}
+$_authBaseUrl = $_authProtocol . '://' . $_SERVER['HTTP_HOST'] . rtrim($_authScriptDir, '/\\');
+$extraHeadContent = '<link rel="stylesheet" href="' . htmlspecialchars($_authBaseUrl . '/assets/css/auth.css') . '">';
+
+require_once '../includes/header.php';
+require_once '../includes/navbar.php';
+
+?>
 
     <main>
-        <section>
+        <section aria-label="Formulaire d'inscription">
             <h1>Créer un compte</h1>
 
             <?php if (!empty($error)): ?>
@@ -155,11 +145,11 @@ if (empty($password)) {
                     <button type="submit" id="submit" name="submit">S'inscrire</button>
                 </fieldset>
             </form>
+            <p class="auth-switch">Already have an account? <a href="login.php">Log In</a></p>
         </section>
     </main>
 
-    <footer>
-        <p>Copyright &copy; 2026 Sabaya Luxury</p>
-    </footer>
+<?php require_once '../includes/footer.php'; ?>
+
 </body>
 </html>

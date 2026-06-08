@@ -166,106 +166,146 @@ $_SESSION['last_order_id'] = $id_commande;
 }
 
 
+// Include cart.css via extraHeadContent
+$baseUrl_hdr = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http')
+    . '://' . $_SERVER['HTTP_HOST']
+    . dirname(dirname($_SERVER['SCRIPT_NAME']));
+
+$extraHeadContent = '<link rel="stylesheet" href="' . htmlspecialchars($baseUrl_hdr) . '/assets/css/cart.css">';
+
+$pageTitle = 'Finaliser la commande | Sabaya Luxury';
+$pageDescription = 'Finalisez votre commande d\'abayas sur Sabaya Luxury.';
+$pageRobots = 'noindex, nofollow';
+
+require_once '../includes/header.php';
+require_once '../includes/navbar.php';
+
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Finalisez votre commande d'abayas sur Sabaya Luxury.">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Finaliser la commande | Sabaya Luxury</title>
+    <main class="checkout-page">
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Sabaya Luxury">
-    <meta property="og:title" content="Finaliser la commande | Sabaya Luxury">
-    <meta property="og:locale" content="fr_MA">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="products.php">Boutique</a></li>
-                <li><a href="cart.php">Mon Panier</a></li>
-                <li><a href="../wishlist/wishlist.php">Ma Liste de souhaits</a></li>
-                <li><a href="my-orders.php">Mes Commandes</a></li>
-                <li><a href="../auth/profile.php">Mon Profil</a></li>
-                <li><a href="../auth/logout.php">Déconnexion</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h1>Finaliser la commande</h1>
-
-            <?php if (isset($errors)): ?>
-                <?php foreach ($errors as $error): ?>
-                    <p style="color:red;">
-                        <?= htmlspecialchars($error) ?>
-                    </p>
-                <?php endforeach; ?>
-            <?php endif; ?>
-
-            <form method="POST">
-                <fieldset>
-                    <legend>Informations de livraison</legend>
-                    <p>
-                        <label for="ville">Ville</label>
-                        <input type="text" name="ville" id="ville">
-                    </p>
-                    <p>
-                        <label for="adresse">Adresse</label>
-                        <input type="text" name="adresse" id="adresse">
-                    </p>
-                    <p>
-                        <label for="code_postal">Code Postal</label>
-                        <input type="text" name="code_postal" id="code_postal">
-                    </p>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Récapitulatif de la commande</legend>
-                    <table border="1" cellpadding="10">
-                        <caption>Articles dans votre commande</caption>
-                        <thead>
-                            <tr>
-                                <th>Produit</th>
-                                <th>Prix</th>
-                                <th>Quantité</th>
-                                <th>Sous Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($cart as $id_produit => $quantite): ?>
-                                <?php
-                                $product = $productModel->find($id_produit);
-                                if (!$product) {
-                                    continue;
-                                }
-                                $sousTotal = $product['prix'] * $quantite;
-                                ?>
-                                <tr>
-                                    <td><?= htmlspecialchars($product['nom']) ?></td>
-                                    <td><?= htmlspecialchars($product['prix']) ?> DH</td>
-                                    <td><?= htmlspecialchars($quantite) ?></td>
-                                    <td><?= htmlspecialchars($sousTotal) ?> DH</td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-
-                    <h3>Total Général : <?= $total ?> DH</h3>
-                    <button type="submit">Confirmer la commande</button>
-                </fieldset>
-            </form>
-
-            <br>
-            <a href="cart.php">Retour au panier</a>
+        <!-- ─── Page Header ─── -->
+        <section class="checkout-header">
+            <div class="checkout-container">
+                <p class="checkout-eyebrow">Sabaya Luxury</p>
+                <h1 class="checkout-title">Finaliser la commande</h1>
+                <p class="checkout-intro">Complétez vos informations de livraison pour confirmer votre achat.</p>
+            </div>
         </section>
+
+        <!-- ─── Errors ─── -->
+        <?php if (isset($errors) && !empty($errors)): ?>
+        <section class="checkout-errors-section">
+            <div class="checkout-container">
+                <div class="checkout-errors">
+                    <?php foreach ($errors as $error): ?>
+                        <p class="checkout-error-msg">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <?= htmlspecialchars($error) ?>
+                        </p>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+        <?php endif; ?>
+
+        <!-- ─── Checkout Content ─── -->
+        <section class="checkout-content-section">
+            <div class="checkout-container">
+                <form method="POST" class="checkout-form" novalidate>
+                    <div class="checkout-layout">
+
+                        <!-- ═══ LEFT — Shipping Form ═══ -->
+                        <div class="checkout-shipping">
+                            <div class="checkout-section-card">
+                                <h2 class="checkout-section-title">
+                                    <i class="fas fa-shipping-fast"></i>
+                                    Informations de livraison
+                                </h2>
+                                <div class="checkout-divider"></div>
+
+                                <div class="checkout-field-group">
+                                    <div class="checkout-field">
+                                        <label for="ville" class="checkout-label">Ville</label>
+                                        <input type="text" name="ville" id="ville"
+                                               class="checkout-input"
+                                               placeholder="Ex : Casablanca" required>
+                                    </div>
+
+                                    <div class="checkout-field">
+                                        <label for="adresse" class="checkout-label">Adresse</label>
+                                        <input type="text" name="adresse" id="adresse"
+                                               class="checkout-input"
+                                               placeholder="Ex : 12 Rue Al Amine, Maarif" required>
+                                    </div>
+
+                                    <div class="checkout-field">
+                                        <label for="code_postal" class="checkout-label">Code Postal</label>
+                                        <input type="text" name="code_postal" id="code_postal"
+                                               class="checkout-input"
+                                               placeholder="Ex : 20000" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ═══ RIGHT — Order Summary ═══ -->
+                        <div class="checkout-summary">
+                            <div class="checkout-summary-card">
+                                <h2 class="checkout-summary-title">Récapitulatif</h2>
+                                <div class="checkout-divider"></div>
+
+                                <!-- Line Items -->
+                                <ul class="checkout-items-list">
+                                    <?php foreach ($cart as $id_produit => $quantite): ?>
+                                        <?php
+                                        $product = $productModel->find($id_produit);
+                                        if (!$product) {
+                                            continue;
+                                        }
+                                        $sousTotal = $product['prix'] * $quantite;
+                                        ?>
+                                        <li class="checkout-item">
+                                            <div class="checkout-item-info">
+                                                <p class="checkout-item-name"><?= htmlspecialchars($product['nom']) ?></p>
+                                                <p class="checkout-item-qty">Quantité : <?= htmlspecialchars($quantite) ?></p>
+                                            </div>
+                                            <div class="checkout-item-pricing">
+                                                <p class="checkout-item-unit"><?= htmlspecialchars($product['prix']) ?> DH</p>
+                                                <p class="checkout-item-subtotal"><?= htmlspecialchars($sousTotal) ?> DH</p>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+
+                                <div class="checkout-divider"></div>
+
+                                <!-- Total -->
+                                <div class="checkout-total-row">
+                                    <span class="checkout-total-label">Total</span>
+                                    <span class="checkout-total-value"><?= $total ?> DH</span>
+                                </div>
+
+                                <!-- Submit -->
+                                <button type="submit" class="checkout-confirm-btn">
+                                    <i class="fas fa-lock"></i>
+                                    Confirmer la commande
+                                </button>
+
+                                <!-- Back to cart -->
+                                <a href="cart.php" class="checkout-back-link">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Retour au panier
+                                </a>
+                            </div>
+                        </div>
+
+                    </div><!-- /checkout-layout -->
+                </form>
+            </div>
+        </section>
+
     </main>
-    <footer>
-        <p>Copyright &copy; 2026 Sabaya Luxury</p>
-    </footer>
+<?php require_once '../includes/footer.php'; ?>
+
 </body>
 </html>

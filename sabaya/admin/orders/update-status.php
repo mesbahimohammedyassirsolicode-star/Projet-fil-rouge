@@ -44,12 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier le statut</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Modifier Statut Commande | Sabaya Luxury Admin</title>
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
 </head>
 
 <body>
     <header>
-        <nav>
+        <nav aria-label="Navigation administration">
             <ul>
                 <li><a href="../categories/list.php">Gestion des catégories</a></li>
                 <li><a href="../products/list.php">Gestion des produits</a></li>

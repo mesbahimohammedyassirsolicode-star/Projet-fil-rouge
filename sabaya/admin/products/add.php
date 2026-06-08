@@ -76,15 +76,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un produit</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Ajouter un Produit | Sabaya Luxury Admin</title>
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav aria-label="Navigation administration">
             <ul>
                 <li><a href="../categories/list.php">Gestion des catégories</a></li>
                 <li><a href="list.php">Gestion des produits</a></li>

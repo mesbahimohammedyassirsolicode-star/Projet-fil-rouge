@@ -38,11 +38,12 @@ $items = $orderModel->getOrderItems($id_commande);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails de la commande #<?= htmlspecialchars($order['id_commande']) ?></title>
+    <title>Détails Commande #<?= htmlspecialchars($order['id_commande']) ?> | Sabaya Luxury Admin</title>
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav aria-label="Navigation administration">
             <ul>
                 <li><a href="../categories/list.php">Gestion des catégories</a></li>
                 <li><a href="../products/list.php">Gestion des produits</a></li>
@@ -60,7 +61,7 @@ $items = $orderModel->getOrderItems($id_commande);
 
             <h2>Informations de la commande</h2>
 
-            <table border="1" cellpadding="10">
+            <table>
                 <thead>
                     <tr>
                         <th>Champ</th>
@@ -91,7 +92,7 @@ $items = $orderModel->getOrderItems($id_commande);
 
             <h2>Informations du client</h2>
 
-            <table border="1" cellpadding="10">
+            <table>
                 <thead>
                     <tr>
                         <th>Champ</th>
@@ -127,8 +128,8 @@ $items = $orderModel->getOrderItems($id_commande);
             <?php if (!empty($items)): ?>
                 <h2>Produits commandés</h2>
 
-                <table border="1" cellpadding="10">
-                    <caption>Liste des produits de cette commande</caption>
+                <table>
+                    <caption class="sr-only">Liste des produits de cette commande</caption>
                     <thead>
                         <tr>
                             <th>Produit</th>

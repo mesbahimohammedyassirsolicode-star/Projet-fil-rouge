@@ -23,11 +23,13 @@ $messages = $contactModel->getAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messages de contact</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Messages de Contact | Sabaya Luxury Admin</title>
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav aria-label="Navigation administration">
             <ul>
                 <li><a href="../categories/list.php">Gestion des catégories</a></li>
                 <li><a href="../products/list.php">Gestion des produits</a></li>
@@ -46,8 +48,8 @@ $messages = $contactModel->getAll();
             <?php if (empty($messages)): ?>
                 <p>Aucun message de contact pour le moment.</p>
             <?php else: ?>
-                <table border="1" cellpadding="10">
-                    <caption>Liste de tous les messages reçus via le formulaire de contact</caption>
+                <table>
+                    <caption class="sr-only">Liste de tous les messages reçus via le formulaire de contact</caption>
                     <thead>
                         <tr>
                             <th>Nom</th>

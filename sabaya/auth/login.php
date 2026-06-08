@@ -31,10 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-
-            $_SESSION['user_id'] = $user['id_client'];
-            $_SESSION['user_name'] = $user['nom'];
-            $_SESSION['role'] = $user['role'];
+ session_regenerate_id(true);
+            $_SESSION['user_id']    = $user['id_client'];
+            $_SESSION['user_name']  = $user['nom'] . ' ' . $user['prenom'];
+            $_SESSION['user_email'] = $user['email'];
+            $_SESSION['user_phone'] = $user['telephone'] ?? '';
+            $_SESSION['role']       = $user['role'];
 
             if ($user['role'] === 'admin') {
 
@@ -51,39 +53,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $error[] = "Email ou mot de passe incorrect";
         }
-        session_regenerate_id(true);
+       
     }
 
 }
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Connectez-vous à votre compte Sabaya Luxury pour accéder à vos commandes et votre liste de souhaits.">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Connexion | Sabaya Luxury</title>
+$pageTitle = 'Connexion | Sabaya Luxury';
+$pageDescription = 'Connectez-vous à votre compte Sabaya Luxury pour accéder à vos commandes et votre liste de souhaits.';
+$pageRobots = 'noindex, nofollow';
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Sabaya Luxury">
-    <meta property="og:title" content="Connexion | Sabaya Luxury">
-    <meta property="og:locale" content="fr_MA">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="../products/products.php">Boutique</a></li>
-                <li><a href="login.php">Connexion</a></li>
-                <li><a href="register.php">Inscription</a></li>
-            </ul>
-        </nav>
-    </header>
+$_authProtocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$_authScriptDir = dirname($_SERVER['SCRIPT_NAME']);
+if ($_authScriptDir !== '/' && $_authScriptDir !== '\\' && $_authScriptDir !== '') {
+    $_authScriptDir = dirname($_authScriptDir);
+}
+$_authBaseUrl = $_authProtocol . '://' . $_SERVER['HTTP_HOST'] . rtrim($_authScriptDir, '/\\');
+$extraHeadContent = '<link rel="stylesheet" href="' . htmlspecialchars($_authBaseUrl . '/assets/css/auth.css') . '">';
+
+require_once '../includes/header.php';
+require_once '../includes/navbar.php';
+
+?>
 
     <main>
-        <section>
+        <section aria-label="Formulaire de connexion">
             <h1>Connexion</h1>
 
             <?php if (!empty($error)): ?>
@@ -108,11 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="submit" id="submit" name="submit">Se connecter</button>
                 </fieldset>
             </form>
+            <p class="auth-switch">Don't have an account? <a href="register.php">Sign Up</a></p>
         </section>
     </main>
 
-    <footer>
-        <p>Copyright &copy; 2026 Sabaya Luxury</p>
-    </footer>
+<?php require_once '../includes/footer.php'; ?>
+
 </body>
 </html>

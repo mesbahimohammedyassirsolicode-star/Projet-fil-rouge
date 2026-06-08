@@ -22,119 +22,134 @@ if (!$product) {
     exit();
 }
 
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$baseUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-$canonicalUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+// Page metadata for header.php
 $productName = htmlspecialchars($product['nom']);
 $productDesc = htmlspecialchars($product['description']);
 $productPrice = htmlspecialchars($product['prix']);
-$productImage = $baseUrl . '/assets/images/products/' . htmlspecialchars($product['image']);
+$pageTitle = $productName . ' | Sabaya Luxury — Abayas Modernes';
 $pageDescription = $productName . ' — ' . $productDesc . ' | Disponible sur Sabaya Luxury au Maroc.';
+$pageKeywords = $productName . ', abaya, mode modeste, Sabaya Luxury, Maroc';
+$ogType = 'product';
+
+// Compute baseUrl (project root) before header.php so it's available for JSON-LD and pageImage
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$scriptDir = dirname($_SERVER['SCRIPT_NAME']);
+if ($scriptDir !== '/' && $scriptDir !== '\\' && $scriptDir !== '') {
+    $scriptDir = dirname($scriptDir);
+}
+$baseUrl  = $protocol . '://' . $_SERVER['HTTP_HOST'] . rtrim($scriptDir, '/\\');
+$productImage = $baseUrl . '/assets/images/products/' . htmlspecialchars($product['image']);
+$pageImage = $productImage;
+$canonicalUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+// Build page-specific JSON-LD for Product
+$extraHeadContent = '<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "' . $productName . '",
+    "description": "' . $productDesc . '",
+    "image": "' . $productImage . '",
+    "brand": {
+        "@type": "Brand",
+        "name": "Sabaya Luxury"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "' . htmlspecialchars($canonicalUrl) . '",
+        "priceCurrency": "MAD",
+        "price": "' . $productPrice . '",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+            "@type": "Organization",
+            "name": "Sabaya Luxury"
+        }
+    },
+    "color": "' . htmlspecialchars($product['couleur']) . '",
+    "size": "' . htmlspecialchars($product['taille']) . '"
+}
+</script>';
+
+require_once '../includes/header.php';
+require_once '../includes/navbar.php';
 
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?= htmlspecialchars($pageDescription) ?>">
-    <meta name="keywords" content="<?= $productName ?>, abaya, mode modeste, Sabaya Luxury, Maroc">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl) ?>">
-    <title><?= $productName ?> | Sabaya Luxury — Abayas Modernes</title>
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="product">
-    <meta property="og:site_name" content="Sabaya Luxury">
-    <meta property="og:title" content="<?= $productName ?> | Sabaya Luxury">
-    <meta property="og:description" content="<?= htmlspecialchars($pageDescription) ?>">
-    <meta property="og:image" content="<?= $productImage ?>">
-    <meta property="og:url" content="<?= htmlspecialchars($canonicalUrl) ?>">
-    <meta property="og:locale" content="fr_MA">
-    <meta property="product:price:amount" content="<?= $productPrice ?>">
-    <meta property="product:price:currency" content="MAD">
+    <main class="pd-wrapper">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<?= $productName ?> | Sabaya Luxury">
-    <meta name="twitter:description" content="<?= htmlspecialchars($pageDescription) ?>">
-    <meta name="twitter:image" content="<?= $productImage ?>">
-
-    <!-- JSON-LD Structured Data: Product -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "<?= $productName ?>",
-        "description": "<?= $productDesc ?>",
-        "image": "<?= $productImage ?>",
-        "brand": {
-            "@type": "Brand",
-            "name": "Sabaya Luxury"
-        },
-        "offers": {
-            "@type": "Offer",
-            "url": "<?= htmlspecialchars($canonicalUrl) ?>",
-            "priceCurrency": "MAD",
-            "price": "<?= $productPrice ?>",
-            "availability": "https://schema.org/InStock",
-            "seller": {
-                "@type": "Organization",
-                "name": "Sabaya Luxury"
-            }
-        },
-        "color": "<?= htmlspecialchars($product['couleur']) ?>",
-        "size": "<?= htmlspecialchars($product['taille']) ?>"
-    }
-    </script>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="products.php">Boutique</a></li>
-                <li><a href="cart.php">Mon Panier</a></li>
-                <li><a href="../wishlist/wishlist.php">Ma Liste de souhaits</a></li>
-                <li><a href="my-orders.php">Mes Commandes</a></li>
-                <li><a href="../auth/profile.php">Mon Profil</a></li>
-                <li><a href="../auth/logout.php">Déconnexion</a></li>
-            </ul>
+        <!-- Breadcrumb -->
+        <nav class="pd-breadcrumb" aria-label="Fil d'Ariane">
+            <a href="../index.php">Accueil</a>
+            <span class="pd-breadcrumb-sep">/</span>
+            <a href="products.php">Collection</a>
+            <span class="pd-breadcrumb-sep">/</span>
+            <span class="pd-breadcrumb-current"><?= htmlspecialchars($product['nom']) ?></span>
         </nav>
-    </header>
 
-    <main class="container">
-        <section aria-label="Détails du produit">
-            <article class="product-details">
-                <img src="../assets/images/products/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['nom']) ?> — Abaya <?= htmlspecialchars($product['couleur']) ?> taille <?= htmlspecialchars($product['taille']) ?>">
+        <section class="pd-layout" aria-label="Détails du produit">
 
-                <h1><?= htmlspecialchars($product['nom']) ?></h1>
+            <!-- LEFT: Product Image -->
+            <div class="pd-gallery">
+                <div class="pd-gallery-main">
+                    <img
+                        src="../assets/images/products/<?= htmlspecialchars($product['image']) ?>"
+                        alt="<?= htmlspecialchars($product['nom']) ?> — Abaya <?= htmlspecialchars($product['couleur']) ?> taille <?= htmlspecialchars($product['taille']) ?>"
+                    >
+                </div>
+            </div>
 
-                <p><?= htmlspecialchars($product['description']) ?></p>
+            <!-- RIGHT: Product Information -->
+            <div class="pd-info">
 
-                <p>Prix : <span itemprop="price"><?= htmlspecialchars($product['prix']) ?></span> <span itemprop="priceCurrency">MAD</span></p>
+                <span class="pd-brand">Sabaya Luxury</span>
 
-                <p>Taille : <?= htmlspecialchars($product['taille']) ?></p>
+                <h1 class="pd-title"><?= htmlspecialchars($product['nom']) ?></h1>
 
-                <p>Couleur : <?= htmlspecialchars($product['couleur']) ?></p>
-            </article>
+                <div class="pd-price">
+                    <span class="pd-price-value"><?= htmlspecialchars($product['prix']) ?></span>
+                    <span class="pd-price-currency"> MAD</span>
+                </div>
 
-            <aside class="product-actions">
-                <a href="add-cart.php?id=<?= $product['id_produit'] ?>">
-                    Ajouter au panier
-                </a>
+                <div class="pd-divider"></div>
 
-                <a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>">
-                    Ajouter à la wishlist
-                </a>
-                <a href="../wishlist/wishlist.php">
+                <p class="pd-description"><?= htmlspecialchars($product['description']) ?></p>
+
+                <div class="pd-specs">
+                    <div class="pd-spec">
+                        <span class="pd-spec-label">Couleur</span>
+                        <span class="pd-spec-value"><?= htmlspecialchars($product['couleur']) ?></span>
+                    </div>
+                    <div class="pd-spec">
+                        <span class="pd-spec-label">Taille</span>
+                        <span class="pd-spec-value"><?= htmlspecialchars($product['taille']) ?></span>
+                    </div>
+                </div>
+
+                <div class="pd-divider"></div>
+
+                <div class="pd-actions">
+                    <a href="add-cart.php?id=<?= $product['id_produit'] ?>" class="btn pd-btn-cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        Ajouter au panier
+                    </a>
+
+                    <a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>" class="btn-outline pd-btn-wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                        Ajouter à la wishlist
+                    </a>
+                </div>
+
+                <a href="../wishlist/wishlist.php" class="pd-wishlist-link">
+                    <i class="fa-solid fa-arrow-right"></i>
                     Voir la wishlist
                 </a>
-            </aside>
+
+            </div>
+
         </section>
     </main>
 
-    <footer>
-        <p>Copyright &copy; 2026 Sabaya Luxury</p>
-    </footer>
+<?php require_once '../includes/footer.php'; ?>
+
 </body>
 </html>

@@ -45,6 +45,23 @@ class User
         ]);
     }
 
+    public function update($id, $nom, $prenom, $email, $telephone)
+    {
+        $sql = "UPDATE client
+                SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone
+                WHERE id_client = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        return $stmt->execute([
+            ':nom'         => $nom,
+            ':prenom'      => $prenom,
+            ':email'       => $email,
+            ':telephone'   => $telephone,
+            ':id'          => $id
+        ]);
+    }
+
     public function getOrderCount($id)
     {
         $sql = "SELECT COUNT(*) AS total_orders

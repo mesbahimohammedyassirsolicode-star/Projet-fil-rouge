@@ -26,17 +26,29 @@ $users = $userModel->getAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des utilisateurs</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Gestion des Utilisateurs | Sabaya Luxury Admin</title>
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
 </head>
 
 <body>
 
 <header>
-    <h1>Gestion des utilisateurs</h1>
+    <nav aria-label="Navigation administration">
+        <ul>
+            <li><a href="../dashboard.php">Tableau de bord</a></li>
+            <li><a href="../categories/list.php">Gestion des catégories</a></li>
+            <li><a href="../products/list.php">Gestion des produits</a></li>
+            <li><a href="../orders/list.php">Gestion des commandes</a></li>
+            <li><a href="list.php">Gestion des utilisateurs</a></li>
+            <li><a href="../../auth/logout.php">Déconnexion</a></li>
+        </ul>
+    </nav>
 </header>
 
 <main>
 
+<h1>Gestion des utilisateurs</h1>
 
 <?php if (empty($users)): ?>
 
@@ -44,7 +56,7 @@ $users = $userModel->getAll();
 
 <?php else: ?>
 
-    <table border="1" cellpadding="10">
+    <table>
 
         <thead>
             <tr>
@@ -119,12 +131,9 @@ $users = $userModel->getAll();
 
 <footer>
 
-<br>
-
 <a href="../dashboard.php">
     Retour Dashboard
 </a>
-
 
 </footer>
 

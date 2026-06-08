@@ -39,11 +39,12 @@ $orders = $userModel->getUserOrders($id);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails utilisateur</title>
+    <title>Détails Utilisateur | Sabaya Luxury Admin</title>
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav aria-label="Navigation administration">
             <ul>
                 <li><a href="../categories/list.php">Gestion des catégories</a></li>
                 <li><a href="../products/list.php">Gestion des produits</a></li>
@@ -59,7 +60,7 @@ $orders = $userModel->getUserOrders($id);
         <section>
             <h1>Détails de l'utilisateur</h1>
 
-            <table border="1" cellpadding="10">
+            <table>
                 <thead>
                     <tr>
                         <th>Champ</th>
@@ -103,8 +104,8 @@ $orders = $userModel->getUserOrders($id);
             <?php if ($orderCount > 0): ?>
                 <h2>Commandes de l'utilisateur</h2>
 
-                <table border="1" cellpadding="10">
-                    <caption>Liste des commandes passées par cet utilisateur</caption>
+                <table>
+                    <caption class="sr-only">Liste des commandes passées par cet utilisateur</caption>
                     <thead>
                         <tr>
                             <th>ID commande</th>

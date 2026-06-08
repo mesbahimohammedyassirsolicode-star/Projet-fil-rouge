@@ -18,33 +18,35 @@ $db = new Database();
 $pdo = $db->getConnection();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Dashboard Admin | Sabaya Luxury</title>
+    <link rel="stylesheet" href="../../assets/css/admin.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav aria-label="Navigation administration">
             <ul>
+                <li><a href="dashboard.php">Tableau de bord</a></li>
                 <li><a href="categories/list.php">Gestion des catégories</a></li>
                 <li><a href="products/list.php">Gestion des produits</a></li>
                 <li><a href="orders/list.php">Gestion des commandes</a></li>
                 <li><a href="users/list.php">Gestion des utilisateurs</a></li>
-                <li><a href="/auth/profile.php">Profil</a></li>
-                <li><a href="/auth/logout.php">Déconnexion</a></li>
                 <li><a href="statistics/index.php">Statistiques</a></li>
                 <li><a href="contact/list.php">Gestion des Messages</a></li>
+                <li><a href="/auth/profile.php">Profil</a></li>
+                <li><a href="/auth/logout.php">Déconnexion</a></li>
             </ul>
         </nav>
-          <main>
+    </header>
+    <main>
         <section>
             <h1>Dashboard Admin</h1>
             <p>Bienvenue <?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
         </section>
-     
-    </header>
     <?php
 
 $stmt = $pdo->query("
@@ -70,7 +72,7 @@ $recentOrders = $stmt->fetchAll();
 
     <h2>Dernières Commandes</h2>
 
-    <table border="1" cellpadding="10">
+    <table>
 
         <thead>
             <tr>
@@ -132,7 +134,7 @@ $bestProducts = $stmt->fetchAll();
 
     <h2>Top Produits Vendus</h2>
 
-    <table border='1' cellpadding='10'>
+    <table>
 
         <thead>
             <tr>
@@ -165,6 +167,7 @@ $bestProducts = $stmt->fetchAll();
 
 </section>
 
+    </main>
     <footer>
         <p>Copyright &copy; 2026 Sabaya Luxury</p>
     </footer>

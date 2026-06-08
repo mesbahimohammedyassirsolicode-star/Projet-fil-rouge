@@ -18,117 +18,170 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
 
 }
 
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$baseUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-$canonicalUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
+// Page metadata for header.php
 $searchQuery = htmlspecialchars($_GET['q'] ?? '');
+$pageTitle = 'Recherche' . (!empty($searchQuery) ? ' : ' . $searchQuery : '') . ' | Sabaya Luxury';
 $pageDescription = !empty($searchQuery) ? 'Résultats de recherche pour « ' . $searchQuery . ' » sur Sabaya Luxury.' : 'Recherchez des abayas et vêtements sur Sabaya Luxury.';
+$pageRobots = 'noindex, follow';
+
+// Build baseUrl for JSON-LD
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$scriptDir = dirname($_SERVER['SCRIPT_NAME']);
+if ($scriptDir !== '/' && $scriptDir !== '\\' && $scriptDir !== '') {
+    $scriptDir = dirname($scriptDir);
+}
+$baseUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . rtrim($scriptDir, '/\\');
+
+// JSON-LD for SearchResultsPage (GEO)
+$extraHeadContent = '<script type="application/ld+json">' .
+    '{' .
+    '"@context": "https://schema.org",' .
+    '"@type": "SearchResultsPage",' .
+    '"name": "Recherche de Produits — Sabaya Luxury",' .
+    '"description": "Recherchez des abayas et vêtements de luxe sur Sabaya Luxury",' .
+    '"url": "' . $baseUrl . '/products/search.php"' .
+    '}';
+if (!empty($products)) {
+    $items = [];
+    $pos = 1;
+    foreach ($products as $p) {
+        $items[] = '{' .
+            '"@type": "ListItem",' .
+            '"position": ' . $pos . ',' .
+            '"url": "' . $baseUrl . '/products/product-details.php?id=' . $p['id_produit'] . '",' .
+            '"name": "' . htmlspecialchars($p['nom']) . '"' .
+        '}';
+        $pos++;
+    }
+    $extraHeadContent .= '</script>' .
+        '<script type="application/ld+json">' .
+        '{' .
+        '"@context": "https://schema.org",' .
+        '"@type": "ItemList",' .
+        '"name": "Résultats de recherche — Sabaya Luxury",' .
+        '"numberOfItems": ' . count($products) . ',' .
+        '"itemListElement": [' . implode(',', $items) . ']' .
+        '}' .
+        '</script>';
+} else {
+    $extraHeadContent .= '</script>';
+}
+
+require_once '../includes/header.php';
+require_once '../includes/navbar.php';
 
 ?>
 
-<!DOCTYPE html>
-
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?= htmlspecialchars($pageDescription) ?>">
-    <meta name="robots" content="noindex, follow">
-    <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl) ?>">
-    <title>Recherche<?= !empty($searchQuery) ? ' : ' . $searchQuery : '' ?> | Sabaya Luxury</title>
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Sabaya Luxury">
-    <meta property="og:title" content="Recherche<?= !empty($searchQuery) ? ' : ' . $searchQuery : '' ?> | Sabaya Luxury">
-    <meta property="og:description" content="<?= htmlspecialchars($pageDescription) ?>">
-    <meta property="og:url" content="<?= htmlspecialchars($canonicalUrl) ?>">
-    <meta property="og:locale" content="fr_MA">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Recherche<?= !empty($searchQuery) ? ' : ' . $searchQuery : '' ?> | Sabaya Luxury">
-    <meta name="twitter:description" content="<?= htmlspecialchars($pageDescription) ?>">
-</head>
-
-<body>
-
-<header>
-    <nav aria-label="Navigation principale">
-        <a href="../index.php">SABAYA</a>
-        <ul>
-            <li><a href="products.php">Boutique</a></li>
-            <li><a href="../about.php">À propos</a></li>
-            <li><a href="../contact/contact.php">Contact</a></li>
-        </ul>
-    </nav>
-</header>
-
 <main>
 
-<section>
-
-    <form method="GET">
-
-        <input
-            type="text"
-            name="q"
-            placeholder="Rechercher un produit..."
-            value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
-        >
-
-        <button type="submit">
-            Rechercher
-        </button>
-
-    </form>
-
+<section class="search-hero">
+    <div class="search-hero__inner">
+        <span class="search-hero__label">Sabaya Luxury</span>
+        <h1 class="search-hero__title">Recherche de Produits</h1>
+        <div class="search-hero__line" aria-hidden="true"></div>
+        <p class="search-hero__subtitle">Trouvez facilement les produits qui correspondent à votre style.</p>
+    </div>
 </section>
 
-<hr>
+<section class="search-form-section">
+    <form method="GET" role="search" aria-label="Recherche de produits" class="search-form">
+        <label for="search-input" class="sr-only">Rechercher un produit</label>
+        <div class="search-form__field">
+            <i class="fa-solid fa-magnifying-glass search-form__icon" aria-hidden="true"></i>
+            <input
+                type="search"
+                id="search-input"
+                name="q"
+                placeholder="Rechercher un produit..."
+                value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
+                autocomplete="off"
+                aria-describedby="search-hint"
+            >
+        </div>
+        <p id="search-hint" class="sr-only">Saisissez un mot-clé pour rechercher des abayas ou vêtements.</p>
+        <button type="submit" class="search-form__btn">
+            Rechercher
+        </button>
+    </form>
+</section>
 
-<section>
+<section class="search-results">
+
+    <?php if (isset($_GET['q'])): ?>
+
+        <header class="search-results__header">
+            <h2 class="search-results__title">Résultats de recherche</h2>
+            <p class="search-results__count">
+                <strong><?= count($products) ?></strong> produit<?= count($products) > 1 ? 's' : '' ?> trouvé<?= count($products) > 1 ? 's' : '' ?>
+                <?php if (!empty($searchQuery)): ?>
+                    pour «&nbsp;<span class="search-results__keyword"><?= $searchQuery ?></span>&nbsp;»
+                <?php endif; ?>
+            </p>
+        </header>
+
+    <?php endif; ?>
 
     <?php if (!empty($products)): ?>
 
-        <?php foreach ($products as $product): ?>
+        <div class="products-grid">
 
-            <article>
+            <?php foreach ($products as $product): ?>
 
-                <img
-                    src="../assets/images/products/<?= htmlspecialchars($product['image']) ?>"
-                    width="150"
-                    alt="<?= htmlspecialchars($product['nom']) ?>"
-                >
+                <article class="product-card">
 
-                <h3>
-                    <?= htmlspecialchars($product['nom']) ?>
-                </h3>
+                    <a href="product-details.php?id=<?= $product['id_produit'] ?>" class="product-card-link">
+                        <div class="product-card-image">
+                            <img
+                                src="../assets/images/products/<?= htmlspecialchars($product['image']) ?>"
+                                alt="<?= htmlspecialchars($product['nom']) ?> — Abaya Sabaya Luxury"
+                                loading="lazy"
+                            >
+                        </div>
+                    </a>
 
-                <p>
-                    <?= htmlspecialchars($product['prix']) ?> DH
-                </p>
+                    <div class="product-card-body">
 
-                <a href="product-details.php?id=<?= $product['id_produit'] ?>">
-                    Voir détails
-                </a>
+                        <span class="product-card-brand">SABAYA</span>
 
-            </article>
+                        <h3 class="product-card-name">
+                            <?= htmlspecialchars($product['nom']) ?>
+                        </h3>
 
-            <hr>
+                        <p class="product-card-price">
+                            <?= htmlspecialchars($product['prix']) ?> DH
+                        </p>
 
-        <?php endforeach; ?>
+                        <a
+                            class="product-card-btn"
+                            href="product-details.php?id=<?= $product['id_produit'] ?>"
+                        >
+                            Voir détails
+                        </a>
 
-    <?php elseif(isset($_GET['q'])): ?>
+                    </div>
 
-        <p>Aucun produit trouvé.</p>
+                </article>
+
+            <?php endforeach; ?>
+
+        </div>
+
+    <?php elseif (isset($_GET['q'])): ?>
+
+        <div class="search-empty">
+            <i class="fa-solid fa-magnifying-glass search-empty__icon" aria-hidden="true"></i>
+            <p class="search-empty__title">Aucun produit trouvé.</p>
+            <p class="search-empty__text">Essayez avec d'autres mots-clés ou explorez notre collection.</p>
+            <a href="products.php" class="btn btn-outline search-empty__btn">Retour à la boutique</a>
+        </div>
 
     <?php endif; ?>
 
 </section>
 
 </main>
+
+<?php require_once '../includes/footer.php'; ?>
 
 </body>
 
