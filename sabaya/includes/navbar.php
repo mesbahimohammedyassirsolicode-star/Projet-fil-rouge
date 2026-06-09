@@ -53,9 +53,15 @@ if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
             </li>
             <li role="none">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="<?= htmlspecialchars($baseUrl) ?>/auth/profile.php" role="menuitem" aria-label="Mon compte">
-                        <i class="fa-regular fa-user" aria-hidden="true"></i>
-                    </a>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <a href="<?= htmlspecialchars($baseUrl) ?>/admin/dashboard.php" role="menuitem" aria-label="Tableau de bord admin">
+                            <i class="fa-regular fa-user" aria-hidden="true"></i>
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= htmlspecialchars($baseUrl) ?>/auth/profile.php" role="menuitem" aria-label="Mon compte">
+                            <i class="fa-regular fa-user" aria-hidden="true"></i>
+                        </a>
+                    <?php endif; ?>
                 <?php else: ?>
                     <a href="<?= htmlspecialchars($baseUrl) ?>/auth/login.php" role="menuitem" aria-label="Se connecter">
                         <i class="fa-regular fa-user" aria-hidden="true"></i>
@@ -86,7 +92,11 @@ if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
             <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/products/search.php" role="menuitem">Recherche</a></li>
             <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/wishlist/wishlist.php" role="menuitem">Liste de souhaits</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
-                <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/auth/profile.php" role="menuitem">Compte</a></li>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                    <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/admin/dashboard.php" role="menuitem">Dashboard</a></li>
+                <?php else: ?>
+                    <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/auth/profile.php" role="menuitem">Compte</a></li>
+                <?php endif; ?>
                 <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/products/cart.php" role="menuitem">Panier <?php if ($cartCount > 0) echo '(' . $cartCount . ')'; ?></a></li>
             <?php else: ?>
                 <li role="none"><a href="<?= htmlspecialchars($baseUrl) ?>/auth/login.php" role="menuitem">Compte</a></li>

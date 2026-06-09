@@ -28,32 +28,51 @@ class Order
         return $this->pdo->lastInsertId();
     }
 
-    public function createOrder($id_client, $total)
-{
-    $sql = "INSERT INTO commande
-            (
-                datecmd,
-                statuscmd,
-                total,
-                id_client
-            )
-            VALUES
-            (
-                NOW(),
-                'En attente',
-                :total,
-                :id_client
-            )";
+    public function createOrder($id_client, $total, $id_adresse)
+    {
+        $sql = "INSERT INTO commande
+                (
+                    datecmd,
+                    statuscmd,
+                    total,
+                    id_client,
+                    id_adresse
+                )
+                VALUES
+                (
+                    NOW(),
+                    'En attente',
+                    :total,
+                    :id_client,
+                    :id_adresse
+                )";
 
-    $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
-    $stmt->execute([
-        ':total' => $total,
-        ':id_client' => $id_client
-    ]);
+        $stmt->execute([
+            ':total'      => $total,
+            ':id_client'  => $id_client,
+            ':id_adresse' => $id_adresse
+        ]);
 
-    return $this->pdo->lastInsertId();
-}
+        return $this->pdo->lastInsertId();
+    }
+
+    // ── Transaction helpers ──────────────────────────────────────────────────
+    public function beginTransaction()
+    {
+        return $this->pdo->beginTransaction();
+    }
+
+    public function commit()
+    {
+        return $this->pdo->commit();
+    }
+
+    public function rollBack()
+    {
+        return $this->pdo->rollBack();
+    }
 
     public function createOrderLine($qte, $prix, $id_commande, $id_produit)
     {

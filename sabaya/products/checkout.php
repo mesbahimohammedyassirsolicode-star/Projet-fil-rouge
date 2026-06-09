@@ -75,91 +75,111 @@ if (empty($errors)) {
 
     $id_client = $_SESSION['user_id'];
 
-    $orderModel->createAddress(
-        $ville,
-        $adresse,
-        $code_postal,
-        $id_client
-    );
+    try {
+        $orderModel->beginTransaction();
 
-    $id_commande = $orderModel->createOrder(
-        $id_client,
-        $total
-    );
-
-    foreach ($cart as $id_produit => $quantite) {
-
-        $product = $productModel->find($id_produit);
-
-        if (!$product) {
-            continue;
-        }
-
-        $orderModel->createOrderLine(
-            $quantite,
-            $product['prix'],
-            $id_commande,
-            $id_produit
+        // ── 1. Create the delivery address ──────────────────────────────────
+        $id_adresse = $orderModel->createAddress(
+            $ville,
+            $adresse,
+            $code_postal,
+            $id_client
         );
 
-        $stmt = $pdo->prepare("
-            UPDATE produits
-            SET stock = stock - :qte
-            WHERE id_produit = :id
-        ");
+        if (!$id_adresse) {
+            throw new Exception("Impossible de créer l'adresse de livraison.");
+        }
 
-        $stmt->execute([
-            ':qte' => $quantite,
-            ':id' => $id_produit
-        ]);
+        // ── 2. Create the order (with the valid id_adresse) ─────────────────
+        $id_commande = $orderModel->createOrder(
+            $id_client,
+            $total,
+            $id_adresse
+        );
+
+        if (!$id_commande) {
+            throw new Exception("Impossible de créer la commande.");
+        }
+
+        // ── 3. Create order lines + update stock ────────────────────────────
+        foreach ($cart as $id_produit => $quantite) {
+
+            $product = $productModel->find($id_produit);
+
+            if (!$product) {
+                continue;
+            }
+
+            $orderModel->createOrderLine(
+                $quantite,
+                $product['prix'],
+                $id_commande,
+                $id_produit
+            );
+
+            $stmt = $pdo->prepare("
+                UPDATE produits
+                SET stock = stock - :qte
+                WHERE id_produit = :id
+            ");
+
+            $stmt->execute([
+                ':qte' => $quantite,
+                ':id'  => $id_produit
+            ]);
+        }
+
+        // ── 4. All good — commit ────────────────────────────────────────────
+        $orderModel->commit();
+
+    } catch (Exception $e) {
+        $orderModel->rollBack();
+        $errors[] = "Une erreur est survenue lors de la commande. Veuillez réessayer.";
+        // Optional: log $e->getMessage() for debugging
     }
-    $whatsappMessage = "Bonjour Sabaya Luxury\n\n";
 
-$whatsappMessage .=
-    "Je souhaite confirmer ma commande.\n\n";
+    if (empty($errors)) {
+        // ── 5. Build WhatsApp message ───────────────────────────────────────
+        $whatsappMessage = "Bonjour Sabaya Luxury\n\n";
 
-$whatsappMessage .=
-    "Commande N°" . $id_commande . "\n\n";
+        $whatsappMessage .= "Je souhaite confirmer ma commande.\n\n";
 
-$whatsappMessage .=
-    "Produits :\n";
+        $whatsappMessage .= "Commande N°" . $id_commande . "\n\n";
 
-foreach ($cart as $id_produit => $quantite) {
+        $whatsappMessage .= "Produits :\n";
 
-    $product = $productModel->find($id_produit);
+        foreach ($cart as $id_produit => $quantite) {
 
-    if (!$product) {
-        continue;
+            $product = $productModel->find($id_produit);
+
+            if (!$product) {
+                continue;
+            }
+
+            $whatsappMessage .=
+                "- " .
+                $product['nom'] .
+                " × " .
+                $quantite .
+                "\n";
+        }
+
+        $whatsappMessage .= "\n";
+
+        $whatsappMessage .= "Total : " . $total . " DH\n";
+
+        $whatsappMessage .= "Ville : " . $ville . "\n";
+
+        $whatsappMessage .= "\nMerci.";
+
+        $_SESSION['whatsapp_message'] = $whatsappMessage;
+        $_SESSION['last_order_id']    = $id_commande;
+
+        unset($_SESSION['cart']);
+
+        header('Location: order-success.php?order_id=' . $id_commande);
+        exit();
     }
-
-    $whatsappMessage .=
-        "- " .
-        $product['nom'] .
-        " × " .
-        $quantite .
-        "\n";
-}
-
-$whatsappMessage .= "\n";
-
-$whatsappMessage .=
-    "Total : " .
-    $total .
-    " DH\n";
-
-$whatsappMessage .=
-    "Ville : " .
-    $ville .
-    "\n";
-
-$whatsappMessage .= "\nMerci.";
-    
-$_SESSION['whatsapp_message'] = $whatsappMessage;
-$_SESSION['last_order_id'] = $id_commande;
-    unset($_SESSION['cart']);
-
-    header('Location: order-success.php?order_id=' . $id_commande);
-    exit();
 }
 
 
