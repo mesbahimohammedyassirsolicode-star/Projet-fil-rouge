@@ -168,14 +168,14 @@ foreach ($monthlyData as $row) {
     <main class="admin-content">
 
         <!-- Statistics Cards -->
-        <section class="stats-cards" aria-label="Statistiques générales">
+    <section class="stats-cards reveal" aria-label="Statistiques générales">
             <article class="stat-card">
                 <div class="stat-icon stat-icon--products">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
                 </div>
                 <div class="stat-info">
                     <h2>Total Produits</h2>
-                    <p class="stat-value"><?= htmlspecialchars($totalProducts) ?></p>
+                    <p class="stat-value"><span class="counter" data-count="<?= (int)$totalProducts ?>" aria-label="<?= (int)$totalProducts ?> produits">0</span></p>
                 </div>
             </article>
             <article class="stat-card">
@@ -184,7 +184,7 @@ foreach ($monthlyData as $row) {
                 </div>
                 <div class="stat-info">
                     <h2>Total Commandes</h2>
-                    <p class="stat-value"><?= htmlspecialchars($totalOrders) ?></p>
+                    <p class="stat-value"><span class="counter" data-count="<?= (int)$totalOrders ?>" aria-label="<?= (int)$totalOrders ?> commandes">0</span></p>
                 </div>
             </article>
             <article class="stat-card">
@@ -193,7 +193,7 @@ foreach ($monthlyData as $row) {
                 </div>
                 <div class="stat-info">
                     <h2>Total Clients</h2>
-                    <p class="stat-value"><?= htmlspecialchars($totalClients) ?></p>
+                    <p class="stat-value"><span class="counter" data-count="<?= (int)$totalClients ?>" aria-label="<?= (int)$totalClients ?> clients">0</span></p>
                 </div>
             </article>
             <article class="stat-card">
@@ -202,26 +202,34 @@ foreach ($monthlyData as $row) {
                 </div>
                 <div class="stat-info">
                     <h2>Messages Contact</h2>
-                    <p class="stat-value"><?= htmlspecialchars($totalMessages) ?></p>
+                    <p class="stat-value"><span class="counter" data-count="<?= (int)$totalMessages ?>" aria-label="<?= (int)$totalMessages ?> messages">0</span></p>
                 </div>
             </article>
         </section>
 
         <!-- Revenue Banner -->
-        <section class="revenue-banner" aria-label="Chiffre d'affaires">
+    <section class="revenue-banner reveal" aria-label="Chiffre d'affaires">
             <div class="revenue-content">
                 <h2>Chiffre d'Affaires</h2>
-                <p class="revenue-value"><?= number_format($totalRevenue, 2, ',', ' ') ?> <abbr title="Dirham">DH</abbr></p>
+                <p class="revenue-value">
+                    <span class="counter"
+                          data-count="<?= number_format($totalRevenue, 2, '.', '') ?>"
+                          data-decimals="2"
+                          data-separator=" "
+                          data-decimal-sep=","
+                          data-suffix=" DH"
+                          aria-label="<?= number_format($totalRevenue, 2, ',', ' ') ?> DH">0 DH</span>
+                </p>
             </div>
             <div class="revenue-meta">
-                <span><?= htmlspecialchars($totalCategories) ?> catégories</span>
+                <span><span class="counter" data-count="<?= (int)$totalCategories ?>" aria-label="<?= (int)$totalCategories ?>">0</span> catégories</span>
                 <span class="separator">·</span>
-                <span><?= htmlspecialchars($totalOrders) ?> commandes traitées</span>
+                <span><span class="counter" data-count="<?= (int)$totalOrders ?>" aria-label="<?= (int)$totalOrders ?>">0</span> commandes traitées</span>
             </div>
         </section>
 
         <!-- Analytics Chart -->
-        <section class="analytics-section" aria-label="Analytique des commandes">
+    <section class="analytics-section reveal" aria-label="Analytique des commandes">
             <header class="section-header">
                 <h2>Évolution des Commandes</h2>
             </header>
@@ -231,7 +239,7 @@ foreach ($monthlyData as $row) {
         </section>
 
         <!-- Quick Actions -->
-        <section class="quick-actions" aria-label="Actions rapides">
+    <section class="quick-actions reveal" aria-label="Actions rapides">
             <header class="section-header">
                 <h2>Actions Rapides</h2>
             </header>
@@ -277,7 +285,7 @@ foreach ($monthlyData as $row) {
             ?>
 
             <!-- Recent Orders -->
-            <section class="table-section" aria-label="Dernières commandes">
+            <section class="table-section reveal" aria-label="Dernières commandes">
                 <header class="section-header">
                     <h2>Dernières Commandes</h2>
                     <a href="orders/list.php" class="view-all-link">Tout voir</a>
@@ -504,6 +512,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+
+<!-- ══ Counter Animations ═════════════════════════ -->
+<script src="../assets/js/counter.js"></script>
 
 </body>
 </html>

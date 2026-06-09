@@ -74,7 +74,7 @@ require_once '../includes/navbar.php';
 
 <main>
 
-<section class="search-hero">
+<section class="search-hero reveal">
     <div class="search-hero__inner">
         <span class="search-hero__label">Sabaya Luxury</span>
         <h1 class="search-hero__title">Recherche de Produits</h1>
@@ -83,7 +83,7 @@ require_once '../includes/navbar.php';
     </div>
 </section>
 
-<section class="search-form-section">
+<section class="search-form-section reveal">
     <form method="GET" role="search" aria-label="Recherche de produits" class="search-form">
         <label for="search-input" class="sr-only">Rechercher un produit</label>
         <div class="search-form__field">
@@ -105,11 +105,11 @@ require_once '../includes/navbar.php';
     </form>
 </section>
 
-<section class="search-results">
+<section class="search-results reveal">
 
     <?php if (isset($_GET['q'])): ?>
 
-        <header class="search-results__header">
+    <header class="search-results__header reveal">
             <h2 class="search-results__title">Résultats de recherche</h2>
             <p class="search-results__count">
                 <strong><?= count($products) ?></strong> produit<?= count($products) > 1 ? 's' : '' ?> trouvé<?= count($products) > 1 ? 's' : '' ?>
@@ -136,6 +136,18 @@ require_once '../includes/navbar.php';
                                 alt="<?= htmlspecialchars($product['nom']) ?> — Abaya Sabaya Luxury"
                                 loading="lazy"
                             >
+                            <!-- Slide-up overlay -->
+                            <div class="product-card-overlay" aria-hidden="true">
+                                <a
+                                    class="product-card-overlay-btn product-card-overlay-btn--primary"
+                                    href="product-details.php?id=<?= $product['id_produit'] ?>"
+                                    tabindex="-1"
+                                    aria-label="Voir les détails de <?= htmlspecialchars($product['nom']) ?>"
+                                >
+                                    <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                                    Voir Détails
+                                </a>
+                            </div>
                         </div>
                     </a>
 

@@ -81,6 +81,10 @@ if (empty($password)) {
                 ':email' => $email,
                 ':password' => $hashedPassword
             ]);
+            $_SESSION['_toast'] = [
+                'message' => 'Compte créé avec succès. Vous pouvez maintenant vous connecter.',
+                'type'    => 'success',
+            ];
             header("Location:login.php"); 
             exit();
         }
@@ -107,13 +111,10 @@ require_once '../includes/navbar.php';
         <section aria-label="Formulaire d'inscription">
             <h1>Créer un compte</h1>
 
-            <?php if (!empty($error)): ?>
-                <div style="color: red; margin-bottom: 15px;" role="alert">
-                    <?php foreach($error as $err): ?>
-                        <p><?php echo htmlspecialchars($err); ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+            <?php if (!empty($error)):
+                $toastMessage = implode(' ', $error);
+                $toastType    = 'error';
+            endif; ?>
 
             <form method="post">
                 <fieldset>

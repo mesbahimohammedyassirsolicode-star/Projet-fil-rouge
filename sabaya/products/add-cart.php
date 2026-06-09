@@ -19,5 +19,9 @@ if (isset($_SESSION['cart'][$id])) {
     $_SESSION['cart'][$id] = 1;
 }
 
+$_SESSION['_toast'] = [
+    'message' => 'Produit ajouté au panier avec succès.',
+    'type'    => 'success',
+];
 header('Location: cart.php');
 exit();

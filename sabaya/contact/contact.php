@@ -105,7 +105,7 @@ require_once '../includes/navbar.php';
     <main id="main-content">
 
         <!-- Hero Section -->
-        <section class="contact-hero" aria-labelledby="contact-heading">
+    <section class="contact-hero reveal" aria-labelledby="contact-heading">
             <div class="contact-hero__inner">
                 <span class="contact-hero__label">Service Client</span>
                 <h1 id="contact-heading" class="contact-hero__title">Contactez Sabaya Luxury</h1>
@@ -115,7 +115,7 @@ require_once '../includes/navbar.php';
         </section>
 
         <!-- Contact Content: Two Columns -->
-        <section class="contact-content" aria-labelledby="contact-info-heading">
+    <section class="contact-content reveal" aria-labelledby="contact-info-heading">
             <div class="contact-content__container">
 
                 <!-- Success / Error Messages -->
@@ -140,7 +140,7 @@ require_once '../includes/navbar.php';
                 <div class="contact-grid">
 
                     <!-- LEFT: Contact Information -->
-                    <article class="contact-info">
+                    <article class="contact-info reveal">
                         <h2 id="contact-info-heading" class="contact-info__title">Nos Coordonnées</h2>
                         <div class="contact-info__line" aria-hidden="true"></div>
                         <p class="contact-info__intro">N'hésitez pas à nous contacter par le moyen qui vous convient le mieux. Nous sommes disponibles pour répondre à toutes vos questions.</p>
@@ -189,7 +189,7 @@ require_once '../includes/navbar.php';
                     </article>
 
                     <!-- RIGHT: Contact Form -->
-                    <article class="contact-form-wrapper">
+                    <article class="contact-form-wrapper reveal">
                         <h2 class="contact-form__title">Envoyez-nous un message</h2>
                         <div class="contact-form__line" aria-hidden="true"></div>
 

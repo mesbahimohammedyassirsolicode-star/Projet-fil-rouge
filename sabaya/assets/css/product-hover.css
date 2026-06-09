@@ -1,0 +1,404 @@
+/* ============================================================
+   SABAYA LUXURY — PREMIUM PRODUCT CARD HOVER EFFECTS
+   Inspired by: Zara · Massimo Dutti · Mango
+   CSS-first, keyboard accessible, performance-optimised
+   ============================================================ */
+
+/* ── CUSTOM PROPERTIES (hover-specific) ───────────────────── */
+:root {
+    --card-shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.10), 0 4px 16px rgba(197, 173, 89, 0.08);
+    --card-lift         : translateY(-8px);
+    --img-zoom          : scale(1.05);
+    --img-transition    : transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --card-transition   : box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+    --overlay-transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Respect reduced-motion — disable all animations */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --img-transition    : none;
+        --card-transition   : none;
+        --overlay-transition: none;
+    }
+}
+
+/* ============================================================
+   1. HOMEPAGE CARDS  (.card)
+   ============================================================ */
+
+.card {
+    position: relative;
+    overflow: hidden;
+    transition: var(--card-transition);
+    border-color: var(--border);
+}
+
+.card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: var(--card-lift);
+    border-color: rgba(197, 173, 89, 0.30);
+}
+
+/* Prevent scroll-reveal fighting the hover lift */
+.card.reveal.active:hover {
+    transform: var(--card-lift);
+}
+
+/* Image zoom */
+.card img {
+    transition: var(--img-transition);
+    will-change: transform;
+}
+
+.card:hover img {
+    transform: var(--img-zoom);
+}
+
+/* ── Slide-up overlay (btn) inside homepage card ── */
+.card-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Add a subtle gradient veil behind buttons on hover */
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(26,26,26,0.04), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+/* ============================================================
+   2. PRODUCTS PAGE / SEARCH RESULTS (.product-card)
+   ============================================================ */
+
+.product-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: var(--card-transition);
+}
+
+.product-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: var(--card-lift);
+    border-color: rgba(197, 173, 89, 0.30);
+}
+
+/* Image container — needed for overflow clip + button overlay */
+.product-card-image {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+/* Image zoom */
+.product-card-image img {
+    transition: var(--img-transition);
+    will-change: transform;
+    display: block;
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.product-card:hover .product-card-image img {
+    transform: var(--img-zoom);
+}
+
+/* ── Quick-action overlay (slide up from bottom of image) ── */
+.product-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 12px;
+    background: rgba(26, 26, 26, 0.88);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Hidden state */
+    transform: translateY(100%);
+    opacity: 0;
+    transition: var(--overlay-transition);
+    z-index: 2;
+}
+
+.product-card:hover .product-card-overlay,
+.product-card:focus-within .product-card-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Overlay buttons */
+.product-card-overlay-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    text-decoration: none;
+    width: 100%;
+}
+
+.product-card-overlay-btn--primary {
+    background: var(--gold);
+    color: #fff;
+}
+
+.product-card-overlay-btn--primary:hover,
+.product-card-overlay-btn--primary:focus-visible {
+    background: #B8A04A;
+    color: #fff;
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.product-card-overlay-btn--outline {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.product-card-overlay-btn--outline:hover,
+.product-card-overlay-btn--outline:focus-visible {
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.7);
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.product-card-overlay-btn i {
+    font-size: 11px;
+}
+
+/* Body — push down to make room */
+.product-card-body {
+    padding: 16px 12px 20px;
+}
+
+/* ── Existing product-card-btn stays for non-overlay fallback ── */
+.product-card-btn {
+    display: none; /* hidden: replaced by overlay on capable devices */
+}
+
+/* On touch / hover-none — keep btn visible */
+@media (hover: none) {
+    .product-card-overlay {
+        position: static;
+        transform: none;
+        opacity: 1;
+        background: transparent;
+        padding: 0 12px 16px;
+        gap: 6px;
+    }
+
+    .product-card-overlay-btn--primary {
+        background: var(--black);
+    }
+
+    .product-card-overlay-btn--outline {
+        color: var(--black);
+        border-color: var(--border);
+    }
+
+    .product-card-btn {
+        display: none; /* still hide old btn */
+    }
+}
+
+/* ============================================================
+   3. WISHLIST CARDS (.wishlist-card)
+   ============================================================ */
+
+.wishlist-card {
+    transition: var(--card-transition);
+}
+
+.wishlist-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: var(--card-lift);
+    border-color: rgba(197, 173, 89, 0.30);
+}
+
+/* Image zoom */
+.wishlist-card__image-link {
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.wishlist-card__image-link img {
+    transition: var(--img-transition);
+    will-change: transform;
+}
+
+.wishlist-card:hover .wishlist-card__image-link img {
+    transform: var(--img-zoom);
+}
+
+/* ── Wishlist heart icon — pulse on click ─────────────────── */
+.wishlist-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: 1;
+}
+
+@keyframes heart-pulse {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.38); }
+    55%  { transform: scale(0.90); }
+    75%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+.wishlist-icon-btn.pulse i,
+a.pd-btn-wishlist.pulse i,
+.nav-right a.wishlist-pulse i {
+    animation: heart-pulse 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Heart icon in product-details wishlist btn */
+.pd-btn-wishlist i {
+    transition: color 0.3s ease;
+}
+
+/* ── Wishlist card — slide-up overlay for "View Details" ── */
+.wishlist-card__image-link {
+    position: relative;
+}
+
+.wishlist-card__quick-view {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: rgba(26, 26, 26, 0.85);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    /* Hidden */
+    transform: translateY(100%);
+    opacity: 0;
+    transition: var(--overlay-transition);
+    z-index: 2;
+}
+
+.wishlist-card:hover .wishlist-card__quick-view,
+.wishlist-card:focus-within .wishlist-card__quick-view {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.wishlist-card__quick-view:hover,
+.wishlist-card__quick-view:focus-visible {
+    background: rgba(197, 173, 89, 0.90);
+    color: #fff;
+    outline: none;
+}
+
+.wishlist-card__quick-view i {
+    font-size: 11px;
+}
+
+@media (hover: none) {
+    .wishlist-card__quick-view {
+        position: static;
+        transform: none;
+        opacity: 1;
+        background: var(--black);
+        margin-bottom: 0;
+    }
+}
+
+/* ============================================================
+   4. RELATED PRODUCTS / GENERAL — ensure consistent look
+   ============================================================ */
+
+/* If a .product-card appears inside any related products section */
+.related-products .product-card,
+.section-related .product-card {
+    /* Same rules already applied above via .product-card */
+}
+
+/* ============================================================
+   5. RESPONSIVE OVERRIDES
+   ============================================================ */
+
+@media (max-width: 1024px) {
+    .product-card-image img {
+        height: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card-overlay {
+        padding: 12px 10px;
+        gap: 6px;
+    }
+
+    .product-card-overlay-btn {
+        padding: 9px 12px;
+        font-size: 9px;
+    }
+
+    .product-card-image img {
+        height: 260px;
+    }
+
+    /* Reduce lift on small screens for visual comfort */
+    :root {
+        --card-lift: translateY(-5px);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card-image img {
+        height: 220px;
+    }
+
+    .wishlist-card__image-link img {
+        height: 260px;
+    }
+
+    :root {
+        --card-lift: translateY(-3px);
+    }
+}

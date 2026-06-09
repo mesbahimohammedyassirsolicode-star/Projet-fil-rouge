@@ -28,5 +28,9 @@ $wishlistModel->add(
     $id_produit
 );
 
+$_SESSION['_toast'] = [
+    'message' => 'Produit ajouté à votre liste de souhaits.',
+    'type'    => 'success',
+];
 header('Location: ../products/products.php');
 exit();

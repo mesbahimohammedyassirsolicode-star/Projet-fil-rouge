@@ -27,7 +27,7 @@ require_once 'includes/navbar.php';
 ?>
 
 <main>
-<section class="hero">
+<section class="hero reveal">
 
     <div class="container">
 
@@ -52,7 +52,7 @@ require_once 'includes/navbar.php';
     </div>
 
 </section>
-<section class="new-arrivals">
+<section class="new-arrivals reveal">
 
     <div class="container">
 
@@ -62,7 +62,7 @@ require_once 'includes/navbar.php';
 
             <?php foreach ($newArrivals as $product): ?>
 
-            <article class="card">
+            <article class="card reveal">
 
                 <img
                     src="assets/images/products/<?= htmlspecialchars($product['image']) ?>"

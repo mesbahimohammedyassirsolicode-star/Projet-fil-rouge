@@ -27,5 +27,9 @@ $wishlistModel->delete(
     $_SESSION['user_id']
 );
 
+$_SESSION['_toast'] = [
+    'message' => 'Produit retiré de votre liste de souhaits.',
+    'type'    => 'success',
+];
 header('Location: wishlist.php');
 exit();

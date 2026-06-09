@@ -42,6 +42,7 @@ $deliveredOrders = $stmtDelivered->fetchColumn();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/admin.css">
+    <link rel="stylesheet" href="../../assets/css/toast.css">
 </head>
 <body class="admin-dashboard">
 
@@ -132,7 +133,7 @@ $deliveredOrders = $stmtDelivered->fetchColumn();
         <main class="admin-content">
 
             <!-- Statistics Cards -->
-            <section class="stats-cards" aria-label="Statistiques des commandes">
+            <section class="stats-cards reveal" aria-label="Statistiques des commandes">
                 <article class="stat-card">
                     <div class="stat-icon stat-icon--orders">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -172,7 +173,7 @@ $deliveredOrders = $stmtDelivered->fetchColumn();
             </section>
 
             <!-- Orders Table -->
-            <section class="products-table-wrapper" aria-label="Liste des commandes">
+            <section class="products-table-wrapper reveal" aria-label="Liste des commandes">
                 <div class="content-header-bar">
                     <div>
                         <h2>Liste des Commandes</h2>
@@ -249,7 +250,7 @@ $deliveredOrders = $stmtDelivered->fetchColumn();
                         </table>
                     </div>
 
-                    <div class="pagination-wrapper">
+                    <div class="pagination-wrapper reveal">
                         <span class="pagination-info">Affichage de <?= count($orders) ?> sur <?= $totalOrders ?> commandes</span>
                     </div>
                 <?php endif; ?>
@@ -262,6 +263,19 @@ $deliveredOrders = $stmtDelivered->fetchColumn();
         </footer>
     </div>
 
+    <!-- Toast Container (Admin) -->
+    <?php
+    if (isset($_SESSION['_toast'])) {
+        $toastMsg  = $_SESSION['_toast']['message'] ?? '';
+        $toastType = $_SESSION['_toast']['type']    ?? 'success';
+        unset($_SESSION['_toast']);
+        echo '<div id="toast-container" aria-live="polite" aria-atomic="false"'
+           . ' data-flash-message="' . htmlspecialchars($toastMsg,  ENT_QUOTES) . '"'
+           . ' data-flash-type="'    . htmlspecialchars($toastType, ENT_QUOTES) . '"></div>';
+    } else {
+        echo '<div id="toast-container" aria-live="polite" aria-atomic="false"></div>';
+    }
+    ?>
     <!-- JS Script for mobile toggle -->
     <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -297,5 +311,6 @@ $deliveredOrders = $stmtDelivered->fetchColumn();
         });
     });
     </script>
+<script src="../../assets/js/toast.js"></script>
 </body>
 </html>

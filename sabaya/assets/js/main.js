@@ -25,3 +25,27 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+
+        reveals.forEach(element => {
+
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (elementTop < windowHeight - 100) {
+                element.classList.add('active');
+            }
+
+        });
+
+    };
+
+    revealOnScroll();
+
+    window.addEventListener('scroll', revealOnScroll);
+
+});

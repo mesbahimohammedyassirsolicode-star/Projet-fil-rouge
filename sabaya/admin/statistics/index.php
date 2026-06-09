@@ -183,7 +183,7 @@ $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
                 </div>
                 <div class="kpi-body">
                     <h2 class="kpi-label">Produits</h2>
-                    <p class="kpi-value"><?= htmlspecialchars($totalProducts) ?></p>
+                    <p class="kpi-value"><span class="counter" data-count="<?= (int)$totalProducts ?>" aria-label="<?= (int)$totalProducts ?> produits">0</span></p>
                 </div>
                 <span class="kpi-tag"><?= htmlspecialchars($totalCategories) ?> catégories</span>
             </article>
@@ -194,7 +194,7 @@ $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
                 </div>
                 <div class="kpi-body">
                     <h2 class="kpi-label">Catégories</h2>
-                    <p class="kpi-value"><?= htmlspecialchars($totalCategories) ?></p>
+                    <p class="kpi-value"><span class="counter" data-count="<?= (int)$totalCategories ?>" aria-label="<?= (int)$totalCategories ?> catégories">0</span></p>
                 </div>
                 <span class="kpi-tag">Organisation</span>
             </article>
@@ -205,7 +205,7 @@ $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
                 </div>
                 <div class="kpi-body">
                     <h2 class="kpi-label">Clients</h2>
-                    <p class="kpi-value"><?= htmlspecialchars($totalClients) ?></p>
+                    <p class="kpi-value"><span class="counter" data-count="<?= (int)$totalClients ?>" aria-label="<?= (int)$totalClients ?> clients">0</span></p>
                 </div>
                 <span class="kpi-tag">Base clients</span>
             </article>
@@ -216,7 +216,7 @@ $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
                 </div>
                 <div class="kpi-body">
                     <h2 class="kpi-label">Commandes</h2>
-                    <p class="kpi-value"><?= htmlspecialchars($totalOrders) ?></p>
+                    <p class="kpi-value"><span class="counter" data-count="<?= (int)$totalOrders ?>" aria-label="<?= (int)$totalOrders ?> commandes">0</span></p>
                 </div>
                 <span class="kpi-tag">Total traitées</span>
             </article>
@@ -227,7 +227,15 @@ $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
                 </div>
                 <div class="kpi-body">
                     <h2 class="kpi-label">Chiffre d'affaires</h2>
-                    <p class="kpi-value"><?= number_format($totalRevenue, 2, ',', ' ') ?> <abbr title="Dirham" class="kpi-currency">DH</abbr></p>
+                    <p class="kpi-value">
+                        <span class="counter"
+                              data-count="<?= number_format($totalRevenue, 2, '.', '') ?>"
+                              data-decimals="2"
+                              data-separator=" "
+                              data-decimal-sep=","
+                              data-suffix=" DH"
+                              aria-label="<?= number_format($totalRevenue, 2, ',', ' ') ?> DH">0 DH</span>
+                    </p>
                 </div>
                 <span class="kpi-tag">Panier moyen : <?= number_format($avgOrderValue, 0, ',', ' ') ?> DH</span>
             </article>
@@ -258,11 +266,11 @@ $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
                 <div class="insight-body">
                     <div class="insight-stat-row">
                         <span class="insight-stat-label">Total produits</span>
-                        <span class="insight-stat-value"><?= htmlspecialchars($totalProducts) ?></span>
+                        <span class="insight-stat-value"><span class="counter" data-count="<?= (int)$totalProducts ?>">0</span></span>
                     </div>
                     <div class="insight-stat-row">
                         <span class="insight-stat-label">Catégories actives</span>
-                        <span class="insight-stat-value"><?= htmlspecialchars($totalCategories) ?></span>
+                        <span class="insight-stat-value"><span class="counter" data-count="<?= (int)$totalCategories ?>">0</span></span>
                     </div>
                     <div class="insight-stat-row">
                         <span class="insight-stat-label">Moyenne / catégorie</span>
@@ -282,7 +290,7 @@ $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
                 <div class="insight-body">
                     <div class="insight-stat-row">
                         <span class="insight-stat-label">Total commandes</span>
-                        <span class="insight-stat-value"><?= htmlspecialchars($totalOrders) ?></span>
+                        <span class="insight-stat-value"><span class="counter" data-count="<?= (int)$totalOrders ?>">0</span></span>
                     </div>
                     <div class="insight-stat-row">
                         <span class="insight-stat-label">Panier moyen</span>
@@ -306,7 +314,7 @@ $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
                 <div class="insight-body">
                     <div class="insight-stat-row">
                         <span class="insight-stat-label">Total inscrits</span>
-                        <span class="insight-stat-value"><?= htmlspecialchars($totalClients) ?></span>
+                        <span class="insight-stat-value"><span class="counter" data-count="<?= (int)$totalClients ?>">0</span></span>
                     </div>
                     <div class="insight-stat-row">
                         <span class="insight-stat-label">Commandes / client</span>
@@ -474,6 +482,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+
+<!-- ══ Counter Animations ═════════════════════════ -->
+<script src="../../assets/js/counter.js"></script>
 
 </body>
 

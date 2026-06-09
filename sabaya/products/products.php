@@ -56,12 +56,12 @@ require_once '../includes/navbar.php';
 
 <main>
 
-<section class="collection-header">
+<section class="collection-header reveal">
     <h1>Modern Collection</h1>
     <p class="collection-subtitle">Elevated essentials for the contemporary woman.</p>
 </section>
 
-<section class="collection-search">
+<section class="collection-search reveal">
     <form method="GET" action="<?= htmlspecialchars($baseUrl) ?>/products/search.php" role="search" class="search-bar">
         <label for="collection-search-input" class="sr-only">Rechercher un produit</label>
         <input
@@ -73,7 +73,7 @@ require_once '../includes/navbar.php';
     </form>
 </section>
 
-<section class="collection-products">
+<section class="collection-products reveal">
 
     <?php if(empty($products)): ?>
 
@@ -94,6 +94,18 @@ require_once '../includes/navbar.php';
                                 alt="<?= htmlspecialchars($product['nom']) ?> — Abaya Sabaya Luxury"
                                 loading="lazy"
                             >
+                            <!-- Slide-up overlay -->
+                            <div class="product-card-overlay" aria-hidden="true">
+                                <a
+                                    class="product-card-overlay-btn product-card-overlay-btn--primary"
+                                    href="product-details.php?id=<?= $product['id_produit'] ?>"
+                                    tabindex="-1"
+                                    aria-label="Voir les détails de <?= htmlspecialchars($product['nom']) ?>"
+                                >
+                                    <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                                    Voir Détails
+                                </a>
+                            </div>
                         </div>
                     </a>
 
@@ -120,6 +132,7 @@ require_once '../includes/navbar.php';
 
                 </article>
 
+
             <?php endforeach; ?>
 
         </div>
@@ -128,7 +141,7 @@ require_once '../includes/navbar.php';
 
 </section>
 
-<nav class="collection-pagination" aria-label="Pagination de la collection">
+<nav class="collection-pagination reveal" aria-label="Pagination de la collection">
     <!-- Pagination placeholder -->
 </nav>
 

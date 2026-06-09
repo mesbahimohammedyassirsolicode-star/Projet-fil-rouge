@@ -39,12 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role']       = $user['role'];
 
             if ($user['role'] === 'admin') {
-
+                $_SESSION['_toast'] = [
+                    'message' => 'Bienvenue dans l\'espace administrateur.',
+                    'type'    => 'success',
+                ];
                 header('Location: ../admin/dashboard.php');
                 exit();
 
             } else {
-
+                $_SESSION['_toast'] = [
+                    'message' => 'Connexion réussie. Bienvenue, ' . htmlspecialchars($user['nom']) . ' !',
+                    'type'    => 'success',
+                ];
                 header('Location: ../index.php');
                 exit();
             }
@@ -78,13 +84,10 @@ require_once '../includes/navbar.php';
         <section aria-label="Formulaire de connexion">
             <h1>Connexion</h1>
 
-            <?php if (!empty($error)): ?>
-                <div style="color: red; margin-bottom: 15px;" role="alert">
-                    <?php foreach ($error as $err): ?>
-                        <p><?php echo htmlspecialchars($err); ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+            <?php if (!empty($error)):
+                $toastMessage = implode(' ', $error);
+                $toastType    = 'error';
+            endif; ?>
 
             <form action="login.php" method="post">
                 <fieldset>

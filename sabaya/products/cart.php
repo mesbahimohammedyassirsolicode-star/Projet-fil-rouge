@@ -34,7 +34,7 @@ require_once '../includes/navbar.php';
 ?>
 
     <main class="cart-page">
-        <section class="cart-header">
+    <section class="cart-header reveal">
             <div class="cart-container">
                 <p class="cart-subtitle">Votre Sélection</p>
                 <h1 class="cart-title">Mon Panier</h1>
@@ -50,11 +50,11 @@ require_once '../includes/navbar.php';
                 </div>
             </section>
         <?php else: ?>
-            <section class="cart-content-section">
+            <section class="cart-content-section reveal">
                 <div class="cart-container cart-layout">
 
                     <!-- Cart Table (Desktop) -->
-                    <div class="cart-table-wrapper">
+                    <div class="cart-table-wrapper reveal">
                         <table class="cart-table">
                             <thead>
                                 <tr>
@@ -107,7 +107,7 @@ require_once '../includes/navbar.php';
                     </div>
 
                     <!-- Order Summary -->
-                    <div class="cart-summary">
+                    <div class="cart-summary reveal">
                         <div class="cart-summary-card">
                             <h2 class="cart-summary-title">Résumé de la Commande</h2>
                             <div class="cart-summary-divider"></div>

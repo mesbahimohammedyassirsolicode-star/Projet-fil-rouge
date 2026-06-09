@@ -29,7 +29,7 @@ require_once 'includes/navbar.php';
     <!-- ═══════════════════════════════════════════
          SECTION 1 — HERO
     ═══════════════════════════════════════════ -->
-    <section class="about-hero">
+    <section class="about-hero reveal">
         <div class="about-hero__inner">
             <span class="about-hero__label">Sabaya Luxury</span>
             <h1 class="about-hero__title">À propos de <em>Sabaya Luxury</em></h1>
@@ -41,7 +41,7 @@ require_once 'includes/navbar.php';
     <!-- ═══════════════════════════════════════════
          SECTION 2 — NOTRE HISTOIRE
     ═══════════════════════════════════════════ -->
-    <section class="about-story">
+    <section class="about-story reveal">
         <div class="container about-story__inner">
             <div class="about-story__badge">
                 <i class="fas fa-feather-alt"></i>
@@ -71,7 +71,7 @@ require_once 'includes/navbar.php';
     <!-- ═══════════════════════════════════════════
          SECTION 3 — NOTRE MISSION
     ═══════════════════════════════════════════ -->
-    <section class="about-mission">
+    <section class="about-mission reveal">
         <div class="container about-mission__inner">
             <div class="about-mission__grid">
                 <div class="about-mission__left">
@@ -126,7 +126,7 @@ require_once 'includes/navbar.php';
     <!-- ═══════════════════════════════════════════
          SECTION 4 — NOS VALEURS
     ═══════════════════════════════════════════ -->
-    <section class="about-values">
+    <section class="about-values reveal">
         <div class="container">
             <div class="about-values__header">
                 <span class="section-label">Nos Valeurs</span>
@@ -190,7 +190,7 @@ require_once 'includes/navbar.php';
     <!-- ═══════════════════════════════════════════
          SECTION 5 — WHY CHOOSE SABAYA
     ═══════════════════════════════════════════ -->
-    <section class="about-why">
+    <section class="about-why reveal">
         <div class="container">
             <div class="about-why__header">
                 <span class="section-label">Pourquoi Sabaya</span>
@@ -265,7 +265,7 @@ require_once 'includes/navbar.php';
     <!-- ═══════════════════════════════════════════
          SECTION 6 — CALL TO ACTION
     ═══════════════════════════════════════════ -->
-    <section class="about-cta">
+    <section class="about-cta reveal">
         <div class="about-cta__inner">
             <span class="about-cta__label">Explorez notre univers</span>
             <h2 class="about-cta__title">Votre prochaine pièce d'exception vous attend.</h2>

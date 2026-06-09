@@ -99,7 +99,7 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
 
     <main class="profile-page">
         <!-- Top Banner -->
-        <div class="profile-banner">
+    <div class="profile-banner reveal">
             <h1 class="profile-banner__title">My Account</h1>
             <p class="profile-banner__welcome">Welcome back, <span class="profile-banner__name"><?= $userName ?></span></p>
             <a href="logout.php" class="profile-banner__logout">
@@ -110,7 +110,7 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
         <!-- Two-Column Layout -->
         <div class="profile-container">
             <!-- LEFT SIDEBAR -->
-            <aside class="profile-sidebar">
+            <aside class="profile-sidebar reveal">
                 <ul class="profile-menu">
                     <li class="profile-menu__item profile-menu__item--active">
                         <a href="#personal-info" class="profile-menu__link">
@@ -140,7 +140,7 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
             </aside>
 
             <!-- RIGHT CONTENT -->
-            <section class="profile-content" id="personal-info">
+            <section class="profile-content reveal" id="personal-info">
                 <h2 class="profile-content__title">Edit Details</h2>
 
                 <!-- Success message -->
@@ -225,7 +225,7 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
                     </div>
 
                     <!-- Buttons -->
-                    <div class="profile-actions">
+                    <div class="profile-actions reveal">
                         <button type="submit" class="profile-actions__btn profile-actions__btn--primary">
                             <i class="fas fa-save" aria-hidden="true"></i> Save Changes
                         </button>

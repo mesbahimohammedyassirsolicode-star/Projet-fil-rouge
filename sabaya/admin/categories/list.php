@@ -173,7 +173,7 @@ $totalOrders = $stmtOrders->fetchColumn();
             <?php endif; ?>
 
             <!-- Statistics Cards -->
-            <section class="stats-cards" aria-label="Statistiques catégories">
+            <section class="stats-cards reveal" aria-label="Statistiques catégories">
                 <article class="stat-card">
                     <div class="stat-icon stat-icon--products">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
@@ -213,7 +213,7 @@ $totalOrders = $stmtOrders->fetchColumn();
             </section>
 
             <!-- Categories Table Area -->
-            <section class="products-table-wrapper" aria-label="Liste des catégories">
+            <section class="products-table-wrapper reveal" aria-label="Liste des catégories">
                 <div class="content-header-bar">
                     <div>
                         <h2>Liste des Catégories</h2>
@@ -287,7 +287,7 @@ $totalOrders = $stmtOrders->fetchColumn();
                 </table>
 
                 <!-- Pagination design -->
-                <div class="pagination-wrapper">
+                <div class="pagination-wrapper reveal">
                     <span class="pagination-info">Affichage de <?= count($categories) ?> sur <?= $totalCategories ?> catégories</span>
                     <nav aria-label="Pagination des catégories">
                         <ul class="pagination-list">

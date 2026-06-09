@@ -33,6 +33,10 @@ $contactModel->create(
     $_SESSION['user_id']
 );
 
-header('Location: contact.php?success=1');
+$_SESSION['_toast'] = [
+    'message' => 'Votre message a bien été envoyé. Nous vous répondrons très bientôt.',
+    'type'    => 'success',
+];
+header('Location: contact.php');
 exit();
 ?>

@@ -145,7 +145,7 @@ $totalCategories = $stmtCategories->fetchColumn();
         <main class="admin-content">
 
             <!-- Statistics Cards -->
-            <section class="stats-cards" aria-label="Statistiques produits">
+            <section class="stats-cards reveal" aria-label="Statistiques produits">
                 <article class="stat-card">
                     <div class="stat-icon stat-icon--products">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -185,7 +185,7 @@ $totalCategories = $stmtCategories->fetchColumn();
             </section>
 
             <!-- Product Table Area -->
-            <section class="products-table-wrapper" aria-label="Liste des produits">
+            <section class="products-table-wrapper reveal" aria-label="Liste des produits">
                 <div class="content-header-bar">
                     <div>
                         <h2>Liste des Produits</h2>
@@ -279,7 +279,7 @@ $totalCategories = $stmtCategories->fetchColumn();
                 </table>
 
                 <!-- Pagination design (mock navigation based on requirements) -->
-                <div class="pagination-wrapper">
+                <div class="pagination-wrapper reveal">
                     <span class="pagination-info">Affichage de <?= count($products) ?> sur <?= $totalProducts ?> produits</span>
                     <nav aria-label="Pagination des produits">
                         <ul class="pagination-list">

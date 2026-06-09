@@ -17,6 +17,7 @@ if (!isset($baseUrl)) {
     $baseUrl  = $protocol . '://' . $_SERVER['HTTP_HOST'] . rtrim($scriptDir, '/\\');
 }
 ?>
+<?php require_once __DIR__ . '/toast-container.php'; ?>
 <footer class="footer" role="contentinfo">
     <div class="footer-content">
         <div class="footer-col">
@@ -52,5 +53,10 @@ if (!isset($baseUrl)) {
     </div>
 </footer>
 
+<!-- Global CSS: Toast -->
+<link rel="stylesheet" href="<?= htmlspecialchars($baseUrl) ?>/assets/css/toast.css">
+
 <!-- Global JS -->
 <script src="<?= htmlspecialchars($baseUrl) ?>/assets/js/main.js"></script>
+<script src="<?= htmlspecialchars($baseUrl) ?>/assets/js/toast.js"></script>
+<script src="<?= htmlspecialchars($baseUrl) ?>/assets/js/product-hover.js"></script>

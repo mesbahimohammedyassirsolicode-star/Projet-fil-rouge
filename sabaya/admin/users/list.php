@@ -132,7 +132,7 @@ $totalOrders = $stmtOrders->fetchColumn();
         <main class="admin-content">
 
             <!-- Statistics Cards -->
-            <section class="stats-cards" aria-label="Statistiques utilisateurs">
+            <section class="stats-cards reveal" aria-label="Statistiques utilisateurs">
                 <article class="stat-card">
                     <div class="stat-icon stat-icon--clients">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
@@ -172,7 +172,7 @@ $totalOrders = $stmtOrders->fetchColumn();
             </section>
 
             <!-- Users Table Area -->
-            <section class="users-table-wrapper" aria-label="Liste des utilisateurs">
+            <section class="users-table-wrapper reveal" aria-label="Liste des utilisateurs">
                 <div class="content-header-bar">
                     <div>
                         <h2>Liste des Utilisateurs</h2>
@@ -248,7 +248,7 @@ $totalOrders = $stmtOrders->fetchColumn();
                 </table>
 
                 <!-- Pagination -->
-                <div class="pagination-wrapper">
+                <div class="pagination-wrapper reveal">
                     <span class="pagination-info">Affichage de <?= count($users) ?> sur <?= $totalUsers ?> utilisateurs</span>
                     <nav aria-label="Pagination des utilisateurs">
                         <ul class="pagination-list">

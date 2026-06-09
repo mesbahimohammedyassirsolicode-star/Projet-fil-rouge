@@ -31,6 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $status
     );
 
+    $_SESSION['_toast'] = [
+        'message' => 'Statut de la commande mis à jour avec succès.',
+        'type'    => 'success',
+    ];
     header('Location: list.php');
     exit();
 }
@@ -63,6 +67,7 @@ $statusClass = match($order['statuscmd']) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/admin.css">
+    <link rel="stylesheet" href="../../assets/css/toast.css">
 </head>
 <body class="admin-dashboard">
 
@@ -256,6 +261,19 @@ $statusClass = match($order['statuscmd']) {
         </footer>
     </div>
 
+    <!-- Toast Container (Admin) -->
+    <?php
+    if (isset($_SESSION['_toast'])) {
+        $toastMessage = $_SESSION['_toast']['message'] ?? '';
+        $toastType    = $_SESSION['_toast']['type']    ?? 'success';
+        unset($_SESSION['_toast']);
+        echo '<div id="toast-container" aria-live="polite" aria-atomic="false"'
+           . ' data-flash-message="' . htmlspecialchars($toastMessage, ENT_QUOTES) . '"'
+           . ' data-flash-type="'    . htmlspecialchars($toastType,    ENT_QUOTES) . '"></div>';
+    } else {
+        echo '<div id="toast-container" aria-live="polite" aria-atomic="false"></div>';
+    }
+    ?>
     <!-- JS Script -->
     <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -295,5 +313,6 @@ $statusClass = match($order['statuscmd']) {
         });
     });
     </script>
+<script src="../../assets/js/toast.js"></script>
 </body>
 </html>

@@ -28,11 +28,11 @@ require_once '../includes/navbar.php';
 
 ?>
 
-<main class="orders-page">
+<main class="orders-page reveal">
     <div class="orders-container">
 
         <!-- Page Header -->
-        <header class="orders-header">
+        <header class="orders-header reveal">
             <span class="orders-header-label">Votre Historique</span>
             <h1 class="orders-title">Mes Commandes</h1>
             <p class="orders-subtitle">Retrouvez l'ensemble de vos commandes passées sur Sabaya Luxury</p>
@@ -46,8 +46,8 @@ require_once '../includes/navbar.php';
                 <p class="orders-empty-text">Vous n'avez pas encore passé de commande.</p>
                 <a href="products.php" class="btn btn-orders-empty">Découvrir la Collection</a>
             </div>
-        <?php else: ?>
-            <div class="orders-list">
+            <?php else: ?>
+            <div class="orders-list reveal">
                 <?php foreach($orders as $order):
                     $status = htmlspecialchars($order['statuscmd']);
                     // Determine badge class
@@ -56,7 +56,7 @@ require_once '../includes/navbar.php';
                     elseif (stripos($status, 'expédi') !== false || stripos($status, 'ship') !== false) $badgeClass = 'orders-badge--shipped';
                     elseif (stripos($status, 'livr') !== false || stripos($status, 'deliver') !== false) $badgeClass = 'orders-badge--delivered';
                 ?>
-                <article class="order-card">
+                <article class="order-card reveal">
                     <div class="order-card-inner">
 
                         <!-- Left: Order Info -->

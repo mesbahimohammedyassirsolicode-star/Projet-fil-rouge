@@ -3584,3 +3584,40 @@ a.contact-info__value:focus{
     }
 
 }
+/* ==========================
+   SCROLL REVEAL ANIMATION
+========================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delay for card grids — cards animate in sequence */
+.card.reveal:nth-child(2) { transition-delay: 0.1s; }
+.card.reveal:nth-child(3) { transition-delay: 0.2s; }
+.card.reveal:nth-child(4) { transition-delay: 0.3s; }
+.card.reveal:nth-child(5) { transition-delay: 0.1s; }
+.card.reveal:nth-child(6) { transition-delay: 0.2s; }
+.card.reveal:nth-child(7) { transition-delay: 0.3s; }
+.card.reveal:nth-child(8) { transition-delay: 0.4s; }
+
+/* Once revealed, restore card hover transform cleanly */
+.card.reveal.active:hover {
+    transform: translateY(-4px);
+}
+
+/* Respect user accessibility preference */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

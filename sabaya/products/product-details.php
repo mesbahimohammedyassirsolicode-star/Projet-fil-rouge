@@ -86,10 +86,10 @@ require_once '../includes/navbar.php';
             <span class="pd-breadcrumb-current"><?= htmlspecialchars($product['nom']) ?></span>
         </nav>
 
-        <section class="pd-layout" aria-label="Détails du produit">
+    <section class="pd-layout reveal" aria-label="Détails du produit">
 
             <!-- LEFT: Product Image -->
-            <div class="pd-gallery">
+            <div class="pd-gallery reveal">
                 <div class="pd-gallery-main">
                     <img
                         src="../assets/images/products/<?= htmlspecialchars($product['image']) ?>"
@@ -99,7 +99,7 @@ require_once '../includes/navbar.php';
             </div>
 
             <!-- RIGHT: Product Information -->
-            <div class="pd-info">
+            <div class="pd-info reveal">
 
                 <span class="pd-brand">Sabaya Luxury</span>
 
@@ -133,7 +133,7 @@ require_once '../includes/navbar.php';
                         Ajouter au panier
                     </a>
 
-                    <a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>" class="btn-outline pd-btn-wishlist">
+                    <a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>" class="btn-outline pd-btn-wishlist" data-wishlist-pulse>
                         <i class="fa-regular fa-heart"></i>
                         Ajouter à la wishlist
                     </a>

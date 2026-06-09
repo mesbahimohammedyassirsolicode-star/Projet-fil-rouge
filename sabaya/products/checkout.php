@@ -184,7 +184,7 @@ require_once '../includes/navbar.php';
     <main class="checkout-page">
 
         <!-- ─── Page Header ─── -->
-        <section class="checkout-header">
+    <section class="checkout-header reveal">
             <div class="checkout-container">
                 <p class="checkout-eyebrow">Sabaya Luxury</p>
                 <h1 class="checkout-title">Finaliser la commande</h1>
@@ -209,13 +209,13 @@ require_once '../includes/navbar.php';
         <?php endif; ?>
 
         <!-- ─── Checkout Content ─── -->
-        <section class="checkout-content-section">
+    <section class="checkout-content-section reveal">
             <div class="checkout-container">
                 <form method="POST" class="checkout-form" novalidate>
                     <div class="checkout-layout">
 
                         <!-- ═══ LEFT — Shipping Form ═══ -->
-                        <div class="checkout-shipping">
+                        <div class="checkout-shipping reveal">
                             <div class="checkout-section-card">
                                 <h2 class="checkout-section-title">
                                     <i class="fas fa-shipping-fast"></i>
@@ -249,7 +249,7 @@ require_once '../includes/navbar.php';
                         </div>
 
                         <!-- ═══ RIGHT — Order Summary ═══ -->
-                        <div class="checkout-summary">
+                        <div class="checkout-summary reveal">
                             <div class="checkout-summary-card">
                                 <h2 class="checkout-summary-title">Récapitulatif</h2>
                                 <div class="checkout-divider"></div>

@@ -1,0 +1,225 @@
+/* ============================================================
+ * toast.css — Sabaya Luxury Toast Notification System
+ * Luxury | Elegant | Minimal
+ * Position: Top Right | Slide-in / Fade-out | 3s duration
+ * ============================================================ */
+
+/* ── Container ──────────────────────────────────────────────── */
+#toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+    /* Accessible on all sizes */
+    max-width: calc(100vw - 48px);
+}
+
+/* ── Individual Toast ───────────────────────────────────────── */
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    min-width: 300px;
+    max-width: 380px;
+    padding: 18px 20px;
+    border-radius: 4px;
+    background-color: #1A1A1A;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.45),
+        0 1px 4px rgba(0, 0, 0, 0.3),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    pointer-events: all;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+
+    /* Slide-in animation */
+    animation: toast-slide-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Accent bar on the left */
+.toast::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+}
+
+/* ── Types ──────────────────────────────────────────────────── */
+.toast--success::before {
+    background-color: #C5AD59;
+}
+
+.toast--error::before {
+    background-color: #dc3545;
+}
+
+/* ── Icon ───────────────────────────────────────────────────── */
+.toast__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    font-size: 0.9rem;
+}
+
+.toast--success .toast__icon {
+    color: #C5AD59;
+}
+
+.toast--error .toast__icon {
+    color: #dc3545;
+}
+
+/* ── Body ───────────────────────────────────────────────────── */
+.toast__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.toast__title {
+    display: block;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.toast__message {
+    display: block;
+    color: #FFFFFF;
+    word-break: break-word;
+}
+
+/* ── Dismiss button ─────────────────────────────────────────── */
+.toast__close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+    margin-top: 1px;
+    transition: color 0.2s ease;
+}
+
+.toast__close:hover,
+.toast__close:focus {
+    color: rgba(255, 255, 255, 0.8);
+    outline: none;
+}
+
+.toast__close:focus-visible {
+    outline: 2px solid #C5AD59;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* ── Progress bar ───────────────────────────────────────────── */
+.toast__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    transform-origin: left;
+    animation: toast-progress 3s linear forwards;
+}
+
+.toast--success .toast__progress {
+    background-color: #C5AD59;
+}
+
+.toast--error .toast__progress {
+    background-color: #dc3545;
+}
+
+/* ── Fade-out state ─────────────────────────────────────────── */
+.toast.is-hiding {
+    animation: toast-fade-out 0.4s ease forwards;
+    pointer-events: none;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes toast-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(40px) translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+@keyframes toast-fade-out {
+    from {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+        max-height: 120px;
+        margin-bottom: 0;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(20px) translateY(-4px);
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: -12px;
+    }
+}
+
+@keyframes toast-progress {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(0); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+/* Tablet */
+@media (max-width: 768px) {
+    #toast-container {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+        max-width: none;
+    }
+
+    .toast {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    #toast-container {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+    }
+
+    .toast {
+        padding: 14px 16px;
+        font-size: 0.82rem;
+    }
+}

@@ -6,13 +6,17 @@ $pageTitle = 'Commande Confirmée | Sabaya Luxury';
 $pageDescription = 'Votre commande sur Sabaya Luxury a été confirmée avec succès.';
 $pageRobots = 'noindex, nofollow';
 
+// Toast: confirm order placement
+$toastMessage = 'Votre commande a été enregistrée avec succès !';
+$toastType    = 'success';
+
 require_once '../includes/header.php';
 require_once '../includes/navbar.php';
 
 ?>
 
-    <main class="order-success-page">
-        <section class="order-success-container">
+    <main class="order-success-page reveal">
+        <section class="order-success-container reveal">
             
             <!-- Success Icon -->
             <div class="success-icon-wrapper">
@@ -44,7 +48,7 @@ require_once '../includes/navbar.php';
             ?>
 
             <!-- Action Buttons -->
-            <div class="success-actions">
+            <div class="success-actions reveal">
                 <a
                     href="<?= $whatsappLink ?>"
                     target="_blank"

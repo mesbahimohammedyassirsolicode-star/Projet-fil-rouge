@@ -51,7 +51,7 @@ require_once '../includes/navbar.php';
     <main id="main-content">
 
         <!-- ══ HERO SECTION ════════════════════════════════════════ -->
-        <section class="wishlist-hero" aria-labelledby="wishlist-title">
+    <section class="wishlist-hero reveal" aria-labelledby="wishlist-title">
             <div class="wishlist-hero__inner">
                 <span class="wishlist-hero__label" aria-hidden="true">Collection Personnelle</span>
                 <h1 id="wishlist-title" class="wishlist-hero__title">Ma Liste de Souhaits</h1>
@@ -64,7 +64,7 @@ require_once '../includes/navbar.php';
         </section>
 
         <!-- ══ WISHLIST CONTENT ════════════════════════════════════ -->
-        <section class="wishlist-content" aria-label="Vos produits favoris">
+    <section class="wishlist-content reveal" aria-label="Vos produits favoris">
 
             <?php if (empty($wishlist)): ?>
 
@@ -97,6 +97,11 @@ require_once '../includes/navbar.php';
                                      loading="lazy"
                                      width="400"
                                      height="500">
+                                <!-- Slide-up quick view -->
+                                <span class="wishlist-card__quick-view" aria-hidden="true">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                    Voir Détails
+                                </span>
                             </a>
 
                             <!-- Product Info -->
@@ -118,6 +123,7 @@ require_once '../includes/navbar.php';
                                     </a>
                                     <a href="remove-wishlist.php?id=<?= $item['id_wishlist'] ?>"
                                        class="wishlist-card__btn-remove"
+                                       data-wishlist-pulse
                                        aria-label="Retirer <?= htmlspecialchars($item['nom']) ?> de votre liste de souhaits">
                                         <i class="far fa-trash-alt" aria-hidden="true"></i>
                                         Retirer
