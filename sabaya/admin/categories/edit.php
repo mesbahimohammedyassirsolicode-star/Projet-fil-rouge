@@ -13,6 +13,9 @@ $pdo = $db->getConnection();
 
 $categoryModel = new Category($pdo);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 // Lookup fetch for the existing category record by id
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header('Location: list.php');

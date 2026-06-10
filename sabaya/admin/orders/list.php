@@ -15,6 +15,9 @@ $pdo = $db->getConnection();
 
 $orderModel = new Order($pdo);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 $orders = $orderModel->getAllOrders();
 
 // Order statistics

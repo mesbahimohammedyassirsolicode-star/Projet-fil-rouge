@@ -40,7 +40,7 @@ require_once 'includes/navbar.php';
         </span>
 
         <h1>
-            The Art of<br>Modesty
+            <?= t('home_hero_title') ?>
         </h1>
 
         <div class="hero-line"></div>
@@ -67,7 +67,7 @@ require_once 'includes/navbar.php';
 
     <div class="container">
 
-        <h2>New Arrivals</h2>
+        <h2><?= t('home_new_arrivals') ?></h2>
 
         <div class="grid grid-4">
 

@@ -72,8 +72,8 @@ require_once '../includes/navbar.php';
 <main>
 
 <section class="collection-header reveal">
-    <h1>Modern Collection</h1>
-    <p class="collection-subtitle">Elevated essentials for the contemporary woman.</p>
+    <h1><?= t('products_page_title') ?></h1>
+    <p class="collection-subtitle"><?= t('products_page_subtitle') ?></p>
 </section>
 
 <section class="collection-search reveal">
@@ -145,7 +145,7 @@ require_once '../includes/navbar.php';
 
                     <div class="product-card-body">
 
-                        <span class="product-card-brand">SABAYA</span>
+        <span class="product-card-brand"><?= t('products_brand') ?></span>
 
                         <h3 class="product-card-name">
                             <?= htmlspecialchars($product['nom']) ?>

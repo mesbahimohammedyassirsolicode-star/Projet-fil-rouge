@@ -18,6 +18,9 @@ $pdo = $db->getConnection();
 
 $userModel = new User($pdo);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 $id = (int) $_GET['id'];
 $user = $userModel->find($id);
 

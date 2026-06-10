@@ -146,7 +146,7 @@ require_once '../includes/navbar.php';
                     <button type="submit" id="submit" name="submit">S'inscrire</button>
                 </fieldset>
             </form>
-            <p class="auth-switch">Already have an account? <a href="login.php">Log In</a></p>
+            <p class="auth-switch"><?= t('register_have_account') ?> <a href="login.php"><?= t('register_login_link') ?></a></p>
         </section>
     </main>
 

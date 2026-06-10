@@ -15,7 +15,8 @@ $pdo = $db->getConnection();
 
 $productModel = new Product($pdo);
 
-// Handle Search logic using the existing search method in Product model
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
 $searchKeyword = '';
 if (isset($_GET['search']) && trim($_GET['search']) !== '') {
     $searchKeyword = trim($_GET['search']);
@@ -124,8 +125,8 @@ $totalCategories = $stmtCategories->fetchColumn();
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
             <div class="header-title-block">
-                <h1>Product Management</h1>
-                <p class="header-subtitle">View, edit, and manage your luxury inventory.</p>
+                <h1><?= t('admin_products_page_title') ?></h1>
+                <p class="header-subtitle"><?= t('admin_products_subtitle') ?></p>
             </div>
             <div class="header-search">
                 <form method="GET" action="" role="search" class="search-form">
@@ -151,7 +152,7 @@ $totalCategories = $stmtCategories->fetchColumn();
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
                     </div>
                     <div class="stat-info">
-                        <h2>Total Products</h2>
+                        <h2><?= t('admin_stat_total_products2') ?></h2>
                         <p class="stat-value"><?= htmlspecialchars($totalProducts) ?></p>
                     </div>
                 </article>
@@ -160,7 +161,7 @@ $totalCategories = $stmtCategories->fetchColumn();
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
                     <div class="stat-info">
-                        <h2>Active Products</h2>
+                        <h2><?= t('admin_stat_active_products') ?></h2>
                         <p class="stat-value"><?= htmlspecialchars($activeProducts) ?></p>
                     </div>
                 </article>
@@ -169,7 +170,7 @@ $totalCategories = $stmtCategories->fetchColumn();
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                     </div>
                     <div class="stat-info">
-                        <h2>Low Stock Products</h2>
+                        <h2><?= t('admin_stat_low_stock') ?></h2>
                         <p class="stat-value"><?= htmlspecialchars($lowStockProducts) ?></p>
                     </div>
                 </article>
@@ -178,7 +179,7 @@ $totalCategories = $stmtCategories->fetchColumn();
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div class="stat-info">
-                        <h2>Categories</h2>
+                        <h2><?= t('admin_stat_categories') ?></h2>
                         <p class="stat-value"><?= htmlspecialchars($totalCategories) ?></p>
                     </div>
                 </article>
@@ -197,7 +198,7 @@ $totalCategories = $stmtCategories->fetchColumn();
                     </div>
                     <a href="add.php" class="btn-add-product">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                        <span>New Product</span>
+                        <span><?= t('admin_new_product_btn') ?></span>
                     </a>
                 </div>
 
@@ -205,12 +206,12 @@ $totalCategories = $stmtCategories->fetchColumn();
                     <caption class="sr-only">Liste de tous les produits en vente</caption>
                     <thead>
                         <tr>
-                            <th scope="col">Image</th>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col"><?= t('admin_col_image') ?></th>
+                            <th scope="col"><?= t('admin_col_product_name') ?></th>
+                            <th scope="col"><?= t('admin_col_category') ?></th>
+                            <th scope="col"><?= t('admin_col_price') ?></th>
+                            <th scope="col"><?= t('admin_col_stock') ?></th>
+                            <th scope="col"><?= t('admin_col_actions') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -224,13 +225,13 @@ $totalCategories = $stmtCategories->fetchColumn();
                                 $stock = (int)$product['stock'];
                                 if ($stock === 0) {
                                     $stockBadgeClass = 'badge-out-of-stock';
-                                    $stockText = 'Out of Stock';
+                                    $stockText = t('admin_stock_out');
                                 } elseif ($stock <= 5) {
                                     $stockBadgeClass = 'badge-low-stock';
-                                    $stockText = 'Low Stock (' . $stock . ')';
+                                    $stockText = t('admin_stock_low') . ' (' . $stock . ')';
                                 } else {
                                     $stockBadgeClass = 'badge-in-stock';
-                                    $stockText = 'In Stock (' . $stock . ')';
+                                    $stockText = t('admin_stock_in') . ' (' . $stock . ')';
                                 }
                                 ?>
                                 <tr>
@@ -239,36 +240,36 @@ $totalCategories = $stmtCategories->fetchColumn();
                                             <img src="../../assets/images/products/<?= htmlspecialchars($product['image']) ?>" alt="Photo de <?= htmlspecialchars($product['nom']) ?>" width="60" height="60" loading="lazy">
                                         </div>
                                     </td>
-                                    <td data-label="Product Name">
+                                    <td data-label="<?= t('admin_col_product_name') ?>">
                                         <div class="product-info-cell">
                                             <span class="product-name-text"><?= htmlspecialchars($product['nom']) ?></span>
                                             <span class="product-ref-text">ID: #<?= htmlspecialchars($product['id_produit']) ?></span>
                                         </div>
                                     </td>
-                                    <td data-label="Category">
+                                    <td data-label="<?= t('admin_col_category') ?>">
                                         <?= htmlspecialchars($product['categorie_nom']) ?>
                                     </td>
-                                    <td data-label="Price" class="product-price-cell">
+                                    <td data-label="<?= t('admin_col_price') ?>" class="product-price-cell">
                                         <?= number_format($product['prix'], 2, ',', ' ') ?> DH
                                     </td>
-                                    <td data-label="Stock">
+                                    <td data-label="<?= t('admin_col_stock') ?>">
                                         <span class="badge <?= $stockBadgeClass ?>">
                                             <?= $stockText ?>
                                         </span>
                                     </td>
-                                    <td data-label="Actions">
+                                    <td data-label="<?= t('admin_col_actions') ?>">
                                         <div class="product-actions-cell">
-                                            <a href="../../products/product-details.php?id=<?= $product['id_produit'] ?>" target="_blank" class="action-btn-circle btn-view" title="View details (Open store page)">
+                                            <a href="../../products/product-details.php?id=<?= $product['id_produit'] ?>" target="_blank" class="action-btn-circle btn-view" title="<?= t('admin_view_details_title') ?>">
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                                <span class="sr-only">View</span>
+                                                <span class="sr-only"><?= t('admin_view_sr') ?></span>
                                             </a>
-                                            <a href="edit.php?id=<?= $product['id_produit'] ?>" class="action-btn-circle btn-edit" title="Edit product">
+                                            <a href="edit.php?id=<?= $product['id_produit'] ?>" class="action-btn-circle btn-edit" title="<?= t('admin_edit_product_title') ?>">
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                                <span class="sr-only">Edit</span>
+                                                <span class="sr-only"><?= t('admin_edit_sr') ?></span>
                                             </a>
-                                            <a href="delete.php?id=<?= $product['id_produit'] ?>" onclick="return confirm('Supprimer ce produit ?')" class="action-btn-circle btn-delete" title="Delete product">
+                                            <a href="delete.php?id=<?= $product['id_produit'] ?>" onclick="return confirm('Supprimer ce produit ?')" class="action-btn-circle btn-delete" title="<?= t('admin_delete_product_title') ?>">
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                                                <span class="sr-only">Delete</span>
+                                                <span class="sr-only"><?= t('admin_delete_sr') ?></span>
                                             </a>
                                         </div>
                                     </td>

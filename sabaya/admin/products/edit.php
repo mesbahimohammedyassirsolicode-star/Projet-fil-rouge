@@ -13,6 +13,9 @@ $pdo = $db->getConnection();
 
 $productModel = new Product($pdo);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header('Location: list.php');
     exit();

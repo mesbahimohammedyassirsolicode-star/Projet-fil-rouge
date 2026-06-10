@@ -15,7 +15,8 @@ $pdo = $db->getConnection();
 
 $categoryModel = new Category($pdo);
 
-// Handle Search logic
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
 $searchKeyword = '';
 if (isset($_GET['search']) && trim($_GET['search']) !== '') {
     $searchKeyword = trim($_GET['search']);
@@ -140,8 +141,8 @@ $totalOrders = $stmtOrders->fetchColumn();
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
             <div class="header-title-block">
-                <h1>Category Management</h1>
-                <p class="header-subtitle">View, edit, and manage your product categories.</p>
+                <h1><?= t('admin_categories_title') ?></h1>
+                <p class="header-subtitle"><?= t('admin_categories_subtitle') ?></p>
             </div>
             <div class="header-search">
                 <form method="GET" action="" role="search" class="search-form">
@@ -225,7 +226,7 @@ $totalOrders = $stmtOrders->fetchColumn();
                     </div>
                     <a href="add.php" class="btn-add-product">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                        <span>New Category</span>
+                        <span><?= t('admin_new_category_btn') ?></span>
                     </a>
                 </div>
 
@@ -233,10 +234,10 @@ $totalOrders = $stmtOrders->fetchColumn();
                     <caption class="sr-only">Liste de toutes les catégories de produits</caption>
                     <thead>
                         <tr>
-                            <th scope="col">Image</th>
-                            <th scope="col">Category Name</th>
+                            <th scope="col"><?= t('admin_col_image') ?></th>
+                            <th scope="col"><?= t('admin_col_category_name') ?></th>
                             <th scope="col">ID</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col"><?= t('admin_col_actions') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -258,7 +259,7 @@ $totalOrders = $stmtOrders->fetchColumn();
                                             <?php endif; ?>
                                         </div>
                                     </td>
-                                    <td data-label="Category Name">
+                                    <td data-label="<?= t('admin_col_category_name') ?>">
                                         <div class="product-info-cell">
                                             <span class="product-name-text"><?= htmlspecialchars($categorie['nom']) ?></span>
                                         </div>
@@ -268,15 +269,15 @@ $totalOrders = $stmtOrders->fetchColumn();
                                             <span class="product-ref-text">ID: #<?= htmlspecialchars($categorie['id_categorie']) ?></span>
                                         </div>
                                     </td>
-                                    <td data-label="Actions">
+                                    <td data-label="<?= t('admin_col_actions') ?>">
                                         <div class="product-actions-cell">
-                                            <a href="edit.php?id=<?= $categorie['id_categorie'] ?>" class="action-btn-circle btn-edit" title="Edit category">
+                                            <a href="edit.php?id=<?= $categorie['id_categorie'] ?>" class="action-btn-circle btn-edit" title="<?= t('admin_edit_category_title') ?>">
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                                <span class="sr-only">Edit</span>
+                                                <span class="sr-only"><?= t('admin_edit_sr') ?></span>
                                             </a>
-                                            <a href="delete.php?id=<?= $categorie['id_categorie'] ?>" onclick="return confirm('Supprimer cette catégorie ?')" class="action-btn-circle btn-delete" title="Delete category">
+                                            <a href="delete.php?id=<?= $categorie['id_categorie'] ?>" onclick="return confirm('Supprimer cette catégorie ?')" class="action-btn-circle btn-delete" title="<?= t('admin_delete_category_title') ?>">
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                                                <span class="sr-only">Delete</span>
+                                                <span class="sr-only"><?= t('admin_delete_sr') ?></span>
                                             </a>
                                         </div>
                                     </td>

@@ -21,6 +21,9 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once __DIR__ . '/../config/lang.php';
+
 // ── Base URL (always points to project root) ────────────────────────────
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 $scriptDir = dirname($_SERVER['SCRIPT_NAME']);

@@ -12,6 +12,9 @@ require_once '../../config/Database.php';
 $db = new Database();
 $pdo = $db->getConnection();
 
+/* ── Load localisation system ──────────────────────────────────────────────── */
+require_once '../../config/lang.php';
+
 /* Produits */
 $stmt = $pdo->query("SELECT COUNT(*) FROM produits");
 $totalProducts = $stmt->fetchColumn();

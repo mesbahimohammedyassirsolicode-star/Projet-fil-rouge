@@ -13,6 +13,9 @@ $pdo = $db->getConnection();
 
 $categoryModel = new Category($pdo);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 // Error handling for database operations
 $errors = [];
 

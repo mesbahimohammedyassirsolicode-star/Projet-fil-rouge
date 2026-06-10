@@ -10,6 +10,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $db = new Database();
 $pdo = $db->getConnection();
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

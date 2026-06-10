@@ -103,7 +103,7 @@ require_once '../includes/navbar.php';
                     <button type="submit" id="submit" name="submit">Se connecter</button>
                 </fieldset>
             </form>
-            <p class="auth-switch">Don't have an account? <a href="register.php">Sign Up</a></p>
+            <p class="auth-switch"><?= t('login_no_account') ?> <a href="register.php"><?= t('login_sign_up_link') ?></a></p>
         </section>
     </main>
 

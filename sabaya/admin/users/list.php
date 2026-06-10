@@ -15,6 +15,9 @@ $pdo = $db->getConnection();
 
 $userModel = new User($pdo);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 $users = $userModel->getAll();
 
 // Fetch database stats for cards
@@ -203,7 +206,7 @@ $totalOrders = $stmtOrders->fetchColumn();
                             <?php foreach ($users as $user): ?>
                                 <?php
                                 $roleClass = ($user['role'] === 'admin') ? 'role-badge--admin' : 'role-badge--client';
-                                $roleText = ($user['role'] === 'admin') ? 'Administrateur' : 'Client';
+                                $roleText = ($user['role'] === 'admin') ? t('admin_role_admin') : t('admin_role_client');
                                 ?>
                                 <tr>
                                     <td data-label="Utilisateur">

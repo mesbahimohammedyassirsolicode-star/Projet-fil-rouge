@@ -31,6 +31,9 @@ if (!$order) {
 
 $items = $orderModel->getOrderItems($id_commande);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 $statusClass = match($order['statuscmd']) {
     'En attente' => 'order-badge--pending',
     'Confirmée'  => 'order-badge--confirmed',

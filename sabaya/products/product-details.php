@@ -135,13 +135,13 @@ require_once '../includes/navbar.php';
 
                     <a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>" class="btn-outline pd-btn-wishlist" data-wishlist-pulse>
                         <i class="fa-regular fa-heart"></i>
-                        Ajouter à la wishlist
+                        <?= t('product_add_to_wishlist') ?>
                     </a>
                 </div>
 
                 <a href="../wishlist/wishlist.php" class="pd-wishlist-link">
                     <i class="fa-solid fa-arrow-right"></i>
-                    Voir la wishlist
+                    <?= t('product_view_wishlist') ?>
                 </a>
 
             </div>

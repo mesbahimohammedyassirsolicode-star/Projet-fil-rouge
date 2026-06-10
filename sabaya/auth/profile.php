@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once '../config/Database.php';
 require_once '../models/User.php';
+require_once '../config/lang.php';
 
 $db = new Database();
 $pdo = $db->getConnection();
@@ -34,32 +35,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telephone = trim($_POST['telephone'] ?? '');
 
     if (empty($nom)) {
-        $errors[] = 'Last name is required.';
+        $errors[] = t('profile_err_last_name_required');
     } elseif (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/u", $nom)) {
-        $errors[] = 'Last name must contain only letters.';
+        $errors[] = t('profile_err_last_name_letters');
     }
 
     if (empty($prenom)) {
-        $errors[] = 'First name is required.';
+        $errors[] = t('profile_err_first_name_required');
     } elseif (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/u", $prenom)) {
-        $errors[] = 'First name must contain only letters.';
+        $errors[] = t('profile_err_first_name_letters');
     }
 
     if (empty($email)) {
-        $errors[] = 'Email is required.';
+        $errors[] = t('profile_err_email_required');
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = 'Invalid email address.';
+        $errors[] = t('profile_err_email_invalid');
     } else {
         // Check if email is already used by another user
         $stmt = $pdo->prepare("SELECT id_client FROM client WHERE email = :email AND id_client != :id");
         $stmt->execute([':email' => $email, ':id' => $_SESSION['user_id']]);
         if ($stmt->fetch()) {
-            $errors[] = 'This email is already used by another account.';
+            $errors[] = t('profile_err_email_taken');
         }
     }
 
     if (!empty($telephone) && !preg_match("/^[0-9]+$/", $telephone)) {
-        $errors[] = 'Phone number must contain only digits.';
+        $errors[] = t('profile_err_phone_digits');
     }
 
     if (empty($errors)) {
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Refresh user data
         $user = $userModel->find($_SESSION['user_id']);
-        $success = 'Your profile has been updated successfully.';
+        $success = t('profile_success');
     }
 }
 
@@ -100,10 +101,10 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
     <main class="profile-page">
         <!-- Top Banner -->
     <div class="profile-banner reveal">
-            <h1 class="profile-banner__title">My Account</h1>
-            <p class="profile-banner__welcome">Welcome back, <span class="profile-banner__name"><?= $userName ?></span></p>
+            <h1 class="profile-banner__title"><?= t('profile_title') ?></h1>
+            <p class="profile-banner__welcome"><?= t('profile_welcome') ?> <span class="profile-banner__name"><?= $userName ?></span></p>
             <a href="logout.php" class="profile-banner__logout">
-                <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+                <i class="fas fa-sign-out-alt" aria-hidden="true"></i> <?= t('profile_logout') ?>
             </a>
         </div>
 
@@ -115,25 +116,25 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
                     <li class="profile-menu__item profile-menu__item--active">
                         <a href="#personal-info" class="profile-menu__link">
                             <i class="fas fa-user" aria-hidden="true"></i>
-                            <span>Personal Info</span>
+                            <span><?= t('profile_menu_personal_info') ?></span>
                         </a>
                     </li>
                     <li class="profile-menu__item">
                         <a href="<?= htmlspecialchars($baseUrl) ?>/products/cart.php" class="profile-menu__link">
                             <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-                            <span>Cart</span>
+                            <span><?= t('profile_menu_cart') ?></span>
                         </a>
                     </li>
                     <li class="profile-menu__item">
                         <a href="<?= htmlspecialchars($baseUrl) ?>/wishlist/wishlist.php" class="profile-menu__link">
                             <i class="fas fa-heart" aria-hidden="true"></i>
-                            <span>Wishlist</span>
+                            <span><?= t('profile_menu_wishlist') ?></span>
                         </a>
                     </li>
                     <li class="profile-menu__item">
                         <a href="<?= htmlspecialchars($baseUrl) ?>/products/my-orders.php" class="profile-menu__link">
                             <i class="fas fa-shopping-bag" aria-hidden="true"></i>
-                            <span>Order History</span>
+                            <span><?= t('profile_menu_orders') ?></span>
                         </a>
                     </li>
                 </ul>
@@ -141,7 +142,7 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
 
             <!-- RIGHT CONTENT -->
             <section class="profile-content reveal" id="personal-info">
-                <h2 class="profile-content__title">Edit Details</h2>
+                <h2 class="profile-content__title"><?= t('profile_edit_title') ?></h2>
 
                 <!-- Success message -->
                 <?php if ($success): ?>
@@ -175,7 +176,7 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
                         <!-- Editable Fields -->
                         <div class="profile-card__details">
                             <div class="profile-card__field">
-                                <label class="profile-card__label" for="nom">Last Name</label>
+                                <label class="profile-card__label" for="nom"><?= t('profile_last_name') ?></label>
                                 <input
                                     type="text"
                                     id="nom"
@@ -187,7 +188,7 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
                             </div>
 
                             <div class="profile-card__field">
-                                <label class="profile-card__label" for="prenom">First Name</label>
+                                <label class="profile-card__label" for="prenom"><?= t('profile_first_name') ?></label>
                                 <input
                                     type="text"
                                     id="prenom"
@@ -199,7 +200,7 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
                             </div>
 
                             <div class="profile-card__field">
-                                <label class="profile-card__label" for="email">Email</label>
+                                <label class="profile-card__label" for="email"><?= t('profile_email') ?></label>
                                 <input
                                     type="email"
                                     id="email"
@@ -211,14 +212,14 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
                             </div>
 
                             <div class="profile-card__field">
-                                <label class="profile-card__label" for="telephone">Phone</label>
+                                <label class="profile-card__label" for="telephone"><?= t('profile_phone') ?></label>
                                 <input
                                     type="tel"
                                     id="telephone"
                                     name="telephone"
                                     class="profile-card__input"
                                     value="<?= htmlspecialchars($user['telephone'] ?? '') ?>"
-                                    placeholder="e.g. 0612345678"
+                                    placeholder="<?= t('profile_phone_placeholder') ?>"
                                 >
                             </div>
                         </div>
@@ -227,10 +228,10 @@ $initials  = strtoupper(substr($user['nom'], 0, 1) . substr($user['prenom'], 0, 
                     <!-- Buttons -->
                     <div class="profile-actions reveal">
                         <button type="submit" class="profile-actions__btn profile-actions__btn--primary">
-                            <i class="fas fa-save" aria-hidden="true"></i> Save Changes
+                            <i class="fas fa-save" aria-hidden="true"></i> <?= t('profile_save_btn') ?>
                         </button>
                         <a href="logout.php" class="profile-actions__btn profile-actions__btn--secondary">
-                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i> <?= t('profile_logout') ?>
                         </a>
                     </div>
                 </form>

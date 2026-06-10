@@ -10,7 +10,12 @@ $productModel = new Product($pdo);
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: ../../auth/login.php');
     exit();
-}$errors = [];
+}
+
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
+$errors = [];
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = trim($_POST['nom']);
     $description = trim($_POST['description']);
@@ -161,8 +166,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
             <div class="header-title-block">
-                <h1>Ajouter un Produit</h1>
-                <p class="header-subtitle">Ajoutez un nouveau produit au catalogue Sabaya Luxury.</p>
+                <h1><?= t('admin_add_product_title') ?></h1>
+                <p class="header-subtitle"><?= t('admin_add_product_subtitle') ?></p>
             </div>
             <div class="header-user" style="margin-left: auto;">
                 <span class="user-greeting">Bonjour, <?= htmlspecialchars(isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Admin') ?></span>
@@ -189,16 +194,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                         <!-- LEFT COLUMN: Informations Produit -->
                         <fieldset class="form-card">
-                            <legend>Informations Produit</legend>
+                            <legend><?= t('admin_product_info') ?></legend>
                             
                             <div class="form-group">
-                                <label for="nom">Nom du produit</label>
+                                <label for="nom"><?= t('admin_product_name_label') ?></label>
                                 <input type="text" id="nom" name="nom" required placeholder="Ex: Coffret Royal Oud" value="<?= isset($_POST['nom']) ? htmlspecialchars($_POST['nom']) : '' ?>">
                             </div>
 
                             <div class="form-row-2">
                                 <div class="form-group">
-                                    <label for="categorie">Catégorie</label>
+                                    <label for="categorie"><?= t('admin_product_category') ?></label>
                                     <select id="categorie" name="categorie" required>
                                         <?php
                                         $sql = "SELECT * FROM categorie";
@@ -212,24 +217,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="prix">Prix (DH)</label>
+                                    <label for="prix"><?= t('admin_product_price') ?></label>
                                     <input type="number" id="prix" name="prix" step="0.01" min="0.01" required placeholder="0.00" value="<?= isset($_POST['prix']) ? htmlspecialchars($_POST['prix']) : '' ?>">
                                 </div>
                             </div>
 
                             <div class="form-row-3">
                                 <div class="form-group">
-                                    <label for="stock">Stock</label>
+                                    <label for="stock"><?= t('admin_product_stock') ?></label>
                                     <input type="number" id="stock" name="stock" step="1" min="0" required placeholder="0" value="<?= isset($_POST['stock']) ? htmlspecialchars($_POST['stock']) : '' ?>">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="taille">Taille</label>
+                                    <label for="taille"><?= t('admin_product_size') ?></label>
                                     <input type="text" id="taille" name="taille" required placeholder="Ex: 100ml / Unique" value="<?= isset($_POST['taille']) ? htmlspecialchars($_POST['taille']) : '' ?>">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="couleur">Couleur</label>
+                                    <label for="couleur"><?= t('admin_product_color') ?></label>
                                     <input type="text" id="couleur" name="couleur" required placeholder="Ex: Or / Noir" value="<?= isset($_POST['couleur']) ? htmlspecialchars($_POST['couleur']) : '' ?>">
                                 </div>
                             </div>
@@ -237,26 +242,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <!-- RIGHT COLUMN: Média Produit -->
                         <fieldset class="form-card media-card">
-                            <legend>Média Produit</legend>
+                            <legend><?= t('admin_product_media') ?></legend>
                             
                             <div class="form-group">
-                                <label for="image">Image produit</label>
+                                <label for="image"><?= t('admin_product_name_label') ?></label>
                                 <div class="file-upload-wrapper">
                                     <div class="file-upload-dropzone" id="dropzone">
                                         <svg class="upload-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                        <p class="upload-text">Glissez-déposez ou cliquez pour ajouter une image</p>
-                                        <p class="upload-tip">Formats acceptés: PNG, JPG, JPEG (Max. 5Mo)</p>
+                                        <p class="upload-text"><?= t('admin_upload_text') ?></p>
+                                        <p class="upload-tip"><?= t('admin_upload_tip') ?></p>
                                         <input type="file" id="image" name="image" required accept="image/*">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="image-preview-wrapper" id="preview-container">
-                                <label>Aperçu de l'image</label>
+                                <label><?= t('admin_preview_label') ?></label>
                                 <div class="image-preview-container">
                                     <img id="image-preview" src="#" alt="Aperçu de l'image du produit" class="image-preview hidden">
                                     <div id="image-placeholder" class="image-placeholder">
-                                        <span>Aucune image sélectionnée</span>
+                                        <span><?= t('admin_no_image_selected') ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -265,17 +270,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <!-- Description Section (Full width card) -->
                     <fieldset class="form-card description-card">
-                        <legend>Description du produit</legend>
+                        <legend><?= t('admin_product_description') ?></legend>
                         <div class="form-group">
-                            <label for="description" class="sr-only">Description du produit</label>
+                            <label for="description" class="sr-only"><?= t('admin_product_description') ?></label>
                             <textarea id="description" name="description" required placeholder="Rédigez une description détaillée et raffinée de cette création..."><?= isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '' ?></textarea>
                         </div>
                     </fieldset>
 
                     <!-- Actions (Buttons) -->
                     <div class="form-actions">
-                        <a href="list.php" class="btn-secondary">Retour à la liste</a>
-                        <button type="submit" class="btn-primary">Ajouter Produit</button>
+                        <a href="list.php" class="btn-secondary"><?= t('admin_back_to_list') ?></a>
+                        <button type="submit" class="btn-primary"><?= t('admin_add_product_submit') ?></button>
                     </div>
                 </form>
             </section>

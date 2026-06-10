@@ -32,8 +32,11 @@ if (!$user) {
 $orderCount = $userModel->getOrderCount($id);
 $orders = $userModel->getUserOrders($id);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 $roleClass = ($user['role'] === 'admin') ? 'role-badge--admin' : 'role-badge--client';
-$roleText = ($user['role'] === 'admin') ? 'Administrateur' : 'Client';
+$roleText = ($user['role'] === 'admin') ? t('admin_role_admin') : t('admin_role_client');
 
 ?>
 <!DOCTYPE html>

@@ -15,6 +15,9 @@ $pdo = $db->getConnection();
 
 $contactModel = new Contact($pdo);
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../../config/lang.php';
+
 $messages = $contactModel->getAll();
 
 // Fetch database stats for cards

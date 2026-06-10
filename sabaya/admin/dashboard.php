@@ -17,6 +17,9 @@ if ($_SESSION['role'] !== 'admin') {
 $db = new Database();
 $pdo = $db->getConnection();
 
+// ── Load localisation system ──────────────────────────────────────────────
+require_once '../config/lang.php';
+
 /* ── Statistics Counts ──────────────────────────── */
 $stmt = $pdo->query("SELECT COUNT(*) FROM produits");
 $totalProducts = $stmt->fetchColumn();
@@ -149,8 +152,8 @@ foreach ($monthlyData as $row) {
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <div class="header-title-block">
-            <h1>Overview</h1>
-            <p class="header-subtitle">Bienvenue dans votre espace d'administration.</p>
+            <h1><?= t('admin_overview_title') ?></h1>
+            <p class="header-subtitle"><?= t('admin_overview_subtitle') ?></p>
         </div>
         <div class="header-search">
             <label for="adminSearch" class="sr-only">Rechercher</label>
