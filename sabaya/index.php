@@ -29,15 +29,21 @@ require_once 'includes/navbar.php';
 <main>
 <section class="hero reveal">
 
-    <div class="container">
+    <div class="hero-bg"></div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
 
         <span class="hero-subtitle">
             SABAYA LUXURY
         </span>
 
         <h1>
-            The Art of Modesty
+            The Art of<br>Modesty
         </h1>
+
+        <div class="hero-line"></div>
 
         <p>
             Découvrez des collections d'abayas raffinées,
@@ -45,9 +51,14 @@ require_once 'includes/navbar.php';
             élégance, confort et distinction.
         </p>
 
-        <a href="products/products.php" class="btn">
-            Explorer la collection
-        </a>
+        <div class="hero-actions">
+            <a href="products/products.php" class="btn">
+                Explorer la collection
+            </a>
+            <a href="about.php" class="btn-outline btn-outline--light">
+                Notre histoire
+            </a>
+        </div>
 
     </div>
 

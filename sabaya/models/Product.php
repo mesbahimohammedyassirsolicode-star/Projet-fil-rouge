@@ -154,10 +154,12 @@ class Product
 }
 public function getByCategory($id_categorie)
 {
-    $sql = "SELECT *
+    $sql = "SELECT produits.*, categorie.nom AS categorie_nom
             FROM produits
-            WHERE id_categorie = :id_categorie
-            ORDER BY id_produit DESC";
+            INNER JOIN categorie
+            ON produits.id_categorie = categorie.id_categorie
+            WHERE produits.id_categorie = :id_categorie
+            ORDER BY produits.id_produit DESC";
 
     $stmt = $this->pdo->prepare($sql);
 

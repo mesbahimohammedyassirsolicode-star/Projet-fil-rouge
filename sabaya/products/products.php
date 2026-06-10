@@ -2,13 +2,28 @@
 
 require_once '../config/Database.php';
 require_once '../models/Product.php';
+require_once '../models/Category.php';
 
 $db = new Database();
 $pdo = $db->getConnection();
 
 $productModel = new Product($pdo);
+$categoryModel = new Category($pdo);
 
-$products = $productModel->getAll();
+// Fetch all categories for the filter bar
+$categories = $categoryModel->getAll();
+
+// Handle category filter via GET parameter
+$currentCategoryId = null;
+$currentPageUrl = 'products.php';
+
+if (!empty($_GET['categorie'])) {
+    $currentCategoryId = (int) $_GET['categorie'];
+    $products = $productModel->getByCategory($currentCategoryId);
+    $currentPageUrl = 'products.php?categorie=' . $currentCategoryId;
+} else {
+    $products = $productModel->getAll();
+}
 
 // Page metadata for header.php
 $pageTitle = 'Boutique Abayas | Collection Mode Modeste — Sabaya Luxury';
@@ -71,6 +86,25 @@ require_once '../includes/navbar.php';
             placeholder="Rechercher dans la collection..."
         >
     </form>
+</section>
+
+<section class="collection-filters reveal">
+    <nav class="category-filters" aria-label="Filtrer par catégorie">
+        <a
+            href="products.php"
+            class="category-filter-btn<?= $currentCategoryId === null ? ' category-filter-btn--active' : '' ?>"
+        >
+            Tous
+        </a>
+        <?php foreach ($categories as $cat): ?>
+            <a
+                href="products.php?categorie=<?= (int) $cat['id_categorie'] ?>"
+                class="category-filter-btn<?= $currentCategoryId === (int) $cat['id_categorie'] ? ' category-filter-btn--active' : '' ?>"
+            >
+                <?= htmlspecialchars($cat['nom']) ?>
+            </a>
+        <?php endforeach; ?>
+    </nav>
 </section>
 
 <section class="collection-products reveal">
