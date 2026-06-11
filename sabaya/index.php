@@ -18,7 +18,7 @@ $newArrivals = array_slice($products, 0, 8);
 // Page metadata for header.php
 $pageTitle = 'Sabaya Luxury | Abayas Modernes & Mode Modeste au Maroc';
 $pageDescription = 'Sabaya Luxury - Boutique en ligne d\'abayas modernes et élégantes au Maroc. Découvrez nos collections de mode modeste, abayas premium, et vêtements raffinés pour femmes.';
-$pageKeywords = 'abaya, abayas, mode modeste, hijab, vêtements femmes, Maroc, Casablanca, Sabaya, luxury, abaya moderne, abaya élégante';
+$pageKeywords = 'abaya, abayas, mode modeste, hijab, vêtements femmes, Maroc, Tangier, Sabaya, luxury, abaya moderne, abaya élégante';
 // $pageImage will use the default logo from header.php
 
 require_once 'includes/header.php';
