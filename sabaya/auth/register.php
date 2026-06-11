@@ -1,6 +1,7 @@
 <?php
 // start session
     session_start();
+require_once '../config/lang.php';
 require_once '../config/Database.php';
 
 $db = new Database();
@@ -52,6 +53,8 @@ if (empty($password)) {
         // check if the phone number is valid
         if (!preg_match("/^[0-9]*$/", $phone)) {
             $error[] = t('register_phone_digits');
+        } elseif (strlen($phone) < 10 || strlen($phone) > 14) {
+            $error[] = t('register_phone_length');
         }
            //check if email is valid
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -89,8 +92,6 @@ if (empty($password)) {
             exit();
         }
     }
-
-require_once '../config/lang.php';
 
 $pageTitle = t('register_title') . ' | ' . t('site_name');
 $pageDescription = 'Créez votre compte Sabaya Luxury et découvrez nos collections d\'abayas modernes et élégantes.';
@@ -131,7 +132,7 @@ require_once '../includes/navbar.php';
                     </p>
                     <p>
                         <label for="phone"><?= t('register_phone') ?></label>
-                        <input type="tel" id="phone" name="phone">
+                        <input type="tel" id="phone" name="phone" minlength="10" maxlength="14" pattern="[0-9]*" inputmode="numeric">
                     </p>
                     <p>
                         <label for="email"><?= t('register_email') ?></label>

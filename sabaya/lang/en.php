@@ -198,6 +198,7 @@ $lang = [
     'register_email_taken'      => 'This email is already in use',
     'register_password_length'  => 'Password must be at least 8 characters long',
     'register_phone_digits'     => 'Phone must contain only digits',
+    'register_phone_length'     => 'Phone number must be between 10 and 14 digits',
     'register_lastname_letters' => 'Last name must contain only letters',
     'register_firstname_letters'=> 'First name must contain only letters',
     'register_success'          => 'Account created successfully. You can now log in.',
