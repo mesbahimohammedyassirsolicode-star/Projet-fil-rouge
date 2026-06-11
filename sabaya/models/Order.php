@@ -28,31 +28,28 @@ class Order
         return $this->pdo->lastInsertId();
     }
 
-    public function createOrder($id_client, $total, $id_adresse)
+    public function createOrder($id_client, $total)
     {
         $sql = "INSERT INTO commande
                 (
                     datecmd,
                     statuscmd,
                     total,
-                    id_client,
-                    id_adresse
+                    id_client
                 )
                 VALUES
                 (
                     NOW(),
                     'En attente',
                     :total,
-                    :id_client,
-                    :id_adresse
+                    :id_client
                 )";
 
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->execute([
-            ':total'      => $total,
-            ':id_client'  => $id_client,
-            ':id_adresse' => $id_adresse
+            ':total'     => $total,
+            ':id_client' => $id_client
         ]);
 
         return $this->pdo->lastInsertId();

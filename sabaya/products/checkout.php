@@ -90,11 +90,10 @@ if (empty($errors)) {
             throw new Exception("Impossible de créer l'adresse de livraison.");
         }
 
-        // ── 2. Create the order (with the valid id_adresse) ─────────────────
+        // ── 2. Create the order ───────────────────────────────────────────
         $id_commande = $orderModel->createOrder(
             $id_client,
-            $total,
-            $id_adresse
+            $total
         );
 
         if (!$id_commande) {
