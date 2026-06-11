@@ -1,8 +1,6 @@
 <?php
-require_once '../config/lang.php';
-
 session_start();
-
+require_once '../config/lang.php';
 require_once '../config/Database.php';
 
 $error = [];
