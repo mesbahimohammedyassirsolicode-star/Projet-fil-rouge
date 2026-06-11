@@ -18,9 +18,11 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
 
 }
 
+require_once '../config/lang.php';
+
 // Page metadata for header.php
 $searchQuery = htmlspecialchars($_GET['q'] ?? '');
-$pageTitle = 'Recherche' . (!empty($searchQuery) ? ' : ' . $searchQuery : '') . ' | Sabaya Luxury';
+$pageTitle = t('search_title') . (!empty($searchQuery) ? ' : ' . $searchQuery : '') . ' | ' . t('site_name');
 $pageDescription = !empty($searchQuery) ? 'Résultats de recherche pour « ' . $searchQuery . ' » sur Sabaya Luxury.' : 'Recherchez des abayas et vêtements sur Sabaya Luxury.';
 $pageRobots = 'noindex, follow';
 
@@ -76,31 +78,31 @@ require_once '../includes/navbar.php';
 
 <section class="search-hero reveal">
     <div class="search-hero__inner">
-        <span class="search-hero__label">Sabaya Luxury</span>
-        <h1 class="search-hero__title">Recherche de Produits</h1>
+        <span class="search-hero__label"><?= t('site_name') ?></span>
+        <h1 class="search-hero__title"><?= t('search_title') ?></h1>
         <div class="search-hero__line" aria-hidden="true"></div>
-        <p class="search-hero__subtitle">Trouvez facilement les produits qui correspondent à votre style.</p>
+        <p class="search-hero__subtitle"><?= t('search_subtitle') ?></p>
     </div>
 </section>
 
 <section class="search-form-section reveal">
-    <form method="GET" role="search" aria-label="Recherche de produits" class="search-form">
-        <label for="search-input" class="sr-only">Rechercher un produit</label>
+    <form method="GET" role="search" aria-label="<?= t('search_title') ?>" class="search-form">
+        <label for="search-input" class="sr-only"><?= t('search_sr_label') ?></label>
         <div class="search-form__field">
             <i class="fa-solid fa-magnifying-glass search-form__icon" aria-hidden="true"></i>
             <input
                 type="search"
                 id="search-input"
                 name="q"
-                placeholder="Rechercher un produit..."
+                placeholder="<?= t('search_placeholder') ?>"
                 value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
                 autocomplete="off"
                 aria-describedby="search-hint"
             >
         </div>
-        <p id="search-hint" class="sr-only">Saisissez un mot-clé pour rechercher des abayas ou vêtements.</p>
+        <p id="search-hint" class="sr-only"><?= t('search_label_hint') ?></p>
         <button type="submit" class="search-form__btn">
-            Rechercher
+            <?= t('search_btn') ?>
         </button>
     </form>
 </section>
@@ -110,11 +112,11 @@ require_once '../includes/navbar.php';
     <?php if (isset($_GET['q'])): ?>
 
     <header class="search-results__header reveal">
-            <h2 class="search-results__title">Résultats de recherche</h2>
+            <h2 class="search-results__title"><?= t('search_results_title') ?></h2>
             <p class="search-results__count">
-                <strong><?= count($products) ?></strong> produit<?= count($products) > 1 ? 's' : '' ?> trouvé<?= count($products) > 1 ? 's' : '' ?>
+                <strong><?= count($products) ?></strong> <?= t('search_results_count') ?>
                 <?php if (!empty($searchQuery)): ?>
-                    pour «&nbsp;<span class="search-results__keyword"><?= $searchQuery ?></span>&nbsp;»
+                    <?= t('admin_products_results_text') ?>&nbsp;<span class="search-results__keyword"><?= $searchQuery ?></span>
                 <?php endif; ?>
             </p>
         </header>
@@ -142,10 +144,10 @@ require_once '../includes/navbar.php';
                                     class="product-card-overlay-btn product-card-overlay-btn--primary"
                                     href="product-details.php?id=<?= $product['id_produit'] ?>"
                                     tabindex="-1"
-                                    aria-label="Voir les détails de <?= htmlspecialchars($product['nom']) ?>"
+                                    aria-label="<?= t('products_view_details_btn') . ' ' . htmlspecialchars($product['nom']) ?>"
                                 >
                                     <i class="fa-solid fa-eye" aria-hidden="true"></i>
-                                    Voir Détails
+                                    <?= t('products_view_details_btn') ?>
                                 </a>
                             </div>
                         </div>
@@ -153,7 +155,7 @@ require_once '../includes/navbar.php';
 
                     <div class="product-card-body">
 
-                        <span class="product-card-brand">SABAYA</span>
+                        <span class="product-card-brand"><?= t('products_brand') ?></span>
 
                         <h3 class="product-card-name">
                             <?= htmlspecialchars($product['nom']) ?>
@@ -167,7 +169,7 @@ require_once '../includes/navbar.php';
                             class="product-card-btn"
                             href="product-details.php?id=<?= $product['id_produit'] ?>"
                         >
-                            Voir détails
+                            <?= t('products_view_details') ?>
                         </a>
 
                     </div>
@@ -182,9 +184,9 @@ require_once '../includes/navbar.php';
 
         <div class="search-empty">
             <i class="fa-solid fa-magnifying-glass search-empty__icon" aria-hidden="true"></i>
-            <p class="search-empty__title">Aucun produit trouvé.</p>
-            <p class="search-empty__text">Essayez avec d'autres mots-clés ou explorez notre collection.</p>
-            <a href="products.php" class="btn btn-outline search-empty__btn">Retour à la boutique</a>
+            <p class="search-empty__title"><?= t('search_empty_title') ?></p>
+            <p class="search-empty__text"><?= t('search_empty_text') ?></p>
+            <a href="products.php" class="btn btn-outline search-empty__btn"><?= t('search_back_to_store') ?></a>
         </div>
 
     <?php endif; ?>

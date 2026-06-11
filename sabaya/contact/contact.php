@@ -20,25 +20,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = trim($_POST['message']);
 
     if (empty($nom)) {
-        $errors[] = "Le nom est obligatoire";
+        $errors[] = t('contact_err_name_required');
     }
 
     if (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/u", $nom)) {
-        $errors[] = "Le nom doit contenir uniquement des lettres";
+        $errors[] = t('contact_err_name_invalid');
     }
 
     if (empty($email)) {
-        $errors[] = "L'email est obligatoire";
+        $errors[] = t('contact_err_email_required');
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Adresse email invalide";
+        $errors[] = t('contact_err_email_invalid');
     }
 
     if (empty($sujet)) {
-        $errors[] = "Le sujet est obligatoire";
+        $errors[] = t('contact_err_subject_required');
     }
 
     if (empty($message)) {
-        $errors[] = "Le message est obligatoire";
+        $errors[] = t('contact_err_message_required');
     }
 
     if (empty($errors)) {
@@ -54,9 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 <?php
+require_once '../config/lang.php';
+
 // Page metadata for header.php
-$pageTitle = 'Contactez-nous | Sabaya Luxury — Boutique Abayas Maroc';
-$pageDescription = 'Contactez Sabaya Luxury — boutique d\'abayas modernes au Maroc. Service client, conseils collections et informations sur nos abayas premium.';
+$pageTitle = t('contact_page_title');
+$pageDescription = "Contactez Sabaya Luxury — boutique d'abayas modernes au Maroc. Service client, conseils collections et informations sur nos abayas premium.";
 $pageKeywords = 'contact Sabaya, service client, abaya Maroc, boutique en ligne, Casablanca, support mode modeste';
 
 // Build page-specific JSON-LD for ContactPage
@@ -107,10 +109,10 @@ require_once '../includes/navbar.php';
         <!-- Hero Section -->
     <section class="contact-hero reveal" aria-labelledby="contact-heading">
             <div class="contact-hero__inner">
-                <span class="contact-hero__label">Service Client</span>
-                <h1 id="contact-heading" class="contact-hero__title">Contactez Sabaya Luxury</h1>
+                <span class="contact-hero__label"><?= t('contact_hero_label') ?></span>
+                <h1 id="contact-heading" class="contact-hero__title"><?= t('contact_hero_title') ?></h1>
                 <div class="contact-hero__line" aria-hidden="true"></div>
-                <p class="contact-hero__subtitle">Une question sur nos collections, une commande en cours ou un conseil personnalisé ? Notre équipe est à votre écoute pour vous offrir une expérience à la hauteur de vos attentes.</p>
+                <p class="contact-hero__subtitle"><?= t('contact_hero_subtitle') ?></p>
             </div>
         </section>
 
@@ -122,7 +124,7 @@ require_once '../includes/navbar.php';
                 <?php if (isset($_GET['success'])): ?>
                     <div class="contact-alert contact-alert--success" role="alert">
                         <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                        <p>Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.</p>
+                        <p><?= t('contact_success_message') ?></p>
                     </div>
                 <?php endif; ?>
 
@@ -141,9 +143,9 @@ require_once '../includes/navbar.php';
 
                     <!-- LEFT: Contact Information -->
                     <article class="contact-info reveal">
-                        <h2 id="contact-info-heading" class="contact-info__title">Nos Coordonnées</h2>
+                        <h2 id="contact-info-heading" class="contact-info__title"><?= t('contact_info_title') ?></h2>
                         <div class="contact-info__line" aria-hidden="true"></div>
-                        <p class="contact-info__intro">N'hésitez pas à nous contacter par le moyen qui vous convient le mieux. Nous sommes disponibles pour répondre à toutes vos questions.</p>
+                        <p class="contact-info__intro"><?= t('contact_info_intro') ?></p>
 
                         <address class="contact-info__list">
                             <div class="contact-info__item">
@@ -151,7 +153,7 @@ require_once '../includes/navbar.php';
                                     <i class="fa-solid fa-envelope"></i>
                                 </div>
                                 <div class="contact-info__text">
-                                    <span class="contact-info__label">Email</span>
+                                    <span class="contact-info__label"><?= t('contact_label_email') ?></span>
                                     <a href="mailto:contact@sabaya.ma" class="contact-info__value">contact@sabaya.ma</a>
                                 </div>
                             </div>
@@ -161,7 +163,7 @@ require_once '../includes/navbar.php';
                                     <i class="fa-solid fa-phone"></i>
                                 </div>
                                 <div class="contact-info__text">
-                                    <span class="contact-info__label">Téléphone</span>
+                                    <span class="contact-info__label"><?= t('contact_label_phone') ?></span>
                                     <a href="tel:+212522000000" class="contact-info__value">+212 5 22 00 00 00</a>
                                 </div>
                             </div>
@@ -171,7 +173,7 @@ require_once '../includes/navbar.php';
                                     <i class="fa-solid fa-location-dot"></i>
                                 </div>
                                 <div class="contact-info__text">
-                                    <span class="contact-info__label">Adresse</span>
+                                    <span class="contact-info__label"><?= t('contact_label_address') ?></span>
                                     <span class="contact-info__value">Boulevard Mohammed V<br>Casablanca, Maroc</span>
                                 </div>
                             </div>
@@ -181,8 +183,8 @@ require_once '../includes/navbar.php';
                                     <i class="fa-solid fa-clock"></i>
                                 </div>
                                 <div class="contact-info__text">
-                                    <span class="contact-info__label">Heures d'ouverture</span>
-                                    <span class="contact-info__value">Lun – Sam : 09h00 – 19h00<br>Dimanche : Fermé</span>
+                                    <span class="contact-info__label"><?= t('contact_label_hours') ?></span>
+                                    <span class="contact-info__value"><?= t('contact_hours_value') ?></span>
                                 </div>
                             </div>
                         </address>
@@ -190,19 +192,19 @@ require_once '../includes/navbar.php';
 
                     <!-- RIGHT: Contact Form -->
                     <article class="contact-form-wrapper reveal">
-                        <h2 class="contact-form__title">Envoyez-nous un message</h2>
+                        <h2 class="contact-form__title"><?= t('contact_form_title') ?></h2>
                         <div class="contact-form__line" aria-hidden="true"></div>
 
                         <form action="contact.php" method="POST" class="contact-form" novalidate>
                             <div class="contact-form__group">
                                 <label for="nom" class="contact-form__label">
-                                    Nom <span class="contact-form__required" aria-label="obligatoire">*</span>
+                                    <?= t('contact_form_name') ?> <span class="contact-form__required" aria-label="<?= t('contact_required') ?>">*</span>
                                 </label>
                                 <input
                                     type="text"
                                     id="nom"
                                     name="nom"
-                                    placeholder="Votre nom complet"
+                                    placeholder="<?= t('contact_form_name_placeholder') ?>"
                                     required
                                     aria-required="true"
                                     autocomplete="name"
@@ -212,13 +214,13 @@ require_once '../includes/navbar.php';
 
                             <div class="contact-form__group">
                                 <label for="email" class="contact-form__label">
-                                    Email <span class="contact-form__required" aria-label="obligatoire">*</span>
+                                    <?= t('contact_form_email') ?> <span class="contact-form__required" aria-label="<?= t('contact_required') ?>">*</span>
                                 </label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
-                                    placeholder="votre@email.com"
+                                    placeholder="<?= t('contact_form_email_placeholder') ?>"
                                     required
                                     aria-required="true"
                                     autocomplete="email"
@@ -228,13 +230,13 @@ require_once '../includes/navbar.php';
 
                             <div class="contact-form__group">
                                 <label for="sujet" class="contact-form__label">
-                                    Sujet <span class="contact-form__required" aria-label="obligatoire">*</span>
+                                    <?= t('contact_form_subject') ?> <span class="contact-form__required" aria-label="<?= t('contact_required') ?>">*</span>
                                 </label>
                                 <input
                                     type="text"
                                     id="sujet"
                                     name="sujet"
-                                    placeholder="Sujet de votre message"
+                                    placeholder="<?= t('contact_form_subject_placeholder') ?>"
                                     required
                                     aria-required="true"
                                     value="<?= isset($_POST['sujet']) ? htmlspecialchars($_POST['sujet']) : '' ?>"
@@ -243,13 +245,13 @@ require_once '../includes/navbar.php';
 
                             <div class="contact-form__group">
                                 <label for="message" class="contact-form__label">
-                                    Message <span class="contact-form__required" aria-label="obligatoire">*</span>
+                                    <?= t('contact_form_message') ?> <span class="contact-form__required" aria-label="<?= t('contact_required') ?>">*</span>
                                 </label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     rows="6"
-                                    placeholder="Décrivez votre demande en détail..."
+                                    placeholder="<?= t('contact_form_message_placeholder') ?>"
                                     required
                                     aria-required="true"
                                 ><?= isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '' ?></textarea>
@@ -257,7 +259,7 @@ require_once '../includes/navbar.php';
 
                             <button type="submit" class="btn contact-form__btn">
                                 <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-                                Envoyer le message
+                                <?= t('contact_form_submit') ?>
                             </button>
                         </form>
                     </article>

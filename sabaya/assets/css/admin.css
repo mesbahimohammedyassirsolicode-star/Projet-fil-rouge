@@ -1543,16 +1543,16 @@ body:not(.admin-dashboard) section article p {
     color: var(--clr-dark);
     padding: 0 8px;
     margin-bottom: 20px;
-    display: inline-block;
-    float: left;
+    display: block;
+    float: none;
     width: 100%;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 4px;
+    margin-bottom: 12px;
     width: 100%;
 }
 

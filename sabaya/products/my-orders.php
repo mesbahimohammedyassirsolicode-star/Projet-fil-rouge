@@ -19,8 +19,10 @@ $orders = $orderModel->getUserOrders(
     $_SESSION['user_id']
 );
 
-$pageTitle = 'Mes Commandes | Sabaya Luxury';
-$pageDescription = 'Consultez l\'historique de vos commandes sur Sabaya Luxury.';
+require_once '../config/lang.php';
+
+$pageTitle = t('my_orders_title') . ' | ' . t('site_name');
+$pageDescription = "Consultez l'historique de vos commandes sur Sabaya Luxury.";
 $pageRobots = 'noindex, nofollow';
 
 require_once '../includes/header.php';
@@ -33,18 +35,18 @@ require_once '../includes/navbar.php';
 
         <!-- Page Header -->
         <header class="orders-header reveal">
-            <span class="orders-header-label">Votre Historique</span>
-            <h1 class="orders-title">Mes Commandes</h1>
-            <p class="orders-subtitle">Retrouvez l'ensemble de vos commandes passées sur Sabaya Luxury</p>
+            <span class="orders-header-label"><?= t('my_orders_history_label') ?></span>
+            <h1 class="orders-title"><?= t('my_orders_title') ?></h1>
+            <p class="orders-subtitle"><?= t('my_orders_subtitle') ?></p>
         </header>
 
         <!-- Orders List -->
         <?php if (empty($orders)): ?>
             <div class="orders-empty">
                 <i class="fas fa-box-open orders-empty-icon"></i>
-                <h2 class="orders-empty-title">Aucune commande</h2>
-                <p class="orders-empty-text">Vous n'avez pas encore passé de commande.</p>
-                <a href="products.php" class="btn btn-orders-empty">Découvrir la Collection</a>
+                <h2 class="orders-empty-title"><?= t('my_orders_empty_title') ?></h2>
+                <p class="orders-empty-text"><?= t('my_orders_empty_text') ?></p>
+                <a href="products.php" class="btn btn-orders-empty"><?= t('my_orders_discover_btn') ?></a>
             </div>
             <?php else: ?>
             <div class="orders-list reveal">
@@ -62,7 +64,7 @@ require_once '../includes/navbar.php';
                         <!-- Left: Order Info -->
                         <div class="order-card-info">
                             <div class="order-card-meta">
-                                <span class="order-card-label">Commande</span>
+                                <span class="order-card-label"><?= t('my_orders_order_label') ?></span>
                                 <span class="order-card-id">#<?= htmlspecialchars($order['id_commande']) ?></span>
                             </div>
                             <div class="order-card-date">
@@ -73,15 +75,15 @@ require_once '../includes/navbar.php';
 
                         <!-- Center: Total -->
                         <div class="order-card-total">
-                            <span class="order-card-total-label">Total</span>
+                            <span class="order-card-total-label"><?= t('my_orders_total') ?></span>
                             <span class="order-card-total-value"><?= number_format((float)$order['total'], 2, ',', ' ') ?> <span class="order-card-currency">DH</span></span>
                         </div>
 
                         <!-- Right: Status + Action -->
                         <div class="order-card-actions">
                             <span class="orders-badge <?= $badgeClass ?>"><?= $status ?></span>
-                            <a href="#" class="btn-outline btn-orders-details" aria-label="Voir les détails de la commande #<?= htmlspecialchars($order['id_commande']) ?>">
-                                Voir Détails
+                            <a href="#" class="btn-outline btn-orders-details" aria-label="<?= t('my_orders_view_details') ?> #<?= htmlspecialchars($order['id_commande']) ?>">
+                                <?= t('my_orders_view_details') ?>
                             </a>
                         </div>
 

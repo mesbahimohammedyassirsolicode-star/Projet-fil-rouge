@@ -36,7 +36,7 @@ require_once 'includes/navbar.php';
     <div class="hero-content">
 
         <span class="hero-subtitle">
-            SABAYA LUXURY
+            <?= t('home_hero_subtitle') ?>
         </span>
 
         <h1>
@@ -46,17 +46,15 @@ require_once 'includes/navbar.php';
         <div class="hero-line"></div>
 
         <p>
-            Découvrez des collections d'abayas raffinées,
-            conçues pour les femmes modernes qui recherchent
-            élégance, confort et distinction.
+            <?= t('home_hero_desc') ?>
         </p>
 
         <div class="hero-actions">
             <a href="products/products.php" class="btn">
-                Explorer la collection
+                <?= t('home_btn_collection') ?>
             </a>
             <a href="about.php" class="btn-outline btn-outline--light">
-                Notre histoire
+                <?= t('home_btn_story') ?>
             </a>
         </div>
 
@@ -95,7 +93,7 @@ require_once 'includes/navbar.php';
                         class="btn"
                         href="products/product-details.php?id=<?= $product['id_produit'] ?>"
                     >
-                        Voir détails
+                        <?= t('home_view_details') ?>
                     </a>
 
                 </div>

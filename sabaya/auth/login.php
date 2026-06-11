@@ -1,4 +1,5 @@
 <?php
+require_once '../config/lang.php';
 
 session_start();
 
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($email) || empty($password)) {
 
-        $error[] = "Tous les champs sont obligatoires";
+        $error[] = t('login_all_fields_required');
 
     } else {
 
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($user['role'] === 'admin') {
                 $_SESSION['_toast'] = [
-                    'message' => 'Bienvenue dans l\'espace administrateur.',
+                    'message' => t('login_welcome_admin'),
                     'type'    => 'success',
                 ];
                 header('Location: ../admin/dashboard.php');
@@ -48,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             } else {
                 $_SESSION['_toast'] = [
-                    'message' => 'Connexion réussie. Bienvenue, ' . htmlspecialchars($user['nom']) . ' !',
+                    'message' => t('login_welcome_user'),
                     'type'    => 'success',
                 ];
                 header('Location: ../index.php');
@@ -57,13 +58,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         } else {
 
-            $error[] = "Email ou mot de passe incorrect";
+            $error[] = t('login_invalid_credentials');
         }
        
     }
 
 }
-$pageTitle = 'Connexion | Sabaya Luxury';
+
+require_once '../config/lang.php';
+
+$pageTitle = t('login_page_title');
 $pageDescription = 'Connectez-vous à votre compte Sabaya Luxury pour accéder à vos commandes et votre liste de souhaits.';
 $pageRobots = 'noindex, nofollow';
 
@@ -82,7 +86,7 @@ require_once '../includes/navbar.php';
 
     <main>
         <section aria-label="Formulaire de connexion">
-            <h1>Connexion</h1>
+            <h1><?= t('login_title') ?></h1>
 
             <?php if (!empty($error)):
                 $toastMessage = implode(' ', $error);
@@ -91,16 +95,16 @@ require_once '../includes/navbar.php';
 
             <form action="login.php" method="post">
                 <fieldset>
-                    <legend>Identifiants de connexion</legend>
+                    <legend><?= t('login_legend') ?></legend>
                     <p>
-                        <label for="email">Email</label>
+                        <label for="email"><?= t('login_email') ?></label>
                         <input type="email" id="email" name="email">
                     </p>
                     <p>
-                        <label for="password">Mot de passe</label>
+                        <label for="password"><?= t('login_password') ?></label>
                         <input type="password" id="password" name="password">
                     </p>
-                    <button type="submit" id="submit" name="submit">Se connecter</button>
+                    <button type="submit" id="submit" name="submit"><?= t('login_submit') ?></button>
                 </fieldset>
             </form>
             <p class="auth-switch"><?= t('login_no_account') ?> <a href="register.php"><?= t('login_sign_up_link') ?></a></p>

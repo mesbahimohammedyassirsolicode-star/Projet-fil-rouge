@@ -22,13 +22,15 @@ if (!$product) {
     exit();
 }
 
+require_once '../config/lang.php';
+
 // Page metadata for header.php
 $productName = htmlspecialchars($product['nom']);
 $productDesc = htmlspecialchars($product['description']);
 $productPrice = htmlspecialchars($product['prix']);
-$pageTitle = $productName . ' | Sabaya Luxury — Abayas Modernes';
-$pageDescription = $productName . ' — ' . $productDesc . ' | Disponible sur Sabaya Luxury au Maroc.';
-$pageKeywords = $productName . ', abaya, mode modeste, Sabaya Luxury, Maroc';
+$pageTitle = $productName . ' | ' . t('product_page_title_suffix');
+$pageDescription = $productName . ' — ' . $productDesc . ' | ' . t('product_page_description_suffix');
+$pageKeywords = $productName . ', ' . t('product_page_keywords');
 $ogType = 'product';
 
 // Compute baseUrl (project root) before header.php so it's available for JSON-LD and pageImage
@@ -78,22 +80,22 @@ require_once '../includes/navbar.php';
     <main class="pd-wrapper">
 
         <!-- Breadcrumb -->
-        <nav class="pd-breadcrumb" aria-label="Fil d'Ariane">
-            <a href="../index.php">Accueil</a>
+        <nav class="pd-breadcrumb" aria-label="<?= t('breadcrumb_label') ?>">
+            <a href="../index.php"><?= t('product_breadcrumb_home') ?></a>
             <span class="pd-breadcrumb-sep">/</span>
-            <a href="products.php">Collection</a>
+            <a href="products.php"><?= t('product_breadcrumb_collection') ?></a>
             <span class="pd-breadcrumb-sep">/</span>
             <span class="pd-breadcrumb-current"><?= htmlspecialchars($product['nom']) ?></span>
         </nav>
 
-    <section class="pd-layout reveal" aria-label="Détails du produit">
+    <section class="pd-layout reveal" aria-label="<?= t('product_details_label') ?>">
 
             <!-- LEFT: Product Image -->
             <div class="pd-gallery reveal">
                 <div class="pd-gallery-main">
                     <img
                         src="../assets/images/products/<?= htmlspecialchars($product['image']) ?>"
-                        alt="<?= htmlspecialchars($product['nom']) ?> — Abaya <?= htmlspecialchars($product['couleur']) ?> taille <?= htmlspecialchars($product['taille']) ?>"
+                        alt="<?= htmlspecialchars($product['nom']) ?> — <?= t('product_alt_abaya') ?> <?= htmlspecialchars($product['couleur']) ?> <?= t('product_alt_size') ?> <?= htmlspecialchars($product['taille']) ?>"
                     >
                 </div>
             </div>
@@ -101,7 +103,7 @@ require_once '../includes/navbar.php';
             <!-- RIGHT: Product Information -->
             <div class="pd-info reveal">
 
-                <span class="pd-brand">Sabaya Luxury</span>
+                <span class="pd-brand"><?= t('site_name') ?></span>
 
                 <h1 class="pd-title"><?= htmlspecialchars($product['nom']) ?></h1>
 
@@ -116,11 +118,11 @@ require_once '../includes/navbar.php';
 
                 <div class="pd-specs">
                     <div class="pd-spec">
-                        <span class="pd-spec-label">Couleur</span>
+                                <span class="pd-spec-label"><?= t('product_color') ?></span>
                         <span class="pd-spec-value"><?= htmlspecialchars($product['couleur']) ?></span>
                     </div>
                     <div class="pd-spec">
-                        <span class="pd-spec-label">Taille</span>
+                                <span class="pd-spec-label"><?= t('product_size') ?></span>
                         <span class="pd-spec-value"><?= htmlspecialchars($product['taille']) ?></span>
                     </div>
                 </div>
@@ -130,7 +132,7 @@ require_once '../includes/navbar.php';
                 <div class="pd-actions">
                     <a href="add-cart.php?id=<?= $product['id_produit'] ?>" class="btn pd-btn-cart">
                         <i class="fa-solid fa-bag-shopping"></i>
-                        Ajouter au panier
+                        <?= t('product_add_to_cart') ?>
                     </a>
 
                     <a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>" class="btn-outline pd-btn-wishlist" data-wishlist-pulse>

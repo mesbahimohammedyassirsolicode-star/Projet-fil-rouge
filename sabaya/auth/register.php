@@ -19,47 +19,47 @@ $pdo = $db->getConnection();
         $confirme = htmlspecialchars($_POST['confirme']);
 // check if the fields are empty
        if (empty($nom)) {
-    $error[] = "Le nom est obligatoire";
+    $error[] = t('register_lastname_letters');
 }
 
 if (empty($prenom)) {
-    $error[] = "Le prénom est obligatoire";
+    $error[] = t('register_firstname_letters');
 }
 
 if (empty($email)) {
-    $error[] = "L'email est obligatoire";
+    $error[] = t('contact_err_email_required');
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $error[] = "Adresse email invalide";
+    $error[] = t('contact_err_email_invalid');
 }
 
 if (empty($phone)) {
-    $error[] = "Le téléphone est obligatoire";
+    $error[] = t('register_phone') . " est obligatoire";
 }
 
 if (empty($password)) {
-    $error[] = "Le mot de passe est obligatoire";
+    $error[] = t('register_password') . " est obligatoire";
 } elseif (strlen($password) < 8) {
-    $error[] = "Le mot de passe doit contenir au moins 8 caractères";
+    $error[] = t('register_password_length');
 }
 
 // check if the name and the prenom are valid
        if (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/u", $nom)) {
-    $error[] = "Le nom doit contenir uniquement des lettres";
+    $error[] = t('register_lastname_letters');
 }
         if (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/u", $prenom)) {
-            $error[] = "Le prenom doit contenir uniquement des lettres";
+            $error[] = t('register_firstname_letters');
         }
         // check if the phone number is valid
         if (!preg_match("/^[0-9]*$/", $phone)) {
-            $error[] = "Le telephone doit contenir uniquement des chiffres";
+            $error[] = t('register_phone_digits');
         }
            //check if email is valid
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $error[] = "Adresse email invalide";
+    $error[] = t('contact_err_email_invalid');
 }
 // check if the password is valid
         if($password != $confirme){
-            $error[] = "Les mots de passe ne correspondent pas";
+            $error[] = t('register_password_mismatch');
         }
         // check if the email is already in the database
         $sql = "SELECT * FROM client WHERE email = :email";
@@ -67,7 +67,7 @@ if (empty($password)) {
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch();
         if($user){
-            $error[] = "L'email est deja utilise";
+            $error[] = t('register_email_taken');
         }
         if(count($error) == 0){
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -82,7 +82,7 @@ if (empty($password)) {
                 ':password' => $hashedPassword
             ]);
             $_SESSION['_toast'] = [
-                'message' => 'Compte créé avec succès. Vous pouvez maintenant vous connecter.',
+                'message' => t('register_success'),
                 'type'    => 'success',
             ];
             header("Location:login.php"); 
@@ -90,7 +90,9 @@ if (empty($password)) {
         }
     }
 
-$pageTitle = 'Inscription | Sabaya Luxury';
+require_once '../config/lang.php';
+
+$pageTitle = t('register_title') . ' | ' . t('site_name');
 $pageDescription = 'Créez votre compte Sabaya Luxury et découvrez nos collections d\'abayas modernes et élégantes.';
 $pageRobots = 'noindex, nofollow';
 
@@ -109,7 +111,7 @@ require_once '../includes/navbar.php';
 
     <main>
         <section aria-label="Formulaire d'inscription">
-            <h1>Créer un compte</h1>
+            <h1><?= t('register_title') ?></h1>
 
             <?php if (!empty($error)):
                 $toastMessage = implode(' ', $error);
@@ -118,32 +120,32 @@ require_once '../includes/navbar.php';
 
             <form method="post">
                 <fieldset>
-                    <legend>Informations d'inscription</legend>
+                    <legend><?= t('register_legend') ?></legend>
                     <p>
-                        <label for="nom">Nom</label>
+                        <label for="nom"><?= t('register_nom') ?></label>
                         <input type="text" id="nom" name="nom">
                     </p>
                     <p>
-                        <label for="prenom">Prénom</label>
+                        <label for="prenom"><?= t('register_prenom') ?></label>
                         <input type="text" id="prenom" name="prenom">
                     </p>
                     <p>
-                        <label for="phone">Téléphone</label>
+                        <label for="phone"><?= t('register_phone') ?></label>
                         <input type="tel" id="phone" name="phone">
                     </p>
                     <p>
-                        <label for="email">Email</label>
+                        <label for="email"><?= t('register_email') ?></label>
                         <input type="email" id="email" name="email">
                     </p>
                     <p>
-                        <label for="password">Mot de passe</label>
+                        <label for="password"><?= t('register_password') ?></label>
                         <input type="password" id="password" name="password">
                     </p>
                     <p>
-                        <label for="confirme">Confirmer le mot de passe</label>
+                        <label for="confirme"><?= t('register_confirm') ?></label>
                         <input type="password" id="confirme" name="confirme">
                     </p>
-                    <button type="submit" id="submit" name="submit">S'inscrire</button>
+                    <button type="submit" id="submit" name="submit"><?= t('register_submit') ?></button>
                 </fieldset>
             </form>
             <p class="auth-switch"><?= t('register_have_account') ?> <a href="login.php"><?= t('register_login_link') ?></a></p>

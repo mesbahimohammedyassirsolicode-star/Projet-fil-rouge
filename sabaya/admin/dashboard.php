@@ -67,12 +67,12 @@ foreach ($monthlyData as $row) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+    <html lang="<?= t('lang_fr') === 'FR' ? 'fr' : 'en' ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Dashboard Admin | Sabaya Luxury</title>
+    <title><?= t('admin_dashboard_link') ?> | <?= t('site_name') ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -84,50 +84,50 @@ foreach ($monthlyData as $row) {
 <aside class="sidebar" id="sidebar" aria-label="Menu administration">
     <div class="sidebar-brand">
         <img src="../assets/images/logo/logo.png" alt="Sabaya Luxury" class="sidebar-logo">
-        <span class="sidebar-title">Sabaya Admin</span>
+        <span class="sidebar-title"><?= t('admin_sidebar_title') ?></span>
     </div>
     <nav aria-label="Navigation principale admin">
         <ul class="sidebar-nav">
             <li class="nav-item active">
                 <a href="dashboard.php" aria-current="page">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                    <span>Dashboard</span>
+                    <span><?= t('admin_dashboard_link') ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="products/list.php">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-                    <span>Produits</span>
+                    <span><?= t('admin_products_link') ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="categories/list.php">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-                    <span>Catégories</span>
+                    <span><?= t('admin_categories_link') ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="orders/list.php">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    <span>Commandes</span>
+                    <span><?= t('admin_orders_link') ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="users/list.php">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                    <span>Clients</span>
+                    <span><?= t('admin_users_link') ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="contact/list.php">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <span>Messages</span>
+                    <span><?= t('admin_messages_link') ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="statistics/index.php">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                    <span>Statistiques</span>
+                    <span><?= t('admin_stats_link') ?></span>
                 </a>
             </li>
         </ul>
@@ -135,7 +135,7 @@ foreach ($monthlyData as $row) {
     <div class="sidebar-footer">
         <a href="/auth/logout.php" class="logout-btn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            <span>Déconnexion</span>
+            <span><?= t('admin_logout') ?></span>
         </a>
     </div>
 </aside>
@@ -148,7 +148,7 @@ foreach ($monthlyData as $row) {
 
     <!-- ── Top Header ──────────────────────────── -->
     <header class="admin-top-header">
-        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="<?= t('admin_toggle_menu') ?>" aria-expanded="false" aria-controls="sidebar">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <div class="header-title-block">
@@ -156,12 +156,12 @@ foreach ($monthlyData as $row) {
             <p class="header-subtitle"><?= t('admin_overview_subtitle') ?></p>
         </div>
         <div class="header-search">
-            <label for="adminSearch" class="sr-only">Rechercher</label>
-            <input type="search" id="adminSearch" placeholder="Rechercher..." aria-label="Rechercher dans le dashboard">
+            <label for="adminSearch" class="sr-only"><?= t('admin_search_label') ?></label>
+            <input type="search" id="adminSearch" placeholder="<?= t('admin_search_placeholder') ?>" aria-label="<?= t('admin_search_placeholder') ?>">
         </div>
         <div class="header-user">
-            <span class="user-greeting">Bonjour, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-            <a href="/auth/profile.php" class="user-avatar" aria-label="Mon profil">
+            <span class="user-greeting"><?= t('admin_hello') ?> <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+            <a href="/auth/profile.php" class="user-avatar" aria-label="<?= t('admin_my_profile') ?>">
                 <?php echo strtoupper(substr($_SESSION['user_name'], 0, 1)); ?>
             </a>
         </div>
@@ -171,13 +171,13 @@ foreach ($monthlyData as $row) {
     <main class="admin-content">
 
         <!-- Statistics Cards -->
-    <section class="stats-cards reveal" aria-label="Statistiques générales">
+    <section class="stats-cards reveal" aria-label="<?= t('admin_stats_aria') ?>">
             <article class="stat-card">
                 <div class="stat-icon stat-icon--products">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
                 </div>
                 <div class="stat-info">
-                    <h2>Total Produits</h2>
+                    <h2><?= t('admin_stat_total_products') ?></h2>
                     <p class="stat-value"><span class="counter" data-count="<?= (int)$totalProducts ?>" aria-label="<?= (int)$totalProducts ?> produits">0</span></p>
                 </div>
             </article>
@@ -186,7 +186,7 @@ foreach ($monthlyData as $row) {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                 </div>
                 <div class="stat-info">
-                    <h2>Total Commandes</h2>
+                    <h2><?= t('admin_stat_total_orders') ?></h2>
                     <p class="stat-value"><span class="counter" data-count="<?= (int)$totalOrders ?>" aria-label="<?= (int)$totalOrders ?> commandes">0</span></p>
                 </div>
             </article>
@@ -195,7 +195,7 @@ foreach ($monthlyData as $row) {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
                 </div>
                 <div class="stat-info">
-                    <h2>Total Clients</h2>
+                    <h2><?= t('admin_stat_total_clients') ?></h2>
                     <p class="stat-value"><span class="counter" data-count="<?= (int)$totalClients ?>" aria-label="<?= (int)$totalClients ?> clients">0</span></p>
                 </div>
             </article>
@@ -204,16 +204,16 @@ foreach ($monthlyData as $row) {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 </div>
                 <div class="stat-info">
-                    <h2>Messages Contact</h2>
+                    <h2><?= t('admin_stat_messages') ?></h2>
                     <p class="stat-value"><span class="counter" data-count="<?= (int)$totalMessages ?>" aria-label="<?= (int)$totalMessages ?> messages">0</span></p>
                 </div>
             </article>
         </section>
 
         <!-- Revenue Banner -->
-    <section class="revenue-banner reveal" aria-label="Chiffre d'affaires">
+    <section class="revenue-banner reveal" aria-label="<?= t('admin_revenue_title') ?>">
             <div class="revenue-content">
-                <h2>Chiffre d'Affaires</h2>
+                <h2><?= t('admin_revenue_title') ?></h2>
                 <p class="revenue-value">
                     <span class="counter"
                           data-count="<?= number_format($totalRevenue, 2, '.', '') ?>"
@@ -225,43 +225,43 @@ foreach ($monthlyData as $row) {
                 </p>
             </div>
             <div class="revenue-meta">
-                <span><span class="counter" data-count="<?= (int)$totalCategories ?>" aria-label="<?= (int)$totalCategories ?>">0</span> catégories</span>
+                <span><span class="counter" data-count="<?= (int)$totalCategories ?>" aria-label="<?= (int)$totalCategories ?>">0</span> <?= t('admin_categories_link') ?></span>
                 <span class="separator">·</span>
-                <span><span class="counter" data-count="<?= (int)$totalOrders ?>" aria-label="<?= (int)$totalOrders ?>">0</span> commandes traitées</span>
+                <span><span class="counter" data-count="<?= (int)$totalOrders ?>" aria-label="<?= (int)$totalOrders ?>">0</span> <?= t('admin_orders_processed') ?></span>
             </div>
         </section>
 
         <!-- Analytics Chart -->
-    <section class="analytics-section reveal" aria-label="Analytique des commandes">
+    <section class="analytics-section reveal" aria-label="<?= t('admin_chart_orders_title') ?>">
             <header class="section-header">
-                <h2>Évolution des Commandes</h2>
+                <h2><?= t('admin_chart_orders_title') ?></h2>
             </header>
             <div class="chart-container">
-                <canvas id="ordersChart" aria-label="Graphique d'évolution des commandes mensuelles" role="img"></canvas>
+                <canvas id="ordersChart" aria-label="<?= t('admin_chart_aria') ?>" role="img"></canvas>
             </div>
         </section>
 
         <!-- Quick Actions -->
-    <section class="quick-actions reveal" aria-label="Actions rapides">
+    <section class="quick-actions reveal" aria-label="<?= t('admin_quick_actions') ?>">
             <header class="section-header">
-                <h2>Actions Rapides</h2>
+                <h2><?= t('admin_quick_actions') ?></h2>
             </header>
             <div class="actions-grid">
                 <a href="products/add.php" class="action-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    <span>Ajouter Produit</span>
+                    <span><?= t('admin_add_product_btn') ?></span>
                 </a>
                 <a href="categories/add.php" class="action-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    <span>Ajouter Catégorie</span>
+                    <span><?= t('admin_add_category_btn') ?></span>
                 </a>
                 <a href="orders/list.php" class="action-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    <span>Voir Commandes</span>
+                    <span><?= t('admin_view_orders_btn') ?></span>
                 </a>
                 <a href="users/list.php" class="action-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                    <span>Voir Clients</span>
+                    <span><?= t('admin_view_clients_btn') ?></span>
                 </a>
             </div>
         </section>
@@ -288,21 +288,21 @@ foreach ($monthlyData as $row) {
             ?>
 
             <!-- Recent Orders -->
-            <section class="table-section reveal" aria-label="Dernières commandes">
+            <section class="table-section reveal" aria-label="<?= t('admin_recent_orders') ?>">
                 <header class="section-header">
-                    <h2>Dernières Commandes</h2>
-                    <a href="orders/list.php" class="view-all-link">Tout voir</a>
+                    <h2><?= t('admin_recent_orders') ?></h2>
+                    <a href="orders/list.php" class="view-all-link"><?= t('admin_view_all') ?></a>
                 </header>
                 <div class="table-responsive">
                     <table>
-                        <caption class="sr-only">Liste des 5 dernières commandes</caption>
+                        <caption class="sr-only"><?= t('admin_recent_orders_caption') ?></caption>
                         <thead>
                             <tr>
-                                <th scope="col">Commande</th>
-                                <th scope="col">Client</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Statut</th>
-                                <th scope="col">Montant</th>
+                                <th scope="col"><?= t('admin_order_table_cmd') ?></th>
+                                <th scope="col"><?= t('admin_order_table_client') ?></th>
+                                <th scope="col"><?= t('admin_order_table_date') ?></th>
+                                <th scope="col"><?= t('admin_order_table_status') ?></th>
+                                <th scope="col"><?= t('admin_order_table_amount') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -321,7 +321,7 @@ foreach ($monthlyData as $row) {
                             <?php endforeach; ?>
                             <?php if (empty($recentOrders)): ?>
                             <tr>
-                                <td colspan="5" class="empty-state">Aucune commande pour le moment.</td>
+                                <td colspan="5" class="empty-state"><?= t('admin_no_orders_yet') ?></td>
                             </tr>
                             <?php endif; ?>
                         </tbody>
@@ -345,18 +345,18 @@ foreach ($monthlyData as $row) {
             ?>
 
             <!-- Top Products -->
-            <section class="table-section" aria-label="Top produits vendus">
+            <section class="table-section" aria-label="<?= t('admin_top_products') ?>">
                 <header class="section-header">
-                    <h2>Top Produits Vendus</h2>
+                    <h2><?= t('admin_top_products') ?></h2>
                 </header>
                 <div class="table-responsive">
                     <table>
-                        <caption class="sr-only">Classement des 5 produits les plus vendus</caption>
+                        <caption class="sr-only"><?= t('admin_top_products_caption') ?></caption>
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Produit</th>
-                                <th scope="col">Quantité Vendue</th>
+                                <th scope="col"><?= t('admin_col_product_name') ?></th>
+                                <th scope="col"><?= t('admin_table_qty_sold') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -376,7 +376,7 @@ foreach ($monthlyData as $row) {
                             <?php endforeach; ?>
                             <?php if (empty($bestProducts)): ?>
                             <tr>
-                                <td colspan="3" class="empty-state">Aucune vente enregistrée.</td>
+                                <td colspan="3" class="empty-state"><?= t('admin_no_sales_yet') ?></td>
                             </tr>
                             <?php endif; ?>
                         </tbody>
@@ -390,7 +390,7 @@ foreach ($monthlyData as $row) {
 
     <!-- ── Footer ──────────────────────────────── -->
     <footer class="admin-footer">
-        <p>Copyright &copy; 2026 Sabaya Luxury</p>
+        <p><?= sprintf(t('admin_footer_copyright'), date('Y')) ?></p>
     </footer>
 
 </div>
@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 labels: <?= json_encode($chartLabels) ?>,
                 datasets: [
                     {
-                        label: 'Commandes',
+                        label: '<?= t('admin_orders_chart_label') ?>',
                         data: <?= json_encode($chartOrders) ?>,
                         borderColor: '#C5AD59',
                         backgroundColor: 'rgba(197, 173, 89, 0.1)',
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         yAxisID: 'y'
                     },
                     {
-                        label: 'Revenu (DH)',
+                        label: '<?= t('admin_revenue_chart_label') ?>',
                         data: <?= json_encode($chartRevenue) ?>,
                         borderColor: '#1A1A1A',
                         backgroundColor: 'rgba(26, 26, 26, 0.05)',
@@ -497,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         type: 'linear',
                         position: 'left',
                         beginAtZero: true,
-                        title: { display: true, text: 'Commandes', font: { family: 'Poppins' } },
+                        title: { display: true, text: '<?= t('admin_chart_yaxis_orders') ?>', font: { family: 'Poppins' } },
                         grid: { color: 'rgba(0,0,0,0.05)' },
                         ticks: { font: { family: 'Poppins', size: 11 }, stepSize: 1 }
                     },
@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         type: 'linear',
                         position: 'right',
                         beginAtZero: true,
-                        title: { display: true, text: 'Revenu (DH)', font: { family: 'Poppins' } },
+                        title: { display: true, text: '<?= t('admin_chart_yaxis_revenue') ?>', font: { family: 'Poppins' } },
                         grid: { drawOnChartArea: false },
                         ticks: { font: { family: 'Poppins', size: 11 } }
                     }

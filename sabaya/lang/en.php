@@ -1,7 +1,7 @@
 <?php
 /**
  * Language file: English (en)
- * Sabaya Luxury — Localization System
+ * Sabaya Luxury — Complete Localization System
  *
  * Structure: associative array $lang[key] = 'translation'
  * This file is the English translation. If a key is missing here,
@@ -31,7 +31,12 @@ $lang = [
      * HOMEPAGE
      * ──────────────────────────────────────────────── */
     'home_hero_title'       => 'The Art of<br>Modesty',
+    'home_hero_subtitle'    => 'SABAYA LUXURY',
+    'home_hero_desc'        => 'Discover refined abaya collections, designed for modern women who seek elegance, comfort, and distinction.',
+    'home_btn_collection'   => 'Explore the Collection',
+    'home_btn_story'        => 'Our Story',
     'home_new_arrivals'     => 'New Arrivals',
+    'home_view_details'     => 'View details',
 
     /* ────────────────────────────────────────────────
      * PRODUCTS PAGE
@@ -43,6 +48,14 @@ $lang = [
     'products_view_details_btn' => 'View Details',
     'products_empty'            => 'No products available.',
     'products_brand'            => 'SABAYA',
+    'products_search_placeholder'=> 'Search the collection...',
+
+    /* ────────────────────────────────────────────────
+     * CATEGORY PAGE
+     * ──────────────────────────────────────────────── */
+    'category_title_prefix'       => 'Abayas',
+    'category_desc'               => 'Discover our selection of abayas in the {name} category. Elegant and modern pieces, designed for the woman of today.',
+    'category_empty'              => 'No products found in this category.',
 
     /* ────────────────────────────────────────────────
      * PRODUCT DETAILS PAGE
@@ -54,6 +67,14 @@ $lang = [
     'product_size'              => 'Size',
     'product_breadcrumb_home'   => 'Home',
     'product_breadcrumb_collection' => 'Collection',
+    'product_currency'          => 'MAD',
+    'breadcrumb_label'            => 'Breadcrumb',
+    'product_details_label'       => 'Product details',
+    'product_alt_abaya'           => 'Abaya',
+    'product_alt_size'            => 'size',
+    'product_page_title_suffix'   => 'Sabaya Luxury — Modern Abayas',
+    'product_page_description_suffix' => 'Available on Sabaya Luxury in Morocco.',
+    'product_page_keywords'       => 'abaya, modest fashion, Sabaya Luxury, Morocco',
 
     /* ────────────────────────────────────────────────
      * WISHLIST
@@ -64,6 +85,11 @@ $lang = [
     'wishlist_discover_btn'     => 'Discover our products',
     'wishlist_remove'           => 'Remove',
     'wishlist_continue_shopping'=> 'Continue shopping',
+    'wishlist_hero_label'       => 'Personal Collection',
+    'wishlist_hero_subtitle'    => 'Find your saved favourite products.',
+    'wishlist_article_count'    => 'saved item(s)',
+    'wishlist_details'          => 'View Details',
+    'wishlist_brand'            => 'Sabaya Luxury',
 
     /* ────────────────────────────────────────────────
      * CART
@@ -97,6 +123,11 @@ $lang = [
     'checkout_address'          => 'Address',
     'checkout_postal_code'      => 'Postal Code',
     'checkout_qty_label'        => 'Quantity:',
+    'checkout_eyebrow'          => 'Sabaya Luxury',
+    'checkout_placeholder_city' => 'e.g., Casablanca',
+    'checkout_placeholder_addr' => 'e.g., 12 Rue Al Amine, Maarif',
+    'checkout_placeholder_postal'=> 'e.g., 20000',
+    'checkout_error_title'      => 'Please fix the following errors:',
 
     /* ────────────────────────────────────────────────
      * ORDER SUCCESS
@@ -132,6 +163,9 @@ $lang = [
     'search_empty_title'        => 'No products found.',
     'search_empty_text'         => 'Try different keywords or explore our collection.',
     'search_back_to_store'      => 'Back to store',
+    'search_results_count'      => 'product(s) found',
+    'search_label_hint'         => 'Enter a keyword to search for abayas or clothing.',
+    'search_sr_label'           => 'Search for a product',
 
     /* ────────────────────────────────────────────────
      * AUTHENTICATION
@@ -143,6 +177,11 @@ $lang = [
     'login_submit'              => 'Sign In',
     'login_no_account'          => "Don't have an account?",
     'login_sign_up_link'        => 'Sign Up',
+    'login_page_title'          => 'Login | Sabaya Luxury',
+    'login_all_fields_required' => 'All fields are required',
+    'login_invalid_credentials' => 'Incorrect email or password',
+    'login_welcome_admin'       => 'Welcome to the administrator space.',
+    'login_welcome_user'        => 'Login successful. Welcome, {name}!',
 
     'register_title'            => 'Create an Account',
     'register_legend'           => 'Registration Information',
@@ -155,6 +194,13 @@ $lang = [
     'register_submit'           => 'Sign Up',
     'register_have_account'     => 'Already have an account?',
     'register_login_link'       => 'Log In',
+    'register_password_mismatch'=> 'Passwords do not match',
+    'register_email_taken'      => 'This email is already in use',
+    'register_password_length'  => 'Password must be at least 8 characters long',
+    'register_phone_digits'     => 'Phone must contain only digits',
+    'register_lastname_letters' => 'Last name must contain only letters',
+    'register_firstname_letters'=> 'First name must contain only letters',
+    'register_success'          => 'Account created successfully. You can now log in.',
 
     /* ────────────────────────────────────────────────
      * PROFILE
@@ -184,6 +230,99 @@ $lang = [
     'profile_err_email_invalid'       => 'Invalid email address.',
     'profile_err_email_taken'         => 'This email is already used by another account.',
     'profile_err_phone_digits'        => 'Phone number must contain only digits.',
+    'profile_page_title'               => 'My Profile | Sabaya Luxury',
+    'profile_page_description'         => 'Manage your Sabaya Luxury profile.',
+
+    /* ────────────────────────────────────────────────
+     * CONTACT
+     * ──────────────────────────────────────────────── */
+    'contact_page_title'        => 'Contact Us | Sabaya Luxury',
+    'contact_hero_label'        => 'Customer Service',
+    'contact_hero_title'        => 'Contact Sabaya Luxury',
+    'contact_hero_subtitle'     => 'A question about our collections, an ongoing order, or personalised advice? Our team is here to provide you with an experience that meets your expectations.',
+    'contact_info_title'        => 'Our Contact Details',
+    'contact_info_intro'        => 'Feel free to reach out through whichever channel suits you best. We are available to answer all your questions.',
+    'contact_label_email'       => 'Email',
+    'contact_label_phone'       => 'Phone',
+    'contact_label_address'     => 'Address',
+    'contact_label_hours'       => 'Opening Hours',
+    'contact_hours_value'       => 'Mon – Sat: 09:00 – 19:00<br>Sunday: Closed',
+    'contact_form_title'        => 'Send us a message',
+    'contact_form_name'         => 'Name',
+    'contact_form_name_placeholder'=> 'Your full name',
+    'contact_form_email'        => 'Email',
+    'contact_form_email_placeholder'=> 'your@email.com',
+    'contact_form_subject'      => 'Subject',
+    'contact_form_subject_placeholder'=> 'Subject of your message',
+    'contact_form_message'      => 'Message',
+    'contact_form_message_placeholder'=> 'Describe your request in detail...',
+    'contact_form_submit'       => 'Send Message',
+    'contact_required'          => 'required',
+    'contact_success_message'   => 'Your message has been sent successfully. We will reply as soon as possible.',
+    'contact_err_name_required'   => 'Name is required',
+    'contact_err_name_invalid'    => 'Name must contain only letters',
+    'contact_err_email_required'  => 'Email is required',
+    'contact_err_email_invalid'   => 'Invalid email address',
+    'contact_err_subject_required'=> 'Subject is required',
+    'contact_err_message_required'=> 'Message is required',
+
+    /* ────────────────────────────────────────────────
+     * ABOUT
+     * ──────────────────────────────────────────────── */
+    'about_hero_label'              => 'Sabaya Luxury',
+    'about_hero_title'              => 'About <em>Sabaya Luxury</em>',
+    'about_hero_subtitle'           => 'Timeless elegance at the service of the modern woman.',
+    'about_story_title'             => 'Our Story',
+    'about_story_p1'                => 'Sabaya Luxury was born from a deep passion for modest fashion and exceptional craftsmanship. Founded in Casablanca, our house draws inspiration from the richness of Moroccan heritage and contemporary international elegance.',
+    'about_story_p2'                => 'Each piece in our collection is the result of meticulous know-how, where luxury is defined by the quality of fabrics, the precision of cuts, and attention to the smallest details. We believe that true elegance does not shout — it whispers.',
+    'about_story_p3'                => 'Today, Sabaya Luxury accompanies a modern, demanding, and refined woman who refuses to choose between her values and her style. Our vision: to make each abaya a wearable work of art, timeless and deeply personal.',
+    'about_mission_label'           => 'Our Mission',
+    'about_mission_title'           => 'The art of modest fashion, reinvented with excellence.',
+    'about_mission_p1'              => 'Our mission is to offer women abayas and modest fashion pieces of impeccable quality, combining tradition, comfort, and contemporary luxury.',
+    'about_mission_p2'              => 'We rigorously select each fabric, collaborate with talented artisans, and design silhouettes that enhance without ever betraying the essence of the woman who wears them.',
+    'about_mission_p3'              => 'At Sabaya Luxury, fashion is an act of trust — and we are committed to honouring that trust with absolute dedication.',
+    'about_pillar_tradition_title'  => 'Tradition',
+    'about_pillar_tradition_text'   => 'A precious cultural heritage, celebrated in every creation.',
+    'about_pillar_comfort_title'    => 'Comfort',
+    'about_pillar_comfort_text'     => 'Noble materials, soft and pleasant to wear every day.',
+    'about_pillar_luxe_title'       => 'Luxury',
+    'about_pillar_luxe_text'        => 'Artisanal excellence at the service of a rare and refined elegance.',
+    'about_values_label'            => 'Our Values',
+    'about_values_title'            => 'The pillars of our house',
+    'about_value_quality_title'     => 'Quality',
+    'about_value_quality_text'      => 'Premium fabrics, impeccable finishes, and rigorous control for pieces that stand the test of time.',
+    'about_value_elegance_title'    => 'Elegance',
+    'about_value_elegance_text'     => 'A clean, modern, and timeless aesthetic that transcends fleeting trends.',
+    'about_value_authenticity_title'=> 'Authenticity',
+    'about_value_authenticity_text' => 'A sincere commitment to our roots, our values, and the woman we dress.',
+    'about_value_satisfaction_title'=> 'Customer Satisfaction',
+    'about_value_satisfaction_text' => 'An impeccable experience, from discovery to delivery, for every Sabaya client.',
+    'about_why_label'               => 'Why Sabaya',
+    'about_why_title'               => 'Excellence, down to the last detail',
+    'about_why_craft_title'         => 'Exceptional Craftsmanship',
+    'about_why_craft_text'          => 'Each piece is crafted with meticulous care by experienced artisans, guaranteeing perfect finishes.',
+    'about_why_fabrics_title'       => 'Noble and Sustainable Fabrics',
+    'about_why_fabrics_text'        => 'We select only premium materials — silk, crepe, linen — for absolute comfort and remarkable durability.',
+    'about_why_design_title'        => 'Exclusive Designs',
+    'about_why_design_text'         => 'Our collections are designed in limited editions, giving every woman the certainty of wearing a unique and rare piece.',
+    'about_why_shipping_title'      => 'Careful Delivery',
+    'about_why_shipping_text'       => 'Luxurious packaging and fast delivery across Morocco, for an experience worthy of the greatest maisons.',
+    'about_why_service_title'       => 'Personalised Service',
+    'about_why_service_text'        => 'Our team listens to every client, offering style advice and bespoke support, from selection to delivery.',
+    'about_why_privacy_title'       => 'Trust and Discretion',
+    'about_why_privacy_text'        => 'Your privacy is sacred. Secure payments, protected data, and fully confidential delivery.',
+    'about_cta_label'               => 'Explore our universe',
+    'about_cta_title'               => 'Your next exceptional piece awaits.',
+    'about_cta_btn'                 => 'Discover Our Collections',
+
+    /* ────────────────────────────────────────────────
+     * CHECKOUT VALIDATION
+     * ──────────────────────────────────────────────── */
+    'checkout_err_city_required'      => 'City is required',
+    'checkout_err_address_required'   => 'Address is required',
+    'checkout_err_postal_required'      => 'Postal code is required',
+    'checkout_err_stock_insufficient' => 'Insufficient stock for: {product}',
+    'checkout_err_generic'            => 'An error occurred while placing your order. Please try again.',
 
     /* ────────────────────────────────────────────────
      * ADMIN DASHBOARD — GLOBAL
@@ -198,13 +337,23 @@ $lang = [
     'admin_stats_link'          => 'Statistics',
     'admin_logout'              => 'Sign Out',
     'admin_hello'               => 'Hello,',
+    'admin_toggle_menu'         => 'Open menu',
+    'admin_search_label'        => 'Search',
+    'admin_search_placeholder'  => 'Search...',
+    'admin_my_profile'          => 'My profile',
+    'admin_sidebar_aria'        => 'Admin menu',
+    'admin_nav_aria'            => 'Main admin navigation',
+    'admin_stats_aria_orders'   => 'Order statistics',
+    'admin_orders_search_label' => 'Search for an order',
+    'admin_orders_search_placeholder' => 'Search for an order...',
+    'admin_orders_results_text' => 'Search results for',
+    'admin_orders_table_caption' => 'List of all placed orders',
 
     /* ────────────────────────────────────────────────
      * ADMIN — OVERVIEW
      * ──────────────────────────────────────────────── */
     'admin_overview_title'      => 'Overview',
     'admin_overview_subtitle'   => 'Welcome to your administration space.',
-    'admin_search_placeholder'  => 'Search...',
     'admin_stat_total_products' => 'Total Products',
     'admin_stat_total_orders'   => 'Total Orders',
     'admin_stat_total_clients'  => 'Total Clients',
@@ -212,6 +361,14 @@ $lang = [
     'admin_revenue_title'       => 'Revenue',
     'admin_chart_orders_title'  => 'Orders Evolution',
     'admin_quick_actions'       => 'Quick Actions',
+    'admin_stats_aria'          => 'General statistics',
+    'admin_orders_processed'    => 'orders processed',
+    'admin_recent_orders_caption' => 'List of the 5 most recent orders',
+    'admin_top_products_caption'  => 'Top 5 best-selling products',
+    'admin_table_qty_sold'         => 'Qty Sold',
+    'admin_chart_yaxis_orders'     => 'Orders',
+    'admin_chart_yaxis_revenue'    => 'Revenue (MAD)',
+    'admin_footer_copyright'       => 'Copyright &copy; %d Sabaya Luxury. All rights reserved.',
     'admin_add_product_btn'     => 'Add Product',
     'admin_add_category_btn'    => 'Add Category',
     'admin_view_orders_btn'     => 'View Orders',
@@ -221,6 +378,11 @@ $lang = [
     'admin_top_products'        => 'Top Selling Products',
     'admin_no_orders_yet'       => 'No orders yet.',
     'admin_no_sales_yet'        => 'No sales recorded.',
+    'admin_order_table_cmd'     => 'Order',
+    'admin_order_table_client'  => 'Client',
+    'admin_order_table_date'    => 'Date',
+    'admin_order_table_status'  => 'Status',
+    'admin_order_table_amount'  => 'Amount',
 
     /* ────────────────────────────────────────────────
      * ADMIN — PRODUCTS MANAGEMENT
@@ -247,6 +409,14 @@ $lang = [
     'admin_view_details_title'  => 'View details (open store page)',
     'admin_edit_product_title'  => 'Edit product',
     'admin_delete_product_title'=> 'Delete product',
+    'admin_products_list_title' => 'Product List',
+    'admin_products_search_placeholder' => 'Search for a product...',
+    'admin_no_products_found'   => 'No products found',
+    'admin_products_results_text'=> 'Search results for',
+    'admin_products_subtitle_default'=> 'Manage the details, prices, and stock of your creations.',
+    'admin_pagination_showing'  => 'Showing',
+    'admin_pagination_of'       => 'of',
+    'admin_pagination_products' => 'products',
 
     /* ────────────────────────────────────────────────
      * ADMIN — ADD/EDIT PRODUCT
@@ -280,6 +450,11 @@ $lang = [
     'admin_stat_with_image'     => 'With Image',
     'admin_edit_category_title' => 'Edit category',
     'admin_delete_category_title'=> 'Delete category',
+    'admin_categories_list_title'=> 'Category List',
+    'admin_categories_search_placeholder'=> 'Search for a category...',
+    'admin_no_categories_found' => 'No categories found',
+    'admin_categories_results_text'=> 'Search results for',
+    'admin_pagination_categories'=> 'categories',
 
     /* ────────────────────────────────────────────────
      * ADMIN — ORDERS MANAGEMENT
@@ -298,6 +473,9 @@ $lang = [
     'admin_back_to_dashboard'   => 'Back to Dashboard',
     'admin_view_details_sr'     => 'View details',
     'admin_update_status_title' => 'Update status',
+    'admin_orders_list_title'   => 'Order List',
+    'admin_orders_empty_back'   => 'Back to Dashboard',
+    'admin_pagination_orders'   => 'orders',
 
     /* ────────────────────────────────────────────────
      * ADMIN — ORDER DETAILS
@@ -317,6 +495,8 @@ $lang = [
     'admin_order_total_row'             => 'Order total',
     'admin_no_items'                    => 'No products found for this order.',
     'admin_client_id_label'             => 'Client ID:',
+    'admin_order_breadcrumb'            => 'Order',
+    'admin_order_details_subtitle'      => 'Complete details of the customer order.',
 
     /* ────────────────────────────────────────────────
      * ADMIN — USERS MANAGEMENT
@@ -333,6 +513,9 @@ $lang = [
     'admin_role_admin'          => 'Administrator',
     'admin_role_client'         => 'Client',
     'admin_no_users'            => 'No users found.',
+    'admin_users_list_title'    => 'User List',
+    'admin_users_subtitle_list' => 'View and manage your Sabaya community accounts.',
+    'admin_pagination_users'    => 'users',
 
     /* ────────────────────────────────────────────────
      * ADMIN — USER DETAILS
@@ -349,6 +532,21 @@ $lang = [
     'admin_user_profile_subtitle'=> 'Sabaya Luxury user profile.',
     'admin_user_id_label'       => 'User ID:',
     'admin_user_order_count'    => 'Number of orders',
+
+    /* ────────────────────────────────────────────────
+     * ADMIN — MESSAGES
+     * ──────────────────────────────────────────────── */
+    'admin_messages_page_title'   => 'Contact Messages',
+    'admin_messages_subtitle'     => 'View and manage messages sent by clients.',
+    'admin_messages_all_title'    => 'All Messages',
+    'admin_stat_total_messages'   => 'Total Messages',
+    'admin_stat_today'            => 'Today',
+    'admin_stat_this_week'        => 'This Week',
+    'admin_no_messages'           => 'No contact messages at the moment.',
+    'admin_col_name'              => 'Name',
+    'admin_col_subject'           => 'Subject',
+    'admin_messages_search_placeholder'=> 'Search for a message...',
+    'admin_pagination_messages'   => 'messages',
 
     /* ────────────────────────────────────────────────
      * ADMIN — STATISTICS
@@ -378,6 +576,9 @@ $lang = [
     'admin_insight_revenue'     => 'Revenue',
     'admin_insight_delivered'   => 'Delivered',
     'admin_insight_cancelled'   => 'Cancelled',
+    'admin_total_orders_label'  => 'Total Orders',
+    'admin_revenue_chart_label' => 'Revenue (MAD)',
+    'admin_orders_chart_label'  => 'Orders',
 
     /* ────────────────────────────────────────────────
      * LANGUAGE SWITCHER
@@ -393,5 +594,45 @@ $lang = [
     'footer_quick_links'        => 'Quick Links',
     'footer_contact'            => 'Contact',
     'footer_copyright'          => 'All rights reserved.',
+    'footer_home'               => 'Home',
+    'footer_shop'               => 'Shop',
+    'footer_about'              => 'About',
+    'footer_address'            => 'Tangier, Morocco',
+    'footer_email'              => 'contact@sabaya.ma',
+    'footer_phone'              => '+212 6XX XXX XXX',
+
+    /* ────────────────────────────────────────────────
+     * SITEMAP / META
+     * ──────────────────────────────────────────────── */
+    'site_name'                 => 'Sabaya Luxury',
+    'site_tagline'              => 'Luxury Abaya and Modest Fashion Boutique',
+    'meta_default_desc'         => 'Sabaya Luxury — Boutique en ligne d\'abayas modernes et élégantes au Maroc. Discover our collections of modest fashion, premium abayas, and refined women\'s clothing.',
+
+    /* ────────────────────────────────────────────────
+     * TOASTS / FLASH MESSAGES
+     * ──────────────────────────────────────────────── */
+    'toast_order_success'        => 'Your order has been placed successfully!',
+
+    /* ────────────────────────────────────────────────
+     * ORDER DETAILS (FRONT)
+     * ──────────────────────────────────────────────── */
+    'order_details_view'         => 'View details',
+
+    /* ────────────────────────────────────────────────
+     * ADMIN SHARED
+     * ──────────────────────────────────────────────── */
+    'admin_copyright'            => 'Copyright',
+    'admin_order_breadcrumb_list'  => 'Back to orders',
+    'admin_breadcrumb_back'      => 'Back',
+    'admin_table_no_data'        => 'No data available.',
+
+    /* ────────────────────────────────────────────────
+     * WHATSAPP
+     * ──────────────────────────────────────────────── */
+    'whatsapp_order_intro'       => "Hello Sabaya Luxury\n\nI would like to confirm my order.\n\nOrder No.",
+    'whatsapp_products'          => 'Products:',
+    'whatsapp_total'               => 'Total',
+    'whatsapp_city'                => 'City',
+    'whatsapp_thanks'              => 'Thank you.',
 
 ];

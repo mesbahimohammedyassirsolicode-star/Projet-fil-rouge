@@ -22,8 +22,10 @@ $products = $productModel->getByCategory($categoryId);
 $category = $categoryModel->find($categoryId);
 $categoryName = $category ? htmlspecialchars($category['nom']) : 'Catégorie';
 
+require_once '../config/lang.php';
+
 // Page metadata for header.php
-$pageTitle = $categoryName . ' | Abayas — Sabaya Luxury';
+$pageTitle = t('category_title_prefix') . ' ' . $categoryName . ' | ' . t('site_name');
 $pageDescription = 'Découvrez les abayas de la catégorie ' . $categoryName . ' sur Sabaya Luxury. Mode modeste et élégante au Maroc.';
 $pageKeywords = $categoryName . ', abaya, mode modeste, Sabaya Luxury, Maroc';
 
@@ -36,13 +38,13 @@ require_once '../includes/navbar.php';
 
 <section aria-label="Produits de la catégorie <?= $categoryName ?>">
 
-    <h1>Abayas <?= $categoryName ?></h1>
+    <h1><?= t('category_title_prefix') ?> <?= $categoryName ?></h1>
 
-    <p>Découvrez notre sélection d'abayas dans la catégorie <?= $categoryName ?>. Des pièces élégantes et modernes, conçues pour la femme d'aujourd'hui.</p>
+    <p><?= str_replace('{name}', $categoryName, t('category_desc')) ?></p>
 
     <?php if(empty($products)): ?>
 
-        <p>Aucun produit trouvé dans cette catégorie.</p>
+        <p><?= t('category_empty') ?></p>
 
     <?php else: ?>
 
@@ -66,7 +68,7 @@ require_once '../includes/navbar.php';
                 </p>
 
                 <a href="product-details.php?id=<?= $product['id_produit'] ?>">
-                    Voir détails
+                    <?= t('products_view_details') ?>
                 </a>
 
             </article>

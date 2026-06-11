@@ -77,8 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$pageTitle = 'Mon Profil | Sabaya Luxury';
-$pageDescription = 'Gérez votre profil Sabaya Luxury.';
+$pageTitle = t('profile_page_title');
+$pageDescription = t('profile_page_description');
 $pageRobots = 'noindex, nofollow';
 
 $_proto = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';

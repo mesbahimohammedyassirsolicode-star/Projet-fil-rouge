@@ -21,7 +21,9 @@ $wishlist = $wishlistModel->getUserWishlist($id_client);
 
 $wishlistCount = count($wishlist);
 
-$pageTitle = 'Ma Liste de Souhaits | Sabaya Luxury — Abayas Favorites & Collection Luxe';
+require_once '../config/lang.php';
+
+$pageTitle = t('wishlist_title') . ' | ' . t('site_name');
 $pageDescription = 'Retrouvez vos abayas et produits favoris enregistrés sur Sabaya Luxury. Votre sélection personnelle de mode modeste haut de gamme.';
 $pageRobots = 'noindex, nofollow';
 
@@ -32,7 +34,7 @@ $extraHeadContent = '
 {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Ma Liste de Souhaits — Sabaya Luxury",
+    "name": "' . t('wishlist_title') . '",
     "description": "Votre sélection personnelle d\'abayas et produits favoris sur Sabaya Luxury.",
     "isPartOf": {
         "@type": "WebSite",
@@ -53,12 +55,12 @@ require_once '../includes/navbar.php';
         <!-- ══ HERO SECTION ════════════════════════════════════════ -->
     <section class="wishlist-hero reveal" aria-labelledby="wishlist-title">
             <div class="wishlist-hero__inner">
-                <span class="wishlist-hero__label" aria-hidden="true">Collection Personnelle</span>
-                <h1 id="wishlist-title" class="wishlist-hero__title">Ma Liste de Souhaits</h1>
+                <span class="wishlist-hero__label" aria-hidden="true"><?= t('wishlist_hero_label') ?></span>
+                <h1 id="wishlist-title" class="wishlist-hero__title"><?= t('wishlist_title') ?></h1>
                 <div class="wishlist-hero__line" aria-hidden="true"></div>
-                <p class="wishlist-hero__subtitle">Retrouvez vos produits favoris enregistrés.</p>
+                <p class="wishlist-hero__subtitle"><?= t('wishlist_hero_subtitle') ?></p>
                 <?php if ($wishlistCount > 0): ?>
-                    <p class="wishlist-hero__count"><?= $wishlistCount ?> article<?= $wishlistCount > 1 ? 's' : '' ?> enregistré<?= $wishlistCount > 1 ? 's' : '' ?></p>
+                    <p class="wishlist-hero__count"><?= $wishlistCount ?> <?= t('wishlist_article_count') ?></p>
                 <?php endif; ?>
             </div>
         </section>
@@ -73,10 +75,10 @@ require_once '../includes/navbar.php';
                     <div class="wishlist-empty__icon-wrapper" aria-hidden="true">
                         <i class="far fa-heart"></i>
                     </div>
-                    <h2 class="wishlist-empty__title">Aucun produit dans votre liste de souhaits.</h2>
-                    <p class="wishlist-empty__text">Explorez notre collection d'abayas luxueuses et enregistrez vos pièces favorites pour les retrouver ici.</p>
-                    <a href="../products/products.php" class="btn wishlist-empty__btn" aria-label="Découvrir nos produits — aller à la boutique">
-                        Découvrir nos produits
+                    <h2 class="wishlist-empty__title"><?= t('wishlist_empty_title') ?></h2>
+                    <p class="wishlist-empty__text"><?= t('wishlist_empty_text') ?></p>
+                    <a href="../products/products.php" class="btn wishlist-empty__btn" aria-label="<?= t('wishlist_discover_btn') ?>">
+                        <?= t('wishlist_discover_btn') ?>
                     </a>
                 </div>
 
@@ -91,7 +93,7 @@ require_once '../includes/navbar.php';
                             <!-- Product Image -->
                             <a href="../products/product-details.php?id=<?= $item['id_produit'] ?>"
                                class="wishlist-card__image-link"
-                               aria-label="Voir les détails de <?= htmlspecialchars($item['nom']) ?>">
+                               aria-label="<?= t('wishlist_details') . ' ' . htmlspecialchars($item['nom']) ?>">
                                 <img src="../assets/images/products/<?= htmlspecialchars($item['image']) ?>"
                                      alt="<?= htmlspecialchars($item['nom']) ?> — Abaya Sabaya Luxury"
                                      loading="lazy"
@@ -100,13 +102,13 @@ require_once '../includes/navbar.php';
                                 <!-- Slide-up quick view -->
                                 <span class="wishlist-card__quick-view" aria-hidden="true">
                                     <i class="fas fa-eye" aria-hidden="true"></i>
-                                    Voir Détails
+                                    <?= t('wishlist_details') ?>
                                 </span>
                             </a>
 
                             <!-- Product Info -->
                             <div class="wishlist-card__body">
-                                <span class="wishlist-card__brand" aria-label="Marque">Sabaya Luxury</span>
+                                <span class="wishlist-card__brand" aria-label="Marque"><?= t('wishlist_brand') ?></span>
                                 <h2 class="wishlist-card__name"><?= htmlspecialchars($item['nom']) ?></h2>
                                 <p class="wishlist-card__price" aria-label="Prix : <?= htmlspecialchars($item['prix']) ?> Dirhams">
                                     <span class="wishlist-card__price-value"><?= htmlspecialchars($item['prix']) ?></span>
@@ -117,16 +119,16 @@ require_once '../includes/navbar.php';
                                 <div class="wishlist-card__actions">
                                     <a href="../products/product-details.php?id=<?= $item['id_produit'] ?>"
                                        class="wishlist-card__btn-details"
-                                       aria-label="Voir les détails de <?= htmlspecialchars($item['nom']) ?>">
+                                       aria-label="<?= t('wishlist_details') . ' ' . htmlspecialchars($item['nom']) ?>">
                                         <i class="fas fa-eye" aria-hidden="true"></i>
-                                        Voir Détails
+                                        <?= t('wishlist_details') ?>
                                     </a>
                                     <a href="remove-wishlist.php?id=<?= $item['id_wishlist'] ?>"
                                        class="wishlist-card__btn-remove"
                                        data-wishlist-pulse
-                                       aria-label="Retirer <?= htmlspecialchars($item['nom']) ?> de votre liste de souhaits">
+                                       aria-label="<?= t('wishlist_remove') . ' ' . htmlspecialchars($item['nom']) ?>">
                                         <i class="far fa-trash-alt" aria-hidden="true"></i>
-                                        Retirer
+                                        <?= t('wishlist_remove') ?>
                                     </a>
                                 </div>
                             </div>
@@ -138,9 +140,9 @@ require_once '../includes/navbar.php';
 
                 <!-- Bottom CTA -->
                 <div class="wishlist-bottom-cta">
-                    <a href="../products/products.php" class="btn-outline wishlist-bottom-cta__btn" aria-label="Continuer vos achats — retourner à la boutique">
+                    <a href="../products/products.php" class="btn-outline wishlist-bottom-cta__btn" aria-label="<?= t('wishlist_continue_shopping') ?>">
                         <i class="fas fa-arrow-left" aria-hidden="true"></i>
-                        Continuer vos achats
+                        <?= t('wishlist_continue_shopping') ?>
                     </a>
                 </div>
 

@@ -36,8 +36,8 @@ require_once '../includes/navbar.php';
     <main class="cart-page">
     <section class="cart-header reveal">
             <div class="cart-container">
-                <p class="cart-subtitle">Votre Sélection</p>
-                <h1 class="cart-title">Mon Panier</h1>
+                <p class="cart-subtitle"><?= t('cart_subtitle') ?></p>
+                <h1 class="cart-title"><?= t('cart_title') ?></h1>
             </div>
         </section>
 
@@ -45,8 +45,8 @@ require_once '../includes/navbar.php';
             <section class="cart-empty-section">
                 <div class="cart-container cart-empty-wrapper">
                     <i class="fa-regular fa-bag-shopping cart-empty-icon"></i>
-                    <p class="cart-empty-text">Votre panier est vide.</p>
-                    <a href="products.php" class="btn cart-empty-btn">Découvrir la Collection</a>
+                    <p class="cart-empty-text"><?= t('cart_empty_text') ?></p>
+                    <a href="products.php" class="btn cart-empty-btn"><?= t('cart_discover_btn') ?></a>
                 </div>
             </section>
         <?php else: ?>
@@ -58,12 +58,12 @@ require_once '../includes/navbar.php';
                         <table class="cart-table">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Produit</th>
-                                    <th>Prix</th>
-                                    <th>Quantité</th>
-                                    <th>Sous-total</th>
-                                    <th>Action</th>
+                                    <th><?= t('cart_col_image') ?></th>
+                                    <th><?= t('cart_col_product') ?></th>
+                                    <th><?= t('cart_col_price') ?></th>
+                                    <th><?= t('cart_col_qty') ?></th>
+                                    <th><?= t('cart_col_subtotal') ?></th>
+                                    <th><?= t('cart_col_action') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,10 +94,10 @@ require_once '../includes/navbar.php';
                                         <td class="cart-cell cart-cell-subtotal" data-label="Sous-total">
                                             <span class="cart-product-subtotal"><?= $sousTotal ?> DH</span>
                                         </td>
-                                        <td class="cart-cell cart-cell-action" data-label="Action">
-                                            <a href="remove-cart.php?id=<?= $product['id_produit'] ?>" class="cart-remove-btn" title="Supprimer">
+                                        <td class="cart-cell cart-cell-action" data-label="<?= t('cart_col_action') ?>">
+                                            <a href="remove-cart.php?id=<?= $product['id_produit'] ?>" class="cart-remove-btn" title="<?= t('cart_remove') ?>">
                                                 <i class="fa-regular fa-trash-can"></i>
-                                                <span class="cart-remove-label">Supprimer</span>
+                                                <span class="cart-remove-label"><?= t('cart_remove') ?></span>
                                             </a>
                                         </td>
                                     </tr>
@@ -108,17 +108,17 @@ require_once '../includes/navbar.php';
 
                     <!-- Order Summary -->
                     <div class="cart-summary reveal">
-                        <div class="cart-summary-card">
-                            <h2 class="cart-summary-title">Résumé de la Commande</h2>
+                                <div class="cart-summary-card">
+                            <h2 class="cart-summary-title"><?= t('cart_order_summary') ?></h2>
                             <div class="cart-summary-divider"></div>
                             <div class="cart-summary-total">
-                                <span class="cart-summary-total-label">Total</span>
+                                <span class="cart-summary-total-label"><?= t('cart_total') ?></span>
                                 <span class="cart-summary-total-value"><?= $total ?> DH</span>
                             </div>
                             <div class="cart-summary-divider"></div>
                             <div class="cart-summary-actions">
-                                <a href="checkout.php" class="btn cart-checkout-btn">Passer la Commande</a>
-                                <a href="products.php" class="btn-outline cart-continue-btn">Continuer mes Achats</a>
+                                <a href="checkout.php" class="btn cart-checkout-btn"><?= t('cart_checkout_btn') ?></a>
+                                <a href="products.php" class="btn-outline cart-continue-btn"><?= t('cart_continue_btn') ?></a>
                             </div>
                         </div>
                     </div>

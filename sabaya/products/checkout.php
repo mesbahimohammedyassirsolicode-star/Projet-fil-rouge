@@ -46,15 +46,15 @@ $adresse = trim($_POST['adresse']);
 $code_postal = trim($_POST['code_postal']);
 
 if (empty($ville)) {
-    $errors[] = "La ville est obligatoire";
+    $errors[] = t('checkout_err_city_required');
 }
 
 if (empty($adresse)) {
-    $errors[] = "L'adresse est obligatoire";
+    $errors[] = t('checkout_err_address_required');
 }
 
 if (empty($code_postal)) {
-    $errors[] = "Le code postal est obligatoire";
+    $errors[] = t('checkout_err_postal_required');
 }
 
 // Vérification du stock AVANT création commande
@@ -67,7 +67,7 @@ foreach ($cart as $id_produit => $quantite) {
     }
 
     if ($product['stock'] < $quantite) {
-        $errors[] = "Stock insuffisant pour : " . $product['nom'];
+        $errors[] = str_replace('{product}', $product['nom'], t('checkout_err_stock_insufficient'));
     }
 }
 
@@ -134,19 +134,14 @@ if (empty($errors)) {
 
     } catch (Exception $e) {
         $orderModel->rollBack();
-        $errors[] = "Une erreur est survenue lors de la commande. Veuillez réessayer.";
-        // Optional: log $e->getMessage() for debugging
+        $errors[] = t('checkout_err_generic');
     }
 
     if (empty($errors)) {
         // ── 5. Build WhatsApp message ───────────────────────────────────────
-        $whatsappMessage = "Bonjour Sabaya Luxury\n\n";
+        $whatsappMessage = t('whatsapp_order_intro') . $id_commande . "\n\n";
 
-        $whatsappMessage .= "Je souhaite confirmer ma commande.\n\n";
-
-        $whatsappMessage .= "Commande N°" . $id_commande . "\n\n";
-
-        $whatsappMessage .= "Produits :\n";
+        $whatsappMessage .= t('whatsapp_products') . "\n";
 
         foreach ($cart as $id_produit => $quantite) {
 
@@ -166,11 +161,11 @@ if (empty($errors)) {
 
         $whatsappMessage .= "\n";
 
-        $whatsappMessage .= "Total : " . $total . " DH\n";
+        $whatsappMessage .= t('whatsapp_total') . " : " . $total . " DH\n";
 
-        $whatsappMessage .= "Ville : " . $ville . "\n";
+        $whatsappMessage .= t('whatsapp_city') . " : " . $ville . "\n";
 
-        $whatsappMessage .= "\nMerci.";
+        $whatsappMessage .= "\n" . t('whatsapp_thanks');
 
         $_SESSION['whatsapp_message'] = $whatsappMessage;
         $_SESSION['last_order_id']    = $id_commande;
@@ -193,7 +188,9 @@ $baseUrl_hdr = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'http
 
 $extraHeadContent = '<link rel="stylesheet" href="' . htmlspecialchars($baseUrl_hdr) . '/assets/css/cart.css">';
 
-$pageTitle = 'Finaliser la commande | Sabaya Luxury';
+require_once '../config/lang.php';
+
+$pageTitle = t('checkout_title') . ' | ' . t('site_name');
 $pageDescription = 'Finalisez votre commande d\'abayas sur Sabaya Luxury.';
 $pageRobots = 'noindex, nofollow';
 
@@ -206,9 +203,9 @@ require_once '../includes/navbar.php';
         <!-- ─── Page Header ─── -->
     <section class="checkout-header reveal">
             <div class="checkout-container">
-                <p class="checkout-eyebrow">Sabaya Luxury</p>
-                <h1 class="checkout-title">Finaliser la commande</h1>
-                <p class="checkout-intro">Complétez vos informations de livraison pour confirmer votre achat.</p>
+                <p class="checkout-eyebrow"><?= t('checkout_eyebrow') ?></p>
+                <h1 class="checkout-title"><?= t('checkout_title') ?></h1>
+                <p class="checkout-intro"><?= t('checkout_intro') ?></p>
             </div>
         </section>
 
@@ -239,30 +236,30 @@ require_once '../includes/navbar.php';
                             <div class="checkout-section-card">
                                 <h2 class="checkout-section-title">
                                     <i class="fas fa-shipping-fast"></i>
-                                    Informations de livraison
+                                    <?= t('checkout_shipping_title') ?>
                                 </h2>
                                 <div class="checkout-divider"></div>
 
                                 <div class="checkout-field-group">
                                     <div class="checkout-field">
-                                        <label for="ville" class="checkout-label">Ville</label>
+                                        <label for="ville" class="checkout-label"><?= t('checkout_city') ?></label>
                                         <input type="text" name="ville" id="ville"
                                                class="checkout-input"
-                                               placeholder="Ex : Casablanca" required>
+                                               placeholder="<?= t('checkout_placeholder_city') ?>" required>
                                     </div>
 
                                     <div class="checkout-field">
-                                        <label for="adresse" class="checkout-label">Adresse</label>
+                                        <label for="adresse" class="checkout-label"><?= t('checkout_address') ?></label>
                                         <input type="text" name="adresse" id="adresse"
                                                class="checkout-input"
-                                               placeholder="Ex : 12 Rue Al Amine, Maarif" required>
+                                               placeholder="<?= t('checkout_placeholder_addr') ?>" required>
                                     </div>
 
                                     <div class="checkout-field">
-                                        <label for="code_postal" class="checkout-label">Code Postal</label>
+                                        <label for="code_postal" class="checkout-label"><?= t('checkout_postal_code') ?></label>
                                         <input type="text" name="code_postal" id="code_postal"
                                                class="checkout-input"
-                                               placeholder="Ex : 20000" required>
+                                               placeholder="<?= t('checkout_placeholder_postal') ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -271,7 +268,7 @@ require_once '../includes/navbar.php';
                         <!-- ═══ RIGHT — Order Summary ═══ -->
                         <div class="checkout-summary reveal">
                             <div class="checkout-summary-card">
-                                <h2 class="checkout-summary-title">Récapitulatif</h2>
+                                <h2 class="checkout-summary-title"><?= t('checkout_summary_title') ?></h2>
                                 <div class="checkout-divider"></div>
 
                                 <!-- Line Items -->
@@ -287,7 +284,7 @@ require_once '../includes/navbar.php';
                                         <li class="checkout-item">
                                             <div class="checkout-item-info">
                                                 <p class="checkout-item-name"><?= htmlspecialchars($product['nom']) ?></p>
-                                                <p class="checkout-item-qty">Quantité : <?= htmlspecialchars($quantite) ?></p>
+                                                <p class="checkout-item-qty"><?= t('checkout_qty_label') ?> <?= htmlspecialchars($quantite) ?></p>
                                             </div>
                                             <div class="checkout-item-pricing">
                                                 <p class="checkout-item-unit"><?= htmlspecialchars($product['prix']) ?> DH</p>
@@ -301,20 +298,20 @@ require_once '../includes/navbar.php';
 
                                 <!-- Total -->
                                 <div class="checkout-total-row">
-                                    <span class="checkout-total-label">Total</span>
+                                    <span class="checkout-total-label"><?= t('cart_total') ?></span>
                                     <span class="checkout-total-value"><?= $total ?> DH</span>
                                 </div>
 
                                 <!-- Submit -->
                                 <button type="submit" class="checkout-confirm-btn">
                                     <i class="fas fa-lock"></i>
-                                    Confirmer la commande
+                                    <?= t('checkout_confirm_btn') ?>
                                 </button>
 
                                 <!-- Back to cart -->
                                 <a href="cart.php" class="checkout-back-link">
                                     <i class="fas fa-arrow-left"></i>
-                                    Retour au panier
+                                    <?= t('checkout_back_to_cart') ?>
                                 </a>
                             </div>
                         </div>

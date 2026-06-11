@@ -78,12 +78,12 @@ require_once '../includes/navbar.php';
 
 <section class="collection-search reveal">
     <form method="GET" action="<?= htmlspecialchars($baseUrl) ?>/products/search.php" role="search" class="search-bar">
-        <label for="collection-search-input" class="sr-only">Rechercher un produit</label>
+        <label for="collection-search-input" class="sr-only"><?= t('search_sr_label') ?></label>
         <input
             type="search"
             id="collection-search-input"
             name="q"
-            placeholder="Rechercher dans la collection..."
+            placeholder="<?= t('products_search_placeholder') ?>"
         >
     </form>
 </section>
@@ -94,7 +94,7 @@ require_once '../includes/navbar.php';
             href="products.php"
             class="category-filter-btn<?= $currentCategoryId === null ? ' category-filter-btn--active' : '' ?>"
         >
-            Tous
+            <?= t('products_filter_all') ?>
         </a>
         <?php foreach ($categories as $cat): ?>
             <a
@@ -111,7 +111,7 @@ require_once '../includes/navbar.php';
 
     <?php if(empty($products)): ?>
 
-        <p class="collection-empty">Aucun produit disponible.</p>
+        <p class="collection-empty"><?= t('products_empty') ?></p>
 
     <?php else: ?>
 
@@ -137,7 +137,7 @@ require_once '../includes/navbar.php';
                                     aria-label="Voir les détails de <?= htmlspecialchars($product['nom']) ?>"
                                 >
                                     <i class="fa-solid fa-eye" aria-hidden="true"></i>
-                                    Voir Détails
+                                    <?= t('products_view_details_btn') ?>
                                 </a>
                             </div>
                         </div>
@@ -159,7 +159,7 @@ require_once '../includes/navbar.php';
                             class="product-card-btn"
                             href="product-details.php?id=<?= $product['id_produit'] ?>"
                         >
-                            Voir détails
+                            <?= t('products_view_details') ?>
                         </a>
 
                     </div>

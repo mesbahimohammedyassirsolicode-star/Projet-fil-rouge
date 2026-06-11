@@ -22,7 +22,7 @@ if (!isset($baseUrl)) {
     <div class="footer-content">
         <div class="footer-col">
             <h4>SABAYA</h4>
-            <p>Votre destination pour des abayas modernes, élégantes et de haute qualité au Maroc.</p>
+            <p><?= t('footer_brand_desc') ?></p>
             <div class="social-links">
                 <a href="https://www.instagram.com/brandsabaya_/" aria-label="Instagram Sabaya Luxury" rel="noopener noreferrer" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                 <a href="https://www.instagram.com/brandsabaya_/" aria-label="Facebook Sabaya Luxury" rel="noopener noreferrer" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
@@ -31,25 +31,25 @@ if (!isset($baseUrl)) {
             </div>
         </div>
         <nav class="footer-col" aria-label="Liens de navigation du pied de page">
-            <h4>Liens Rapides</h4>
+            <h4><?= t('footer_quick_links') ?></h4>
             <ul>
-                <li><a href="<?= htmlspecialchars($baseUrl) ?>/index.php">Accueil</a></li>
-                <li><a href="<?= htmlspecialchars($baseUrl) ?>/products/products.php">Boutique</a></li>
-                <li><a href="<?= htmlspecialchars($baseUrl) ?>/about.php">À propos</a></li>
-                <li><a href="<?= htmlspecialchars($baseUrl) ?>/contact/contact.php">Contact</a></li>
+                <li><a href="<?= htmlspecialchars($baseUrl) ?>/index.php"><?= t('footer_home') ?></a></li>
+                <li><a href="<?= htmlspecialchars($baseUrl) ?>/products/products.php"><?= t('footer_shop') ?></a></li>
+                <li><a href="<?= htmlspecialchars($baseUrl) ?>/about.php"><?= t('footer_about') ?></a></li>
+                <li><a href="<?= htmlspecialchars($baseUrl) ?>/contact/contact.php"><?= t('footer_contact') ?></a></li>
             </ul>
         </nav>
         <div class="footer-col">
-            <h4>Contact</h4>
+            <h4><?= t('footer_contact') ?></h4>
             <address>
-                <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Tangier, Maroc</p>
-                <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:contact@sabaya.ma">contact@sabaya.ma</a></p>
-                <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+212600000000">+212 6XX XXX XXX</a></p>
+                <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <?= t('footer_address') ?></p>
+                <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:<?= t('footer_email') ?>"><?= t('footer_email') ?></a></p>
+                <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+212600000000"><?= t('footer_phone') ?></a></p>
             </address>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; <?= date('Y') ?> Sabaya Luxury. Tous droits réservés.</p>
+        <p>&copy; <?= date('Y') ?> <?= t('site_name') ?>. <?= t('footer_copyright') ?></p>
     </div>
 </footer>
 
