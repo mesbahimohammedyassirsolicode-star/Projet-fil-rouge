@@ -174,7 +174,7 @@ require_once '../includes/navbar.php';
                                 </div>
                                 <div class="contact-info__text">
                                     <span class="contact-info__label"><?= t('contact_label_address') ?></span>
-                                    <span class="contact-info__value">Boulevard Mohammed V<br>Casablanca, Maroc</span>
+                                    <span class="contact-info__value">Complexe Hassani V<br>Tangier, Maroc</span>
                                 </div>
                             </div>
 
