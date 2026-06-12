@@ -1,13 +1,4 @@
-/**
- * product-hover.js — Sabaya Luxury
- * Handles heart-pulse animation for wishlist icons.
- * Pure vanilla JS, no dependencies. Does NOT modify PHP/backend logic.
- */
 
-(function () {
-    'use strict';
-
-    /* ── Pulse class management ─────────────────────────────── */
 
     /**
      * Trigger a heart-pulse animation on the given element.
@@ -88,4 +79,4 @@
         initCardFocusVisibility();
     });
 
-}());
+

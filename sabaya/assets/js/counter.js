@@ -1,21 +1,4 @@
-/**
- * counter.js — Sabaya Luxury
- * Animated number counters for Dashboard & Statistics KPI cards.
- *
- * Usage:
- *   <span class="counter" data-count="1234">0</span>
- *   <span class="counter" data-count="15000.00" data-decimals="2" data-separator=" " data-decimal-sep=",">0</span>
- *
- * Attributes:
- *   data-count        — target number (required)
- *   data-decimals     — decimal places to display (default: 0)
- *   data-separator    — thousands separator character (default: '')
- *   data-decimal-sep  — decimal separator character (default: '.')
- *   data-suffix       — text appended after the number (default: '')
- *   data-duration     — animation duration in ms (default: 1800)
- *
- * Dependencies: none (vanilla JS, IntersectionObserver)
- */
+
 
 (function () {
   'use strict';
