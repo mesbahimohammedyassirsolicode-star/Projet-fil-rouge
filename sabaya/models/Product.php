@@ -25,7 +25,10 @@ class Product
 
     public function find($id)
     {
-        $sql = "SELECT * FROM produits
+        $sql = "SELECT produits.*, categorie.nom AS categorie_nom
+                FROM produits
+                LEFT JOIN categorie
+                ON produits.id_categorie = categorie.id_categorie
                 WHERE id_produit = :id";
 
         $stmt = $this->pdo->prepare($sql);

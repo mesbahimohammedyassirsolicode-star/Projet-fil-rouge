@@ -44,7 +44,12 @@ $productImage = $baseUrl . '/assets/images/products/' . htmlspecialchars($produc
 $pageImage = $productImage;
 $canonicalUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-// Build page-specific JSON-LD for Product
+// Build page-specific JSON-LD for Product and Breadcrumbs
+$categoryName = htmlspecialchars($product['categorie_nom'] ?? t('product_breadcrumb_collection'));
+$availability = $product['stock'] > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock';
+$sku = 'SAB-' . (int)$product['id_produit'];
+$priceValidUntil = date('Y-12-31', strtotime('+1 year'));
+
 $extraHeadContent = '<script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -52,6 +57,9 @@ $extraHeadContent = '<script type="application/ld+json">
     "name": "' . $productName . '",
     "description": "' . $productDesc . '",
     "image": "' . $productImage . '",
+    "sku": "' . $sku . '",
+    "mpn": "' . $sku . '",
+    "category": "' . $categoryName . '",
     "brand": {
         "@type": "Brand",
         "name": "Sabaya Luxury"
@@ -61,14 +69,43 @@ $extraHeadContent = '<script type="application/ld+json">
         "url": "' . htmlspecialchars($canonicalUrl) . '",
         "priceCurrency": "MAD",
         "price": "' . $productPrice . '",
-        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "' . $priceValidUntil . '",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "' . $availability . '",
         "seller": {
             "@type": "Organization",
-            "name": "Sabaya Luxury"
+            "name": "Sabaya Luxury",
+            "url": "' . $baseUrl . '"
         }
     },
     "color": "' . htmlspecialchars($product['couleur']) . '",
     "size": "' . htmlspecialchars($product['taille']) . '"
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "' . t('product_breadcrumb_home') . '",
+            "item": "' . $baseUrl . '/index.php"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "' . $categoryName . '",
+            "item": "' . $baseUrl . '/products/category.php?id=' . (int)$product['id_categorie'] . '"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "' . $productName . '",
+            "item": "' . htmlspecialchars($canonicalUrl) . '"
+        }
+    ]
 }
 </script>';
 
@@ -83,7 +120,11 @@ require_once '../includes/navbar.php';
         <nav class="pd-breadcrumb" aria-label="<?= t('breadcrumb_label') ?>">
             <a href="../index.php"><?= t('product_breadcrumb_home') ?></a>
             <span class="pd-breadcrumb-sep">/</span>
-            <a href="products.php"><?= t('product_breadcrumb_collection') ?></a>
+            <?php if (!empty($product['id_categorie'])): ?>
+                <a href="category.php?id=<?= (int)$product['id_categorie'] ?>"><?= htmlspecialchars($product['categorie_nom'] ?? t('product_breadcrumb_collection')) ?></a>
+            <?php else: ?>
+                <a href="products.php"><?= t('product_breadcrumb_collection') ?></a>
+            <?php endif; ?>
             <span class="pd-breadcrumb-sep">/</span>
             <span class="pd-breadcrumb-current"><?= htmlspecialchars($product['nom']) ?></span>
         </nav>
@@ -114,8 +155,10 @@ require_once '../includes/navbar.php';
 
                 <div class="pd-divider"></div>
 
+                <h2 class="sr-only"><?= t('product_details_label') ?></h2>
                 <p class="pd-description"><?= htmlspecialchars($product['description']) ?></p>
 
+                <h2 class="pd-specs-title" style="font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-muted, #666);"><?= t('product_specs_heading', 'Details & Specs') ?></h2>
                 <div class="pd-specs">
                     <div class="pd-spec">
                                 <span class="pd-spec-label"><?= t('product_color') ?></span>

@@ -70,6 +70,7 @@ $lang = [
     'product_currency'          => 'MAD',
     'breadcrumb_label'            => 'Breadcrumb',
     'product_details_label'       => 'Product details',
+    'product_specs_heading'       => 'Details & Specs',
     'product_alt_abaya'           => 'Abaya',
     'product_alt_size'            => 'size',
     'product_page_title_suffix'   => 'Sabaya Luxury — Modern Abayas',

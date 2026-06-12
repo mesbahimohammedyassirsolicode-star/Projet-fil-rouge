@@ -67,6 +67,7 @@ $lang = [
     'product_currency'          => 'MAD',
     'breadcrumb_label'            => 'Fil d\'Ariane',
     'product_details_label'       => 'Détails du produit',
+    'product_specs_heading'       => 'Détails & Coupe',
     'product_alt_abaya'           => 'Abaya',
     'product_alt_size'            => 'taille',
     'product_page_title_suffix'   => 'Sabaya Luxury — Abayas Modernes',
