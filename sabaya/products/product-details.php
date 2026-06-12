@@ -130,10 +130,17 @@ require_once '../includes/navbar.php';
                 <div class="pd-divider"></div>
 
                 <div class="pd-actions">
-                    <a href="add-cart.php?id=<?= $product['id_produit'] ?>" class="btn pd-btn-cart">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <?= t('product_add_to_cart') ?>
-                    </a>
+                    <?php if ($product['stock'] > 0): ?>
+                        <a href="add-cart.php?id=<?= $product['id_produit'] ?>" class="btn pd-btn-cart">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <?= t('product_add_to_cart') ?>
+                        </a>
+                    <?php else: ?>
+                        <button class="btn pd-btn-cart" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            <i class="fa-solid fa-ban"></i>
+                            <?= t('product_out_of_stock') ?>
+                        </button>
+                    <?php endif; ?>
 
                     <a href="../wishlist/add-wishlist.php?id=<?= $product['id_produit'] ?>" class="btn-outline pd-btn-wishlist" data-wishlist-pulse>
                         <i class="fa-regular fa-heart"></i>

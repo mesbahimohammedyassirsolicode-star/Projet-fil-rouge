@@ -72,6 +72,7 @@ $lang = [
     'product_page_title_suffix'   => 'Sabaya Luxury — Abayas Modernes',
     'product_page_description_suffix' => 'Disponible sur Sabaya Luxury au Maroc.',
     'product_page_keywords'       => 'abaya, mode modeste, Sabaya Luxury, Maroc',
+    'product_out_of_stock'        => 'Rupture de stock',
 
     /* ────────────────────────────────────────────────
      * LISTE DE SOUHAITS
@@ -106,6 +107,7 @@ $lang = [
     'cart_checkout_btn'         => 'Passer la Commande',
     'cart_continue_btn'         => 'Continuer mes Achats',
     'cart_remove'               => 'Supprimer',
+    'cart_err_stock_insufficient' => 'Stock insuffisant. Seulement {stock} disponible(s).',
 
     /* ────────────────────────────────────────────────
      * COMMANDE / CHECKOUT
@@ -319,7 +321,7 @@ $lang = [
     'checkout_err_city_required'      => 'La ville est obligatoire',
     'checkout_err_address_required'   => 'L\'adresse est obligatoire',
     'checkout_err_postal_required'    => 'Le code postal est obligatoire',
-    'checkout_err_stock_insufficient' => 'Stock insuffisant pour : {product}',
+    'checkout_err_stock_insufficient' => 'Stock insuffisant pour : {product} (Seulement {stock} disponible(s))',
     'checkout_err_generic'            => 'Une erreur est survenue lors de la commande. Veuillez réessayer.',
 
     /* ────────────────────────────────────────────────

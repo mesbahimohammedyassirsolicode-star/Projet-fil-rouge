@@ -67,7 +67,10 @@ foreach ($cart as $id_produit => $quantite) {
     }
 
     if ($product['stock'] < $quantite) {
-        $errors[] = str_replace('{product}', $product['nom'], t('checkout_err_stock_insufficient'));
+        $msg = t('checkout_err_stock_insufficient');
+        $msg = str_replace('{product}', $product['nom'], $msg);
+        $msg = str_replace('{stock}', $product['stock'], $msg);
+        $errors[] = $msg;
     }
 }
 
