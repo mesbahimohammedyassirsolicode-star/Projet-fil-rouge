@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             } else {
                 $_SESSION['_toast'] = [
-                    'message' => t('login_welcome_user'),
+                    'message' => str_replace('{name}', $_SESSION['user_name'], t('login_welcome_user')),
                     'type'    => 'success',
                 ];
                 header('Location: ../index.php');
