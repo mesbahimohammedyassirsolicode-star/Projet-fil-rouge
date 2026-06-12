@@ -27,17 +27,17 @@
      */
     function initWishlistPulse() {
         // Product details page — wishlist button
-        var wishlistBtns = document.querySelectorAll(
+        const wishlistBtns = document.querySelectorAll(
             '.pd-btn-wishlist, .wishlist-icon-btn, [data-wishlist-pulse]'
         );
 
-        wishlistBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () {
+        wishlistBtns.forEach((btn) => {
+            btn.addEventListener('click', () => {
                 triggerPulse(btn);
             });
 
             // Keyboard accessibility — also pulse on Enter/Space
-            btn.addEventListener('keydown', function (e) {
+            btn.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     triggerPulse(btn);
                 }
@@ -53,18 +53,18 @@
      * the visual, but we ensure screen-reader semantics stay correct).
      */
     function initCardFocusVisibility() {
-        var cards = document.querySelectorAll('.product-card');
+        const cards = document.querySelectorAll('.product-card');
 
-        cards.forEach(function (card) {
-            var overlay = card.querySelector('.product-card-overlay');
+        cards.forEach((card) => {
+            const overlay = card.querySelector('.product-card-overlay');
             if (!overlay) return;
 
             // When focus enters the overlay, mark it visible for AT
-            overlay.addEventListener('focusin', function () {
+            overlay.addEventListener('focusin', () => {
                 overlay.setAttribute('aria-hidden', 'false');
             });
 
-            overlay.addEventListener('focusout', function (e) {
+            overlay.addEventListener('focusout', (e) => {
                 if (!overlay.contains(e.relatedTarget)) {
                     overlay.setAttribute('aria-hidden', 'true');
                 }
@@ -74,9 +74,10 @@
 
     /* ── Init ────────────────────────────────────────────────── */
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', () => {
         initWishlistPulse();
         initCardFocusVisibility();
     });
+
 
 
