@@ -1,1 +1,1 @@
-https://www.figma.com/design/VI0svABuSzLPIw0g9zW2YN/abbaya-store?node-id=1-150&t=CwehoD1CLy1Z5oMi-1
+https://www.figma.com/design/Ooj1HnK2enPelpJELJ0mSF/abbaya-store?node-id=0-1&t=FfQTJxfCXpFY2qbX-1
