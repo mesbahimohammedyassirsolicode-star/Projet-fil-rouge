@@ -128,7 +128,7 @@ require_once 'includes/navbar.php';
                 <div class="value-card">
                     <div class="value-card__number">02</div>
                     <div class="value-card__icon">
-                        <i class="fas fa-sparkles"></i>
+                        <i class="fas fa-gem" aria-hidden="true"></i>
                     </div>
                     <h3 class="value-card__title"><?= t('about_value_elegance_title') ?></h3>
                     <p class="value-card__text"><?= t('about_value_elegance_text') ?></p>
